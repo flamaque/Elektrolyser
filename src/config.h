@@ -54,7 +54,6 @@ void printDS18B20Address();
 void mq7_init(MQUnifiedsensor& MQ7);
 void mq8_init(MQUnifiedsensor& MQ8);
 
-
 /* Volt sensor */
 extern uint8_t voltPin;
 

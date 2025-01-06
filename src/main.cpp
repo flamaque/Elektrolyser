@@ -11,10 +11,10 @@ bool MeasurementReady = false;
 // const char *password = "9EAD76CC35C6";
 // const char *ssid = "Ziggo0542186";       
 // const char *password = "bu6cjcwg3fpuhwwN";
-// const char *ssid = "JRB"; 
-// const char *password = "driekeerraden";  
-const char *ssid = "Loading..."; 
-const char *password = "driekeerraden123";  
+const char *ssid = "JRB"; 
+const char *password = "driekeerraden";  
+// const char *ssid = "Loading..."; 
+// const char *password = "driekeerraden123";  
 
 const char *ntpServer = "pool.ntp.org"; // NTP server to request epoch time
 const long gmtOffset_sec = 3600;
@@ -22,11 +22,7 @@ const int daylightOffset_sec = 3600;
 String Connected = "";
 
 /*      SD card                         */
-// uint8_t CS_PIN = 5;
-// #define SCK 18
-// #define MISO 19  
-// #define MOSI 23
-SPIClass spi = SPIClass(HSPI);                   // VSPI
+// SPIClass spi = SPIClass(HSPI);                   // VSPI
 // uint8_t SD_CS_PIN = 46;
 #define SD_CS_PIN 46
 
@@ -694,9 +690,10 @@ void setup()
   Serial.println(WiFi.localIP());
   Serial.println("Getting time via WiFi");
   getTime_WiFi();
-  vTaskDelay(10 / portTICK_PERIOD_MS);
+  vTaskDelay(100 / portTICK_PERIOD_MS);
+
   // SPI.begin();  // SCK, MISO, MOSI, CS
-  if (!SD.begin(46, SPI, 40000000)) {
+  if (!SD.begin(SD_CS_PIN)) {
     Serial.println("SD Card initialization failed!");
     uint8_t cardType = SD.cardType();
     if(cardType == CARD_NONE){
