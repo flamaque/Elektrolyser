@@ -1,4 +1,25 @@
 #include "config.h"
+
+void initSD() {
+    Serial.println("Initializing SD card...");
+    if (!SD.begin(SD_CS_PIN, SPI, 25000000)) {
+        Serial.println("SD Card initialization failed!");
+        uint8_t cardType = SD.cardType();
+        Serial.print("Card Type: ");
+        switch(cardType) {
+            case CARD_NONE: Serial.println("No card attached"); break;
+            case CARD_MMC: Serial.println("MMC"); break;
+            case CARD_SD: Serial.println("SDSC"); break;
+            case CARD_SDHC: Serial.println("SDHC"); break;
+            default: Serial.println("Unknown"); break;
+        }
+        return;
+    }
+    Serial.println("SD Card initialized successfully");
+    Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
+    Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
+}
+
 /*
 void SD_init()
 {

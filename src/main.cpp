@@ -1,30 +1,49 @@
 #include "config.h"
-String httpapi = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
+// String httpapi = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
+char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
 const char *serverName = "http://jrbubuntu.ddns.net:5000/api/telemetry";
 uint64_t savedTimestamp;
 
 SemaphoreHandle_t i2c_mutex, OneLogMutex, fileMutex = NULL; // Handler for the log.txt file
 bool MeasurementReady = false;
 
+/*      GSM Module Setup     */
+HardwareSerial gsmSerial(1); // Use UART1
+uint8_t GSM_RX_PIN = 44;     // SIM7600E TX
+uint8_t GSM_TX_PIN = 43;     // SIM7600E RX
+String mobileNumber = "+31614504288";
+const String apn = "data.lycamobile.nl";
+const String apn_User = "lmnl";
+const String apn_Pass = "plus";
+
+/*      Bluetooth                       */
+String message = "";
+
 /*      Setup Wifi                      */
-// const char *ssid = "H369A2606A5";       
+// const char *ssid = "H369A2606A5";
 // const char *password = "9EAD76CC35C6";
-// const char *ssid = "Ziggo0542186";       
+// const char *ssid = "Ziggo0542186";
 // const char *password = "bu6cjcwg3fpuhwwN";
-const char *ssid = "JRB"; 
-const char *password = "driekeerraden";  
-// const char *ssid = "Loading..."; 
-// const char *password = "driekeerraden123";  
+const char *ssid = "JRB";
+const char *password = "driekeerraden";
+// const char *ssid = "Loading...";
+// const char *password = "driekeerraden123";
 
 const char *ntpServer = "pool.ntp.org"; // NTP server to request epoch time
 const long gmtOffset_sec = 3600;
 const int daylightOffset_sec = 3600;
 String Connected = "";
 
+bool gsmMode, wifiMode = false;
+
 /*      SD card                         */
 // SPIClass spi = SPIClass(HSPI);                   // VSPI
-// uint8_t SD_CS_PIN = 46;
-#define SD_CS_PIN 46
+uint8_t SD_CS_PIN = 46;
+// #define SD_CS_PIN 46
+// Add these definitions at the top
+// #define SD_MOSI 11  // SPI MOSI
+// #define SD_MISO 13  // SPI MISO
+// #define SD_SCK  12  // SPI CLK
 
 /*      MQ-7 CO sensor                  */
 uint8_t Pin_MQ7 = 2;
@@ -33,13 +52,13 @@ MQUnifiedsensor MQ7("ESP32", 5, 12, Pin_MQ7, "MQ-7");
 uint8_t Pin_MQ8 = 1;
 MQUnifiedsensor MQ8("ESP32", 5, 12, Pin_MQ8, "MQ-8");
 /*      DF Robot CO sensor              */
-uint8_t Pin_CO = 11;
-uint8_t CO_Value = 0;
+uint8_t Pin_CO = 15;
+// uint8_t CO_Value = 0;
+uint32_t CO_Value = 0; // Changed to uint32_t because uint8_t was giving a weird character in the JSON file
 
 /*      Asair AGS02MA TVOC Gas Sensor   */
 Adafruit_AGS02MA ags;
-uint32_t resistance;
-uint32_t AGS02MA_Value;
+uint32_t resistance, AGS02MA_Value;
 
 /*      DHT22 - Temperature and Humidity */
 #include "DHT.h"
@@ -61,13 +80,9 @@ uint8_t flowSensorPin = 5;
 float flowSensorCalibration = 21.00;
 float frequency1 = 0.0;
 
-volatile float flowRate2 = 0.00;
-uint8_t flowSensor2Pin = 7; // 27; Changed for trying WiFi
-float flowSensorCalibration2 = 7.50;
-float frequency2 = 0.0;
-
 uint8_t voltPin = 15;
 uint8_t NTC_PIN = 3;
+
 /*          Current sensor                  */
 uint8_t CurrentPin = 8;
 
@@ -77,6 +92,7 @@ float *ds18b20Sensors[] = {&DS18B20_1, &DS18B20_2, &DS18B20_3, &DS18B20_4, &DS18
 /*          Test for Array of JSON Objects         */
 // Ctrl + d for multiple cursors
 int currentMeasurementIndex = 0;
+int numMeasurements_Placeholder = 0;
 
 uint8_t h2Amount = 5;
 uint8_t coAmount = 5;
@@ -122,6 +138,12 @@ void sendArray_WiFi(void *parameter)
   unsigned long previousTime = 0;
   for (;;)
   {
+    // Wait for measurements to be ready
+    while (!MeasurementReady)
+    {
+      vTaskDelay(100 / portTICK_PERIOD_MS);
+    }
+
     if (WiFi.status() == WL_CONNECTED)
     {
       unsigned long currentTime = millis();
@@ -132,9 +154,9 @@ void sendArray_WiFi(void *parameter)
       HTTPClient http;
       http.begin(client, serverName);
       http.addHeader("Content-Type", "application/json");
-
       if (xSemaphoreTake(OneLogMutex, portMAX_DELAY) == pdTRUE)
       {
+        Serial.println("Received OneLogMutex and inside if statement");
         File OneLog = SD.open("/One_Measurement.txt", FILE_READ);
         if (!OneLog)
         {
@@ -144,8 +166,8 @@ void sendArray_WiFi(void *parameter)
           File OneLog = SD.open("/One_Measurement.txt", FILE_READ);
           // return;
         }
-        size_t fileSize = OneLog.size();
 
+        size_t fileSize = OneLog.size();
         Serial.println();
         Serial.println("Buffer size in sendArray: " + String(fileSize));
 
@@ -214,7 +236,7 @@ void Measuring(void *parameter)
   Serial.println("MaxMeasurements: " + String(numMeasurements));
 
   TickType_t measureTime, stopTime, startTimeMeasurement, startTime;
-  int numMeasurements_Placeholder = 250;
+  numMeasurements_Placeholder = 20;
   for (;;)
   {
     startTimeMeasurement = xTaskGetTickCount();
@@ -238,48 +260,6 @@ void Measuring(void *parameter)
       measurement["ts"] = savedTimestamp + millis();
       JsonObject values = measurement["values"].to<JsonObject>();
       values.clear();
-
-      if (i % DFcoInterval == 0)
-      {
-        CO_Value = analogRead(Pin_CO);
-        ss.str("");
-        ss << std::fixed << std::setprecision(2) << CO_Value;
-        values["DFCO"] = isnan(CO_Value) || isinf(CO_Value) ? "0.0" : ss.str();
-      }
-
-      if (i % AGS02MAInterval == 0)
-      {
-        // uint32_t AGS02MA_Value = AGS.readPPB();
-        // Serial.print("PPB:\t");
-        // Serial.print(AGS02MA_Value);
-        // Serial.print("\t");
-        // Serial.print(AGS.lastStatus(), HEX);
-        // Serial.print("\t");
-        // Serial.print(AGS.lastError(), HEX);
-        // Serial.println();
-        
-        // xSemaphoreTake(i2c_mutex, portMAX_DELAY);
-        // resistance = ags.getGasResistance();
-        // AGS02MA_Value = ags.getTVOC();
-        
-        // if (resistance == 0) {
-        //   Serial.println(F("Failure reading resistance, I2C communications issue?"));
-        // } else {
-        //   float kohm = resistance / 1000.0;
-        //   Serial.print(F("Gas resistance: "));
-        //   Serial.print(kohm);
-        //   Serial.println(" Kohms");
-        // }
-
-        // if (AGS02MA_Value == 0) {
-        //   Serial.println(F("Failure reading TVOC, I2C communications issue?"));
-        // } else {
-        //   Serial.print(F("TVOC: "));
-        //   Serial.print(AGS02MA_Value);
-        //   Serial.println(" ppb");
-        // }
-        // xSemaphoreGive(i2c_mutex);
-      }
 
       if (i % dht22_tempInterval == 0)
       {
@@ -330,30 +310,6 @@ void Measuring(void *parameter)
         values["Flow1"] = isnan(flowRate) || isinf(flowRate) ? "0.00" : ss.str();
       }
 
-      if (i % flowRate2Interval == 0)
-      {
-        ss.str("");
-        ss << std::fixed << std::setprecision(2) << flowRate2;
-        values["Flow2"] = isnan(flowRate2) || isinf(flowRate2) ? "0.00" : ss.str();
-      }
-
-      if (i % FlowTempinterval == 0)
-      {
-        temp_flow = Read_NTC(); // Read temperature
-        ss.str("");
-        ss << std::fixed << std::setprecision(1) << temp_flow;
-        values["FT"] = isnan(temp_flow) || isinf(temp_flow) ? "0.00" : ss.str();
-      }
-
-      if (i % coInterval == 0)
-      {
-        MQ7.update();
-        ppmCO = MQ7.readSensor();
-        ss.str("");
-        ss << std::fixed << std::setprecision(3) << ppmCO;
-        values["CO"] = isnan(ppmCO) || isinf(ppmCO) ? "0.00" : ss.str();
-      }
-
       if (i % h2Interval == 0)
       {
         MQ8.update();
@@ -379,6 +335,76 @@ void Measuring(void *parameter)
         values["P"] = isnan(power) || isinf(power) ? "0.00" : ss.str();
       }
 
+      /*
+
+            if (i % flowRate2Interval == 0)
+            {
+              ss.str("");
+              ss << std::fixed << std::setprecision(2) << flowRate2;
+              values["Flow2"] = isnan(flowRate2) || isinf(flowRate2) ? "0.00" : ss.str();
+            }
+
+            if (i % DFcoInterval == 0)
+            {
+              CO_Value = analogRead(Pin_CO);
+              ss.str("");
+              ss << std::fixed << std::setprecision(2) << CO_Value;
+              // values["DFCO"] = "0.0"; //Changed because previous code was not working. It entered "�" in the JSON file.
+              values["DFCO"] = isnan(CO_Value) || isinf(CO_Value) ? "0.0" : ss.str();
+            }
+
+            if (i % AGS02MAInterval == 0)
+            {
+              // uint32_t AGS02MA_Value = AGS.readPPB();
+              // Serial.print("PPB:\t");
+              // Serial.print(AGS02MA_Value);
+              // Serial.print("\t");
+              // Serial.print(AGS.lastStatus(), HEX);
+              // Serial.print("\t");
+              // Serial.print(AGS.lastError(), HEX);
+              // Serial.println();
+
+              // xSemaphoreTake(i2c_mutex, portMAX_DELAY);
+              // resistance = ags.getGasResistance();
+              // AGS02MA_Value = ags.getTVOC();
+
+              // if (resistance == 0) {
+              //   Serial.println(F("Failure reading resistance, I2C communications issue?"));
+              // } else {
+              //   float kohm = resistance / 1000.0;
+              //   Serial.print(F("Gas resistance: "));
+              //   Serial.print(kohm);
+              //   Serial.println(" Kohms");
+              // }
+
+              // if (AGS02MA_Value == 0) {
+              //   Serial.println(F("Failure reading TVOC, I2C communications issue?"));
+              // } else {
+              //   Serial.print(F("TVOC: "));
+              //   Serial.print(AGS02MA_Value);
+              //   Serial.println(" ppb");
+              // }
+              // xSemaphoreGive(i2c_mutex);
+            }
+
+            if (i % FlowTempinterval == 0)
+            {
+              temp_flow = Read_NTC(); // Read temperature
+              ss.str("");
+              ss << std::fixed << std::setprecision(1) << temp_flow;
+              values["FT"] = isnan(temp_flow) || isinf(temp_flow) ? "0.00" : ss.str();
+            }
+
+            if (i % coInterval == 0)
+            {
+              MQ7.update();
+              ppmCO = MQ7.readSensor();
+              ss.str("");
+              ss << std::fixed << std::setprecision(3) << ppmCO;
+              values["CO"] = isnan(ppmCO) || isinf(ppmCO) ? "0.00" : ss.str();
+            }
+
+      */
       if (doc.isNull())
       {
         Serial.println("JSON allocation failed");
@@ -445,6 +471,7 @@ void Measuring(void *parameter)
         Serial.println("Free heap below 1000 bytes. Not writing to SD card.");
         Serial.printf("Free heap: %d, Heap fragmentation:  %d%%\n", ESP.getFreeHeap(), 100 - (ESP.getMaxAllocHeap() * 100) / ESP.getFreeHeap());
       }
+
       if (xSemaphoreTake(OneLogMutex, pdMS_TO_TICKS(3000)) == pdTRUE)
       {
         if (doc != nullptr)
@@ -452,7 +479,11 @@ void Measuring(void *parameter)
           File file = SD.open("/One_Measurement.txt", FILE_WRITE);
           if (file)
           {
+            Serial.println("doc entries: " + String(doc.size()) + " size : " + String(measureJson(doc)));
+
             serializeJson(doc, file);
+            Serial.println("Onelog data in MeasuringTask: ");
+            serializeJsonPretty(doc, Serial);
             file.close();
             Serial.println("Data written to one measurement file.");
           }
@@ -536,13 +567,6 @@ void Counting(void *parameter)
       last_count1 = count1;
     }
 
-    if (elapsed_time > 0)
-    {
-      int16_t pulses2 = count2 - last_count2;
-      frequency2 = (float)pulses2 / (elapsed_time / 1000.0);
-      flowRate2 = frequency2 / flowSensorCalibration2;
-      last_count2 = count2;
-    }
     // Update last time
     last_time = current_time;
 
@@ -558,35 +582,32 @@ void DisplayMeasurements(void *parameter)
 
   char TX_RX[32];
   char definiedGSMTypeDis[32];
-  char Pin_MQ7Dis[32];
   char Pin_MQ8Dis[32];
   char DHT_SENSOR_PINDis[32];
   char DS18B20_PINDis[32];
   char flowSensorPinDis[32];
-  char flowSensor2PinDis[32];
-  char NTC_PINDis[32];
   char EC_PINDis[32];
   char CurrentPinDis[32];
   char PH_PINDis[32];
   char voltPinDis[32];
-  char CO_PinDis[32];
-  
+  // char CO_PinDis[32];
+  // char Pin_MQ7Dis[32];
+  // char flowSensor2PinDis[32];
+  // char NTC_PINDis[32];
+
   for (;;)
   {
     time_t timestamp = (savedTimestamp + millis()) / 1000; // savedTimestamp + millis() / 1000;  // Convert to seconds
     struct tm *timeinfo;
     char buffer[25];
     timeinfo = gmtime(&timestamp); // Convert timestamp to timeinfo struct
-    strftime(buffer, sizeof(buffer), "%d %b  %H:%M:%S", timeinfo);
+    // strftime(buffer, sizeof(buffer), "%d %b  %H:%M:%S", timeinfo);
+    strftime(buffer, sizeof(buffer), "%d %b  %H:%M", timeinfo); // Removed seconds because it's unnecessary and won't tik properly
 
     String timeDis = String(buffer);
-    String CODFDis = "CODF: " + String(CO_Value) + " ppm";
-    String AGS02MADis = "VTOC: " + String(AGS02MA_Value) + " ppb";
     String flowDis = "Flow: " + String(flowRate) + " L/min";
-    String flowDis2 = "Flow2: " + String(flowRate2) + " L/min";
-    String tempDis = "Temp: " + String(t) + " °C";
     String humidityDis = "Hum_: " + String(humidity) + " %";
-    String coDis = "CO__: " + String(ppmCO) + " ppm";
+    String tempDis = "Temp: " + String(t) + " °C";
     String h2Dis = "H2__: " + String(ppmH) + " ppm";
     String DS18B20_A_B = "A: " + String(DS18B20_1) + " B:" + String(DS18B20_2);
     String DS18B20_C_D = "C: " + String(DS18B20_3) + " D:" + String(DS18B20_4);
@@ -600,8 +621,13 @@ void DisplayMeasurements(void *parameter)
     String pH_Dis = "pH__: " + String(phvalue) + "";
     String VoltDis = "Volt: " + String(Volt) + " V";
     String ecDis = "EC__: " + String(ecValue) + " ms/cm";
-    String temp_flowDis = "Tflow: " + String(temp_flow) + " °C";
     String powerDis = "Power: " + String(power) + " W";
+    // String temp_flowDis = "Tflow: " + String(temp_flow) + " °C";
+    // String CODFDis = "CODF: " + String(CO_Value) + " ppm";
+    // String AGS02MADis = "VTOC: " + String(AGS02MA_Value) + " ppb";
+    // String flowDis2 = "Flow2: " + String(flowRate2) + " L/min";
+    // String coDis = "CO__: " + String(ppmCO) + " ppm";
+    String amountOfMeasurementsDis = "Amount: " + String(numMeasurements_Placeholder);
     String ConnectedDis = "WiFi: " + String(Connected);
     if (WiFi.status() != WL_CONNECTED)
     {
@@ -629,23 +655,129 @@ void DisplayMeasurements(void *parameter)
       bigOled.drawStr(0, 72, DS18B20_A_B.c_str());
       bigOled.drawStr(0, 80, DS18B20_C_D.c_str());
       // bigOled.drawStr(0, 88, DS18B20_E_F.c_str());
-      bigOled.drawStr(0, 88, ConnectedDis.c_str());
-      bigOled.drawStr(0, 96, h2Dis.c_str());
-      bigOled.drawStr(0, 104, coDis.c_str()); 
-      bigOled.drawStr(0, 112, AGS02MADis.c_str());
+      bigOled.drawStr(0, 88, h2Dis.c_str());
+      bigOled.drawStr(0, 112, amountOfMeasurementsDis.c_str());
+      if (wifiMode)
+      {
+        bigOled.drawStr(0, 120, ConnectedDis.c_str());
+      }
+      else if (gsmMode)
+      {
+        String gsmStatus = "GSM: ";
+        // Check if registered and connected
+        gsmSerial.println("AT+CREG?");
+        if (response.indexOf("+CREG: 2,1") != -1 || response.indexOf("+CREG: 2,5") != -1)
+        {
+          gsmStatus += "Connected";
+        }
+        else
+        {
+          gsmStatus += "Disconnected";
+        }
+        bigOled.drawStr(0, 120, gsmStatus.c_str());
+      }
+
+      // bigOled.drawStr(0, 104, coDis.c_str());
+      // bigOled.drawStr(0, 112, AGS02MADis.c_str());
       // bigOled.drawStr(0, 112, flowDis.c_str());
-      bigOled.drawStr(0, 120, CODFDis.c_str());
+      // bigOled.drawStr(0, 120, CODFDis.c_str());
       // bigOled.drawStr(0, 120, flowDis2.c_str());
-      bigOled.drawStr(0, 128, temp_flowDis.c_str());
+      // bigOled.drawStr(0, 128, temp_flowDis.c_str());
     } while (bigOled.nextPage());
     xSemaphoreGive(i2c_mutex);
-    vTaskDelay(500 / portTICK_PERIOD_MS);
+    vTaskDelay(2000 / portTICK_PERIOD_MS);
   }
   Serial.println("Display task has ended.");
 }
 
+void BluetoothListen(void *parameter)
+{
+  Serial.println("Inside BLE task.");
+  esp_task_wdt_init(30, false);
+
+  for (;;)
+  {
+    if (deviceConnected)
+    {
+      // Handle incoming BLE data
+      std::string value = pCharacteristic->getValue();
+      if (value.length() > 0)
+      {
+        message = String(value.c_str());
+      }
+      else
+      {
+        message = "";
+      }
+      Serial.println("Received message:" + message);
+
+      // Check if the command is to request a file
+      if (message == "config" || message == "log" || message == "one_log" || message == "log_big" || message == "s" || message == "d" || message == "api_jrb" || message == "api_mont" || message == "init_gsm")
+      {
+        // Acquire the mutex before accessing the file
+        if (xSemaphoreTake(fileMutex, portMAX_DELAY) == pdTRUE)
+        {
+          // File operations go here
+          if (message == "config")
+          {
+            Serial.println("Sending config.txt");
+            sendFileOverBluetooth("/config.txt");
+          }
+          else if (message == "log")
+          {
+            Serial.println("Sending log.txt");
+            sendFileOverBluetooth("/log.txt");
+          }
+          else if (message == "one_log")
+          {
+            Serial.println("Sending One_Measurement.txt"); // Sending log
+            sendFileOverBluetooth("/One_Measurement.txt"); // log.txt /One_Measurement.txt
+          }
+          else if (message == "api_jrb")
+          {
+            char httpapi[] = "http://jrbubuntu.ddns.net:5000/api/telemetry";
+            Serial.println("Changed api to: " + String(httpapi));
+            pCharacteristic->setValue((uint8_t *)httpapi, strlen(httpapi));
+            pCharacteristic->notify();
+          }
+          else if (message == "api_mont")
+          {
+            char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
+            Serial.println("Changed api to: " + String(httpapi));
+            pCharacteristic->setValue((uint8_t *)httpapi, strlen(httpapi));
+            pCharacteristic->notify();
+          }
+          // Release the mutex after the file operations are complete
+          xSemaphoreGive(fileMutex);
+        }
+        else
+        {
+          Serial.println("Failed to acquire file mutex");
+        }
+      }
+    }
+
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    size_t freeHeap = xPortGetFreeHeapSize();
+    Serial.println("xPort Free heap size Bluetooth: " + String(freeHeap));
+    size_t heap = esp_get_free_heap_size();
+    Serial.println("ESP Free heap size Bluetooth: " + String(heap));
+  }
+  Serial.println("Bluetooth task has ended.");
+}
+
 void setup()
 {
+  gsmMode = false;
+  wifiMode = true;
+  if (gsmMode == false)
+  {
+    wifiMode = true;
+  }
+  else if (wifiMode == false)
+  {
+    gsmMode = true;
+  }
   Serial.begin(115200);
   Serial.println("Free heap at start of setup: " + String(ESP.getFreeHeap()));
   if (setCpuFrequencyMhz(240))
@@ -656,10 +788,15 @@ void setup()
   {
     Serial.println("Failed to set CPU frequency.");
   }
-  vTaskDelay(1000 / portTICK_PERIOD_MS);
 
   init_displays();
-  vTaskDelay(100 / portTICK_PERIOD_MS);
+  // Bluetooth
+  esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
+  esp_bt_controller_init(&bt_cfg);
+  esp_bt_controller_enable(ESP_BT_MODE_BLE);
+  initBLE();
+
+  vTaskDelay(500 / portTICK_PERIOD_MS);
   bigOled.firstPage();
   do
   {
@@ -668,57 +805,122 @@ void setup()
     bigOled.drawStr(0, 40, "Rotterdam");
     bigOled.drawStr(0, 60, "Elektrotechniek.");
     bigOled.drawStr(0, 70, "#Jeej");
-    bigOled.drawStr(0, 90, "Connecting");
-    bigOled.drawStr(0, 100, "to WiFi...");
+    if (gsmMode)
+    {
+      bigOled.drawStr(0, 80, "GSM Mode");
+      bigOled.drawStr(0, 90, "Connecting");
+      bigOled.drawStr(0, 90, "to network...");
+    }
+    else if (wifiMode)
+    {
+      bigOled.drawStr(0, 80, "WiFi Mode");
+      bigOled.drawStr(0, 90, "Connecting");
+      bigOled.drawStr(0, 100, "to WiFi...");
+    }
   } while (bigOled.nextPage());
+  vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-  WiFi.mode(WIFI_STA);
-  // Disable WiFi events
-  WiFi.disconnect(true);
-  // Disable powersafe
-  WiFi.setSleep(WIFI_PS_NONE);
-  // Connect to WiFi
-  Serial.println("WiFi mode selected, setting up WiFi.");
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
+  if (wifiMode)
   {
+    WiFi.mode(WIFI_STA);
+    esp_wifi_set_ps(WIFI_PS_MIN_MODEM);
+    // Disable WiFi events
+    // WiFi.disconnect(true);
+    // Disable powersafe
+    WiFi.setSleep(true);
+    // Connect to WiFi
+    Serial.println("WiFi mode selected, setting up WiFi.");
+    WiFi.begin(ssid, password);
+        int attempts = 0;
+        while (WiFi.status() != WL_CONNECTED && attempts < 20) {
+            vTaskDelay(500 / portTICK_PERIOD_MS);
+            Serial.print(".");
+            attempts++;
+        }
+        
+        if (WiFi.status() == WL_CONNECTED) {
+            Serial.println("\nConnected to WiFi");
+            Serial.println(WiFi.localIP());
+            configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+            getTime_WiFi();
+            savedTimestamp = getSavedTimestamp_WiFi();
+        } else {
+            Serial.println("\nWiFi connection failed");
+            wifiMode = false;
+        }
     vTaskDelay(100 / portTICK_PERIOD_MS);
-    Serial.println("Connecting to WiFi...");
   }
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-  Serial.println("Connected to WiFi");
-  Serial.println(WiFi.localIP());
-  Serial.println("Getting time via WiFi");
-  getTime_WiFi();
-  vTaskDelay(100 / portTICK_PERIOD_MS);
+  else if (gsmMode)
+  {
+    Serial.println("GSM mode selected, setting up GSM.");
+    gsmSerial.begin(115200, SERIAL_8N1, GSM_RX_PIN, GSM_TX_PIN, false); // 38400 Initialize gsmSerial with appropriate RX/TX pins
+    vTaskDelay(5000 / portTICK_PERIOD_MS);                              // Give some time for the serial communication to establish
+    gsmSerial.println("AT");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+IPR=115200");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CNMP=2");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CREG=2");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    initialize_gsm();
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CREG?");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CTZU=1");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CTZR=1");
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    nvs_flash_init();
+    // getTime();
+    getDateTime_SIM7600();
+    // savedTimestamp = getSavedTimestamp_GSM();
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+  }
+  else
+  {
+    Serial.println("No mode selected.");
+  }
 
-  // SPI.begin();  // SCK, MISO, MOSI, CS
-  if (!SD.begin(SD_CS_PIN)) {
+  SPI.begin(); // SCK, MISO, MOSI, CS
+  if (!SD.begin(SD_CS_PIN))
+  {
     Serial.println("SD Card initialization failed!");
     uint8_t cardType = SD.cardType();
-    if(cardType == CARD_NONE){
-        Serial.println("No SD card attached");
+    if (cardType == CARD_NONE)
+    {
+      Serial.println("No SD card attached");
     }
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    initSD();
     // return;
   }
-  else {
+  else
+  {
     Serial.println("SD Card initialized successfully.");
 
     uint8_t cardType = SD.cardType();
     Serial.println("SD Card Type: ");
-    if(cardType == CARD_MMC){
-        Serial.println("MMC");
-    } else if(cardType == CARD_SD){
-        Serial.println("SDSC");
-    } else if(cardType == CARD_SDHC){
-        Serial.println("SDHC");
-    } else {
-        Serial.println("UNKNOWN");
+    if (cardType == CARD_MMC)
+    {
+      Serial.println("MMC");
+    }
+    else if (cardType == CARD_SD)
+    {
+      Serial.println("SDSC");
+    }
+    else if (cardType == CARD_SDHC)
+    {
+      Serial.println("SDHC");
+    }
+    else
+    {
+      Serial.println("UNKNOWN");
     }
   }
+
   vTaskDelay(1000 / portTICK_PERIOD_MS);
-  
-  savedTimestamp = getSavedTimestamp();
+
   // savedTimestamp = 1729408564;
   Serial.println("Saved timestamp in setup: " + String(savedTimestamp));
   vTaskDelay(10 / portTICK_PERIOD_MS);
@@ -740,30 +942,34 @@ void setup()
   }
   /* Flow sensor */
   pcnt_example_init(PCNT_UNIT1, PCNT_INPUT_SIG_IO1);
-  pcnt_example_init(PCNT_UNIT2, PCNT_INPUT_SIG_IO2);
 
   fileMutex = xSemaphoreCreateMutex();
   if (fileMutex == NULL)
   {
-    Serial.println("Failed to create file mutex.");    // Handle the error appropriately
+    Serial.println("Failed to create file mutex."); // Handle the error appropriately
   }
   OneLogMutex = xSemaphoreCreateMutex();
   if (OneLogMutex == NULL)
   {
-    Serial.println("Failed to create OneLogMutex.");    // Handle the error appropriately
+    Serial.println("Failed to create OneLogMutex."); // Handle the error appropriately
   }
   i2c_mutex = xSemaphoreCreateMutex();
   if (i2c_mutex == NULL)
   {
-    Serial.println("Failed to create i2c_mutex");    // Handle the error appropriately
+    Serial.println("Failed to create i2c_mutex"); // Handle the error appropriately
   }
 
-  xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 3072, NULL, 0, &Task_Display, 0);
+  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 4096, NULL, 3, &Task_Bluetooth, 1);
+  xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 4096, NULL, 0, &Task_Display, 0);
   xTaskCreatePinnedToCore(Counting, "Count pulses", 1024, NULL, 2, &Task_Counting, 1); // 1024
-  xTaskCreatePinnedToCore(Measuring, "Measuring", 6144, NULL, 3, &Task_Measuring, 1); // 6144 maar crashed wanneer JSON te groot wordt
+  xTaskCreatePinnedToCore(Measuring, "Measuring", 8192, NULL, 3, &Task_Measuring, 1);  // 6144 maar crashed wanneer JSON te groot wordt
   vTaskDelay(500 / portTICK_PERIOD_MS);
-  xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array", 3072, NULL, 3, &Task_sendArrayWifi, 0); // 6144
-
+  if (wifiMode) {
+  xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array", 4096, NULL, 3, &Task_sendArrayWifi, 0); // 6144
+  }
+  else if (gsmMode) {
+    // xTaskCreatePinnedToCore(sendArray_GSM, "Send Array", 4096, NULL, 3, &Task_sendArrayGSM, 0); // 6144
+  }
   size_t free_size = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   size_t largest_free_block = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   Serial.println("Free heap size: " + String(free_size) + ", largest free block: " + String(largest_free_block));

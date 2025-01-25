@@ -362,3 +362,224 @@ void init_displays()
   u8g2log.setRedrawMode(1);                // 0: Update screen with newline, 1: Update screen for every char
   Serial.println("Displays initialized!"); // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
 }
+
+
+void processLine(String line)
+{
+  line.trim(); // Remove any leading or trailing whitespace
+  int colonIndex = line.indexOf(':');
+  if (colonIndex == -1)
+  {
+    Serial.println("Invalid line: " + line);
+    return; // Skip if no colon found
+  }
+  String pinName = line.substring(0, colonIndex);
+  String pinValueStr = line.substring(colonIndex + 1);
+  pinValueStr.trim(); // Remove any leading or trailing whitespace
+  uint8_t pinValue = pinValueStr.toInt();
+
+  if (pinName == "GSM_RX_PIN" || pinName == "GSM_TX_PIN" || pinName == "GSM_RST_PIN" || pinName == "Pin_MQ7" || pinName == "Pin_MQ8" || pinName == "DHT_SENSOR_PIN" || pinName == "DS18B20_PIN" || pinName == "flowSensorPin" || pinName == "flowSensor2Pin" || pinName == "buttonbigOled" || pinName == "EC_PIN" || pinName == "CurrentPin" || pinName == "PH_PIN")
+  {
+    if (pinValue < 0 || pinValue > 39)
+    {
+      Serial.println("Invalid pin value: " + pinValueStr);
+      Serial.println("For pin: " + pinName);
+      return; // Validate pin number range for ESP32
+    }
+    if (pinName == "GSM_RX_PIN")
+    {
+      GSM_RX_PIN = pinValue;
+    }
+    else if (pinName == "GSM_TX_PIN")
+    {
+      GSM_TX_PIN = pinValue;
+    }
+    else if (pinName == "Pin_MQ8")
+    {
+      Pin_MQ8 = pinValue;
+    }
+    else if (pinName == "DHT_SENSOR_PIN")
+    {
+      DHT_SENSOR_PIN = pinValue;
+    }
+    else if (pinName == "DS18B20_PIN")
+    {
+      DS18B20_PIN = pinValue;
+    }
+    else if (pinName == "flowSensorPin")
+    {
+      flowSensorPin = pinValue;
+    }
+    else if (pinName == "EC_PIN")
+    {
+      EC_PIN = pinValue;
+    }
+    else if (pinName == "CurrentPin")
+    {
+      CurrentPin = pinValue;
+    }
+    else if (pinName == "PH_PIN")
+    {
+      PH_PIN = pinValue;
+    }
+    else if (pinName == "NTC_PIN")
+    {
+      NTC_PIN = pinValue;
+    }
+    else if (pinName == "voltPin")
+    {
+      voltPin = pinValue;
+    }
+  }
+
+  if (pinName == "temperatureAmount" || pinName == "phValueAmount" || pinName == "humidityAmount" || pinName == "ecValueAmount" || pinName == "flowRateAmount" || pinName == "ds18b20Amount" || pinName == "acsAmount" || pinName == "h2Amount" || pinName == "voltAmount" || pinName == "powerAmount" || pinName == "TempFlowAmount")
+  {
+    if (pinValue < 0 || pinValue > 500)
+    {
+      Serial.println("Invalid pin value: " + pinValueStr);
+      Serial.println("For pin: " + pinName);
+      return; // Validate range for ESP32
+    }
+    else if (pinValue == 0)
+    {
+      Serial.println("Measurement for pin: " + pinName + " is disabled");
+      Serial.println("Pin value: " + pinValueStr);
+      // return;
+    }
+    if (pinName == "temperatureAmount")
+    {
+      temperatureAmount = pinValue;
+    }
+    else if (pinName == "phValueAmount")
+    {
+      phValueAmount = pinValue;
+    }
+    else if (pinName == "humidityAmount")
+    {
+      humidityAmount = pinValue;
+    }
+    else if (pinName == "ecValueAmount")
+    {
+      ecValueAmount = pinValue;
+    }
+    else if (pinName == "flowRateAmount")
+    {
+      flowRateAmount = pinValue;
+    }
+    else if (pinName == "acsAmount")
+    {
+      acsAmount = pinValue;
+    }
+    else if (pinName == "ds18b20Amount")
+    {
+      ds18b20Amount = pinValue;
+    }
+    else if (pinName == "h2Amount")
+    {
+      h2Amount = pinValue;
+    }
+    else if (pinName == "voltAmount")
+    {
+      voltAmount = pinValue;
+    }
+    else if (pinName == "powerAmount")
+    {
+      powerAmount = pinValue;
+    }
+    else if (pinName == "TempFlowAmount")
+    {
+      TempFlowAmount = pinValue;
+    }
+    else if (pinName == "flowSensorCalibration")
+    {
+      flowSensorCalibration = pinValue;
+    }
+  }
+
+  if (pinName == "mobileNumber")
+  {
+    if (pinValueStr.length() == 12 && pinValueStr.startsWith("+"))
+    {
+      mobileNumber = pinValueStr;
+    }
+    else
+    {
+      Serial.println("Invalid mobile number format: " + pinValueStr);
+      Serial.println("Number length: " + pinValueStr.length());
+      return;
+    }
+  }
+}
+
+void read_configuration()
+{
+  File file = SD.open("/config.txt");
+  if (!file)
+  {
+    Serial.println("Failed to open file for reading");
+    return;
+  }
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+
+  while (file.available())
+  {
+    String line = file.readStringUntil('\n');
+    processLine(line);
+  }
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+
+  file.close();
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+}
+
+void printVariables()
+{
+  Serial.print("GSM_RX_PIN: ");
+  Serial.println(GSM_RX_PIN);
+  Serial.print("GSM_TX_PIN: ");
+  Serial.println(GSM_TX_PIN);
+  Serial.print("mobileNumber: ");
+  Serial.println(mobileNumber);
+  Serial.print("Pin_MQ8: ");
+  Serial.println(Pin_MQ8);
+  Serial.print("DHT_SENSOR_PIN: ");
+  Serial.println(DHT_SENSOR_PIN);
+  Serial.print("DS18B20_PIN: ");
+  Serial.println(DS18B20_PIN);
+  Serial.print("flowSensorPin: ");
+  Serial.println(flowSensorPin);
+  Serial.print("NTC_PIN: ");
+  Serial.println(NTC_PIN);
+  Serial.print("EC_PIN: ");
+  Serial.println(EC_PIN);
+  Serial.print("CurrentPin: ");
+  Serial.println(CurrentPin);
+  Serial.print("PH_PIN: ");
+  Serial.println(PH_PIN);
+  Serial.print("voltPin: ");
+  Serial.println(voltPin);
+
+  Serial.print("h2Amount: ");
+  Serial.println(h2Amount);
+  Serial.print("flowRateAmount: ");
+  Serial.println(flowRateAmount);
+  Serial.print("temperatureAmount: ");
+  Serial.println(temperatureAmount);
+  Serial.print("humidityAmount: ");
+  Serial.println(humidityAmount);
+  Serial.print("phValueAmount: ");
+  Serial.println(phValueAmount);
+  Serial.print("ecValueAmount: ");
+  Serial.println(ecValueAmount);
+  Serial.print("ds18b20Amount: ");
+  Serial.println(ds18b20Amount);
+  Serial.print("voltAmount: ");
+  Serial.println(voltAmount);
+  Serial.print("acsAmount: ");
+  Serial.println(acsAmount);
+  Serial.print("TempFlowAmount: ");
+  Serial.println(TempFlowAmount);
+
+  Serial.print("Phone Number: ");
+  Serial.println(mobileNumber);
+}
