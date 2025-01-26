@@ -583,3 +583,61 @@ void printVariables()
   Serial.print("Phone Number: ");
   Serial.println(mobileNumber);
 }
+
+
+
+/*      Conductivity Sensor   */
+DFRobot_ESP_EC ec;
+volatile float voltage_cond, temperature_cond = 25; // variable for storing the potentiometer value
+// extern int EC_PIN;
+float ecValueFloat = 0;
+float Cond()
+{
+  static unsigned long timepoint = millis();
+  if (millis() - timepoint > 1000U) // time interval: 1s
+  {
+    timepoint = millis();
+    voltage_cond = analogRead(EC_PIN) / 4095.0 * 3300;
+    // Serial.println("voltage: " + String(voltage_cond, 4));
+    // temperature = readTemperature();  // read your temperature sensor to execute temperature compensation
+    // Serial.println("voltage_cond: " String(temperature_cond, 1));
+    // Serial.println("^C");
+
+    ecValueFloat = ec.readEC(voltage_cond, temperature_cond); // convert voltage to EC with temperature compensation
+                                                              // Serial.println("EC: " + String(measurement.ecValue, 4) + " ms/cm");
+  }
+  ec.calibration(voltage_cond, temperature_cond); // calibration process by Serail CMD
+
+  // Serial.print(ecValue,2);  Serial.println("ms/cm");
+  return ecValueFloat;
+}
+
+/*      pH Sensor             */
+#define ESPADC 4096.0   // the esp Analog Digital Conversion value
+#define ESPVOLTAGE 3300 // the esp voltage supply value
+// extern int PH_PIN;
+float voltage_pH, phValue;
+float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
+
+// wanneer je inf melding krijgt moet je caliberen lees hieronder om de code te laten werken is er een calibratie proces nodig type enterph
+// doe ph sensor in 4ph en type calph
+// doe ph sensor in 7ph en type calph
+// type endcalph om compleet te maken.
+
+float pH()
+{
+  static unsigned long timepoint = millis();
+  if (millis() - timepoint > 1000U) // time interval: 1s
+  {
+    timepoint = millis();
+    voltage_pH = analogRead(PH_PIN) / ESPADC * ESPVOLTAGE; // read the voltage
+    // Serial.print("voltage_pH:");
+    // Serial.println(voltage_pH, 4);
+
+    phValue = ph.readPH(voltage_pH, temperature_pH); // convert voltage to pH with fixed temperature
+                                                     // Serial.print("pH:");
+    // Serial.println(phValue, 4);
+  }
+  ph.calibration(voltage_pH, temperature_pH); // calibration process by Serial CMD
+  return phValue;
+}

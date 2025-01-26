@@ -30,6 +30,8 @@
 #include <BLEUtils.h>
 #include <BLE2902.h>
 #include "esp_task_wdt.h"      //Needed for Watchdog timer for Bluetooth task
+#include "ESP_PH.h" // library for the PH sensor
+#include "DFRobot_ESP_EC.h" // library for the conductivity sensor
 
 void Counting(void *parameter);
 void DisplayMeasurements(void *parameter);
@@ -118,12 +120,27 @@ extern BLEServer* pServer;
 extern BLEService* pService;
 extern BLECharacteristic* pCharacteristic;
 extern bool deviceConnected;
-#define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+// #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+// #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+//Suited for Serial Port Profile (SPP) service
+#define SERVICE_UUID        "0000FFE0-0000-1000-8000-00805F9B34FB"
+#define CHARACTERISTIC_UUID "0000FFE1-0000-1000-8000-00805F9B34FB"
 
 extern String message;
 extern char incomingChar;
 extern bool bluetooth_connected;
-void sendFileOverBluetooth(const char *path);
 void initBLE();
+
+/*      Ph Sensor         */
+extern ESP_PH ph;
+extern uint8_t PH_PIN;
+float pH();
+//float readTemperature();
+
+/*      Conductivity Sensor   */
+extern DFRobot_ESP_EC ec;
+//extern float voltage_cond, temperature_cond;
+extern uint8_t EC_PIN; // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
+float Cond();
+
 #endif // CONFIG_H

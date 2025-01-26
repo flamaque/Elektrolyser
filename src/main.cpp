@@ -18,6 +18,7 @@ const String apn_Pass = "plus";
 
 /*      Bluetooth                       */
 String message = "";
+String BtConnected;
 
 /*      Setup Wifi                      */
 // const char *ssid = "H369A2606A5";
@@ -45,9 +46,9 @@ uint8_t SD_CS_PIN = 46;
 // #define SD_MISO 13  // SPI MISO
 // #define SD_SCK  12  // SPI CLK
 
-/*      MQ-7 CO sensor                  */
-uint8_t Pin_MQ7 = 2;
-MQUnifiedsensor MQ7("ESP32", 5, 12, Pin_MQ7, "MQ-7");
+// /*      MQ-7 CO sensor                  */
+// uint8_t Pin_MQ7 = 2;
+// MQUnifiedsensor MQ7("ESP32", 5, 12, Pin_MQ7, "MQ-7");
 /*      MQ-8 H2 sensor                   */
 uint8_t Pin_MQ8 = 1;
 MQUnifiedsensor MQ8("ESP32", 5, 12, Pin_MQ8, "MQ-8");
@@ -55,6 +56,13 @@ MQUnifiedsensor MQ8("ESP32", 5, 12, Pin_MQ8, "MQ-8");
 uint8_t Pin_CO = 15;
 // uint8_t CO_Value = 0;
 uint32_t CO_Value = 0; // Changed to uint32_t because uint8_t was giving a weird character in the JSON file
+
+/*      EC sensor              */
+uint8_t EC_PIN = 39;
+
+/*      PH sensor              */
+ESP_PH ph;
+uint8_t PH_PIN = 3;
 
 /*      Asair AGS02MA TVOC Gas Sensor   */
 Adafruit_AGS02MA ags;
@@ -81,7 +89,7 @@ float flowSensorCalibration = 21.00;
 float frequency1 = 0.0;
 
 uint8_t voltPin = 15;
-uint8_t NTC_PIN = 3;
+// uint8_t NTC_PIN = 3;
 
 /*          Current sensor                  */
 uint8_t CurrentPin = 8;
@@ -628,6 +636,16 @@ void DisplayMeasurements(void *parameter)
     // String flowDis2 = "Flow2: " + String(flowRate2) + " L/min";
     // String coDis = "CO__: " + String(ppmCO) + " ppm";
     String amountOfMeasurementsDis = "Amount: " + String(numMeasurements_Placeholder);
+    String BluetoothConnectedDis = "BT: " + String(BtConnected);
+    if (deviceConnected)
+    {
+      BtConnected = "Connected";
+    }
+    else if (!deviceConnected)
+    {
+      BtConnected = "Disconnected";
+    }
+
     String ConnectedDis = "WiFi: " + String(Connected);
     if (WiFi.status() != WL_CONNECTED)
     {
@@ -656,7 +674,8 @@ void DisplayMeasurements(void *parameter)
       bigOled.drawStr(0, 80, DS18B20_C_D.c_str());
       // bigOled.drawStr(0, 88, DS18B20_E_F.c_str());
       bigOled.drawStr(0, 88, h2Dis.c_str());
-      bigOled.drawStr(0, 112, amountOfMeasurementsDis.c_str());
+      bigOled.drawStr(0, 104, amountOfMeasurementsDis.c_str());
+      bigOled.drawStr(0, 112, BluetoothConnectedDis.c_str());
       if (wifiMode)
       {
         bigOled.drawStr(0, 120, ConnectedDis.c_str());
@@ -693,78 +712,155 @@ void DisplayMeasurements(void *parameter)
 void BluetoothListen(void *parameter)
 {
   Serial.println("Inside BLE task.");
-  esp_task_wdt_init(30, false);
+  String lastCommand = "";
+  const int bufferSize = 8192;
+  uint8_t *buffer = (uint8_t *)malloc(bufferSize);
+
+  if (!buffer)
+  {
+    Serial.println("Failed to allocate buffer");
+  }
 
   for (;;)
   {
     if (deviceConnected)
     {
-      // Handle incoming BLE data
-      std::string value = pCharacteristic->getValue();
-      if (value.length() > 0)
+      std::string rxValue = pCharacteristic->getValue();
+      if (rxValue.length() > 0)
       {
-        message = String(value.c_str());
-      }
-      else
-      {
-        message = "";
-      }
-      Serial.println("Received message:" + message);
+        String command = String(rxValue.c_str());
+        command.trim();
 
-      // Check if the command is to request a file
-      if (message == "config" || message == "log" || message == "one_log" || message == "log_big" || message == "s" || message == "d" || message == "api_jrb" || message == "api_mont" || message == "init_gsm")
-      {
-        // Acquire the mutex before accessing the file
-        if (xSemaphoreTake(fileMutex, portMAX_DELAY) == pdTRUE)
+        if (command != lastCommand)
         {
-          // File operations go here
-          if (message == "config")
+          Serial.println("Received command: " + command);
+          lastCommand = command;
+
+          if (command == "config" || command == "log" || command == "one_log")
           {
-            Serial.println("Sending config.txt");
-            sendFileOverBluetooth("/config.txt");
+            unsigned long startTime = millis();
+
+            if (xSemaphoreTake(fileMutex, portMAX_DELAY) == pdTRUE)
+            {
+              const char *filename = "";
+              if (command == "config")
+                filename = "/config.txt";
+              else if (command == "log")
+                filename = "/log.txt";
+              else if (command == "one_log")
+                filename = "/One_Measurement.txt";
+
+              File file = SD.open(filename, FILE_READ);
+              size_t fileSize = file.size();
+              Serial.println(String(filename) + " size: " + String(fileSize) + " bytes");
+              if (file)
+              {
+                size_t bytesRead;
+                while ((bytesRead = file.read(buffer, bufferSize)) > 0 && deviceConnected)
+                {
+                  for (size_t i = 0; i < bytesRead; i += 512) //100
+                  {
+                    if (!deviceConnected) {
+                        Serial.println("Client disconnected, stopping transfer");
+                        file.close();
+                        xSemaphoreGive(fileMutex);
+                        break;
+                    }
+
+                    const size_t chunkSize = min(512, (int)(bytesRead - i)); // 100 works fine
+                    pCharacteristic->setValue(&buffer[i], chunkSize);
+                    pCharacteristic->notify();
+                    vTaskDelay(1 / portTICK_PERIOD_MS); // was 20
+                  }
+                }
+                file.close();
+                Serial.println("File sent successfully: " + String(filename));
+              }
+              xSemaphoreGive(fileMutex);
+            }
+
+            unsigned long transferTime = millis() - startTime;
+            int seconds = transferTime / 1000;
+            int minutes = seconds / 60;
+            int remainingSeconds = seconds % 60;
+            Serial.println("Time taken to send file: " + String(minutes) + " min " + String(remainingSeconds) + " sec.");
           }
-          else if (message == "log")
+          else if (command == "api_jrb")
           {
-            Serial.println("Sending log.txt");
-            sendFileOverBluetooth("/log.txt");
+            strcpy(httpapi, "http://jrbubuntu.ddns.net:5000/api/telemetry");
+            Serial.println("API endpoint changed to JRB");
           }
-          else if (message == "one_log")
+          else if (command == "api_mont")
           {
-            Serial.println("Sending One_Measurement.txt"); // Sending log
-            sendFileOverBluetooth("/One_Measurement.txt"); // log.txt /One_Measurement.txt
+            strcpy(httpapi, "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry");
+            Serial.println("API endpoint changed to Montaigne");
           }
-          else if (message == "api_jrb")
-          {
-            char httpapi[] = "http://jrbubuntu.ddns.net:5000/api/telemetry";
-            Serial.println("Changed api to: " + String(httpapi));
-            pCharacteristic->setValue((uint8_t *)httpapi, strlen(httpapi));
-            pCharacteristic->notify();
-          }
-          else if (message == "api_mont")
-          {
-            char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
-            Serial.println("Changed api to: " + String(httpapi));
-            pCharacteristic->setValue((uint8_t *)httpapi, strlen(httpapi));
-            pCharacteristic->notify();
-          }
-          // Release the mutex after the file operations are complete
-          xSemaphoreGive(fileMutex);
-        }
-        else
-        {
-          Serial.println("Failed to acquire file mutex");
         }
       }
     }
-
-    vTaskDelay(5000 / portTICK_PERIOD_MS);
-    size_t freeHeap = xPortGetFreeHeapSize();
-    Serial.println("xPort Free heap size Bluetooth: " + String(freeHeap));
-    size_t heap = esp_get_free_heap_size();
-    Serial.println("ESP Free heap size Bluetooth: " + String(heap));
+    vTaskDelay(5 / portTICK_PERIOD_MS);
   }
-  Serial.println("Bluetooth task has ended.");
+  free(buffer);
 }
+
+/*
+void BluetoothListen(void *parameter) {
+    Serial.println("Inside BLE task.");
+    String lastCommand = "";
+
+    for (;;) {
+        if (deviceConnected) {
+            std::string rxValue = pCharacteristic->getValue();
+            if (rxValue.length() > 0) {
+                String command = String(rxValue.c_str());
+                command.trim();
+
+                if (command != lastCommand) {
+                    Serial.println("Received command: " + command);
+                    lastCommand = command;
+
+                    if (command == "config" || command == "log" || command == "one_log") {
+                        if (xSemaphoreTake(fileMutex, portMAX_DELAY) == pdTRUE) {
+                            const char* filename = "";
+                            if (command == "config") filename = "/config.txt";
+                            else if (command == "log") filename = "/log.txt";
+                            else if (command == "one_log") filename = "/One_Measurement.txt";
+
+                            File file = SD.open(filename, FILE_READ);
+                            if (file) {
+                                const int bufferSize = 2048; //512 works fine but crashes on "log"
+                                uint8_t buffer[bufferSize];
+                                size_t bytesRead;
+
+                                while ((bytesRead = file.read(buffer, bufferSize)) > 0) {
+                                    for (size_t i = 0; i < bytesRead; i += 20) {
+                                        size_t chunkSize = min(20, (int)(bytesRead - i));
+                                        pCharacteristic->setValue(&buffer[i], chunkSize);
+                                        pCharacteristic->notify();
+                                        delay(20);
+                                    }
+                                }
+                                file.close();
+                                Serial.println("File sent successfully: " + String(filename));
+                            }
+                            xSemaphoreGive(fileMutex);
+                        }
+                    }
+                    else if (command == "api_jrb") {
+                        strcpy(httpapi, "http://jrbubuntu.ddns.net:5000/api/telemetry");
+                        Serial.println("API endpoint changed to JRB");
+                    }
+                    else if (command == "api_mont") {
+                        strcpy(httpapi, "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry");
+                        Serial.println("API endpoint changed to Montaigne");
+                    }
+                }
+            }
+        }
+        vTaskDelay(250 / portTICK_PERIOD_MS);
+    }
+}
+*/
 
 void setup()
 {
@@ -831,23 +927,27 @@ void setup()
     // Connect to WiFi
     Serial.println("WiFi mode selected, setting up WiFi.");
     WiFi.begin(ssid, password);
-        int attempts = 0;
-        while (WiFi.status() != WL_CONNECTED && attempts < 20) {
-            vTaskDelay(500 / portTICK_PERIOD_MS);
-            Serial.print(".");
-            attempts++;
-        }
-        
-        if (WiFi.status() == WL_CONNECTED) {
-            Serial.println("\nConnected to WiFi");
-            Serial.println(WiFi.localIP());
-            configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-            getTime_WiFi();
-            savedTimestamp = getSavedTimestamp_WiFi();
-        } else {
-            Serial.println("\nWiFi connection failed");
-            wifiMode = false;
-        }
+    int attempts = 0;
+    while (WiFi.status() != WL_CONNECTED && attempts < 20)
+    {
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+      Serial.print(".");
+      attempts++;
+    }
+
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      Serial.println("\nConnected to WiFi");
+      Serial.println(WiFi.localIP());
+      configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+      getTime_WiFi();
+      savedTimestamp = getSavedTimestamp_WiFi();
+    }
+    else
+    {
+      Serial.println("\nWiFi connection failed");
+      wifiMode = false;
+    }
     vTaskDelay(100 / portTICK_PERIOD_MS);
   }
   else if (gsmMode)
@@ -926,8 +1026,8 @@ void setup()
   vTaskDelay(10 / portTICK_PERIOD_MS);
   // AGS02MA_Init();
   vTaskDelay(10 / portTICK_PERIOD_MS);
-  mq7_init(MQ7);
-  vTaskDelay(10 / portTICK_PERIOD_MS);
+  // mq7_init(MQ7);
+  // vTaskDelay(10 / portTICK_PERIOD_MS);
   mq8_init(MQ8);
   vTaskDelay(10 / portTICK_PERIOD_MS);
   dht_sensor.begin();
@@ -936,10 +1036,10 @@ void setup()
   vTaskDelay(10 / portTICK_PERIOD_MS);
   interrupts();
   analogReadResolution(12); // ADC_ATTENDB_MAX
-  if (adcAttachPin(NTC_PIN) != true)
-  {
-    Serial.println("Failed to attach ADC to NTC_PIN, current GPIO: " + String(NTC_PIN));
-  }
+  // if (adcAttachPin(NTC_PIN) != true)
+  // {
+  //   Serial.println("Failed to attach ADC to NTC_PIN, current GPIO: " + String(NTC_PIN));
+  // }
   /* Flow sensor */
   pcnt_example_init(PCNT_UNIT1, PCNT_INPUT_SIG_IO1);
 
@@ -959,15 +1059,17 @@ void setup()
     Serial.println("Failed to create i2c_mutex"); // Handle the error appropriately
   }
 
-  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 4096, NULL, 3, &Task_Bluetooth, 1);
+  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 10240, NULL, 3, &Task_Bluetooth, 1); //4096 worked 6144 worked as well. As well did 10240
   xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 4096, NULL, 0, &Task_Display, 0);
   xTaskCreatePinnedToCore(Counting, "Count pulses", 1024, NULL, 2, &Task_Counting, 1); // 1024
   xTaskCreatePinnedToCore(Measuring, "Measuring", 8192, NULL, 3, &Task_Measuring, 1);  // 6144 maar crashed wanneer JSON te groot wordt
   vTaskDelay(500 / portTICK_PERIOD_MS);
-  if (wifiMode) {
-  xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array", 4096, NULL, 3, &Task_sendArrayWifi, 0); // 6144
+  if (wifiMode)
+  {
+    xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array", 4096, NULL, 3, &Task_sendArrayWifi, 0); // 6144
   }
-  else if (gsmMode) {
+  else if (gsmMode)
+  {
     // xTaskCreatePinnedToCore(sendArray_GSM, "Send Array", 4096, NULL, 3, &Task_sendArrayGSM, 0); // 6144
   }
   size_t free_size = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
