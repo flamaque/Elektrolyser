@@ -43,9 +43,11 @@ void BluetoothListen(void *parameter);
 void initialize_gsm();
 void readGsmResponse();
 String readGsmResponse3();
+// String getDateTime_SIM7600();
 void getTime();
-String getDateTime_SIM7600();
+void IsGSMConnected();
 void saveTimestamp(uint64_t timestamp_ms);
+uint64_t getDateTime_SIM7600();
 uint64_t getSavedTimestamp_GSM();
 uint64_t convertToUnixTimestamp(String date, String time);
 extern const String apn, apn_User, apn_Pass;
@@ -53,6 +55,7 @@ extern String date_getTime, response, datetime_gsm;
 extern uint64_t savedTimestamp, timestamp_ms, unixTimestamp;
 extern char httpapi[]; // Removed because in main.cpp it's declared as String
 extern HardwareSerial gsmSerial;
+extern bool gsmConnected;
 
 void AGS02MA_Init();
 extern Adafruit_AGS02MA ags;
@@ -67,7 +70,7 @@ extern U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled;
 void init_displays();
 // For GSMSerial output on OLED
 extern U8G2LOG u8g2log;
-extern volatile uint8_t stateBigOled, stateDebug;
+extern volatile uint8_t GSMOutputToOLED, stateDebug;
 
 /* voltage sensor */
 float readVoltage();

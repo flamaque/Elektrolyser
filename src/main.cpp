@@ -1,6 +1,6 @@
 #include "config.h"
-// String httpapi = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
-char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
+char httpapi[] = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
+char httpapi_mont[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
 const char *serverName = "http://jrbubuntu.ddns.net:5000/api/telemetry";
 uint64_t savedTimestamp;
 
@@ -15,6 +15,7 @@ String mobileNumber = "+31614504288";
 const String apn = "data.lycamobile.nl";
 const String apn_User = "lmnl";
 const String apn_Pass = "plus";
+bool gsmConnected;
 
 /*      Bluetooth                       */
 String message = "";
@@ -41,10 +42,6 @@ bool gsmMode, wifiMode = false;
 // SPIClass spi = SPIClass(HSPI);                   // VSPI
 uint8_t SD_CS_PIN = 46;
 // #define SD_CS_PIN 46
-// Add these definitions at the top
-// #define SD_MOSI 11  // SPI MOSI
-// #define SD_MISO 13  // SPI MISO
-// #define SD_SCK  12  // SPI CLK
 
 // /*      MQ-7 CO sensor                  */
 // uint8_t Pin_MQ7 = 2;
@@ -137,7 +134,115 @@ const uint8_t h2Interval = numMeasurements / h2Amount;
 const uint8_t coInterval = numMeasurements / coAmount;
 const uint8_t FlowTempinterval = numMeasurements / TempFlowAmount;
 
-TaskHandle_t Task_Bluetooth, Task_Counting, Task_Display, Task_Measuring, Task_sendArrayWifi = NULL;
+TaskHandle_t Task_Bluetooth, Task_Counting, Task_Display, Task_Measuring, Task_sendArrayWifi, Task_sendArrayGSM = NULL;
+
+void sendArray_GSM(void *parameter)
+{
+  // Initialize watchdog timer for this task
+  esp_task_wdt_init(30, true); // 30 second timeout
+  esp_task_wdt_add(NULL);      // Add current task to WDT watch
+  vTaskDelay(200 / portTICK_PERIOD_MS);
+  Serial.println("Now running sendArray GSM task.");
+  unsigned long previousTime = 0;
+
+  for (;;)
+  {
+    esp_task_wdt_reset(); // Reset watchdog timer
+    while (MeasurementReady)
+    {
+      if (xSemaphoreTake(OneLogMutex, portMAX_DELAY) == pdTRUE)
+      {
+        GSMOutputToOLED = 0; //Don't print gsm output to display
+        IsGSMConnected();
+        File OneLog = SD.open("/One_Measurement.txt", FILE_READ);
+        if (!OneLog)
+        {
+          Serial.println("Error opening OneLog file");
+          xSemaphoreGive(OneLogMutex);
+          return;
+        }
+
+        unsigned long currentTime = millis();
+        unsigned long timeBetweenUsage = currentTime - previousTime;
+        previousTime = currentTime;
+
+        // Reset WDT before HTTP operations
+        esp_task_wdt_reset();
+
+        // SIM7600 HTTP POST sequence
+        gsmSerial.println("AT+HTTPTERM"); // Terminate any existing HTTP sessions
+        readGsmResponse();
+
+        gsmSerial.println("AT+HTTPINIT"); // Initialize HTTP service
+        readGsmResponse();
+        esp_task_wdt_reset();
+        gsmSerial.println("AT+HTTPPARA=\"URL\",\"" + String(httpapi) + "\"");
+        readGsmResponse();
+
+        gsmSerial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
+        readGsmResponse();
+        esp_task_wdt_reset();
+        // Set data length and timeout
+        String httpDataCommand = "AT+HTTPDATA=" + String(OneLog.size()) + ",30000"; //Waits 30 seconds, maybe change to max 65535
+        gsmSerial.println(httpDataCommand);
+        readGsmResponse();
+        // Wait for "DOWNLOAD" prompt
+        vTaskDelay(1000 / portTICK_PERIOD_MS); 
+
+        // Send data in chunks
+        const size_t bufferSize = 1024;
+        char buffer[bufferSize];
+        size_t bytesRead;
+
+        while ((bytesRead = OneLog.readBytes(buffer, bufferSize)) > 0)
+        {
+          gsmSerial.write(buffer, bytesRead);
+          vTaskDelay(10 / portTICK_PERIOD_MS);  // Add small delay between chunks
+        }
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        readGsmResponse();
+
+        // Execute POST request
+        gsmSerial.println("AT+HTTPACTION=1");
+        String response = readGsmResponse3();
+
+        // Check response
+        if (response.indexOf("+HTTPACTION: 1,200") != -1)
+        {
+          Serial.println("POST successful");
+          // Read response data
+          gsmSerial.println("AT+HTTPREAD");
+          readGsmResponse();
+        }
+        else
+        {
+          Serial.println("POST failed with response: " + response);
+        }
+
+        // Cleanup
+        gsmSerial.println("AT+HTTPTERM");
+        readGsmResponse();
+
+        OneLog.close();
+        xSemaphoreGive(OneLogMutex);
+
+        int seconds = timeBetweenUsage / 1000;
+        int minutes = seconds / 60;
+        int remainingSeconds = seconds % 60;
+        Serial.println("Time between usage: " + String(minutes) + " min " + String(remainingSeconds) + " sec.");
+        GSMOutputToOLED = 0; //Print gsm output to display
+      }
+      else
+      {
+        Serial.println("Failed to take OneLogMutex.");
+      }
+      esp_task_wdt_reset();
+      MeasurementReady = false;
+      vTaskDelay(50 / portTICK_PERIOD_MS);
+    }
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+  }
+}
 
 void sendArray_WiFi(void *parameter)
 {
@@ -635,6 +740,8 @@ void DisplayMeasurements(void *parameter)
     // String AGS02MADis = "VTOC: " + String(AGS02MA_Value) + " ppb";
     // String flowDis2 = "Flow2: " + String(flowRate2) + " L/min";
     // String coDis = "CO__: " + String(ppmCO) + " ppm";
+    String SendingDIS = "Sending...: ";
+    String MeasDiS = "Measuring... ";
     String amountOfMeasurementsDis = "Amount: " + String(numMeasurements_Placeholder);
     String BluetoothConnectedDis = "BT: " + String(BtConnected);
     if (deviceConnected)
@@ -674,6 +781,12 @@ void DisplayMeasurements(void *parameter)
       bigOled.drawStr(0, 80, DS18B20_C_D.c_str());
       // bigOled.drawStr(0, 88, DS18B20_E_F.c_str());
       bigOled.drawStr(0, 88, h2Dis.c_str());
+      if(MeasurementReady){
+      bigOled.drawStr(0, 96, SendingDIS.c_str());
+      }
+      else if(!MeasurementReady){
+      bigOled.drawStr(0, 96, MeasDiS.c_str());
+      }
       bigOled.drawStr(0, 104, amountOfMeasurementsDis.c_str());
       bigOled.drawStr(0, 112, BluetoothConnectedDis.c_str());
       if (wifiMode)
@@ -683,13 +796,11 @@ void DisplayMeasurements(void *parameter)
       else if (gsmMode)
       {
         String gsmStatus = "GSM: ";
-        // Check if registered and connected
-        gsmSerial.println("AT+CREG?");
-        if (response.indexOf("+CREG: 2,1") != -1 || response.indexOf("+CREG: 2,5") != -1)
+        if (gsmConnected)
         {
           gsmStatus += "Connected";
         }
-        else
+        else if (!gsmConnected)
         {
           gsmStatus += "Disconnected";
         }
@@ -758,13 +869,14 @@ void BluetoothListen(void *parameter)
                 size_t bytesRead;
                 while ((bytesRead = file.read(buffer, bufferSize)) > 0 && deviceConnected)
                 {
-                  for (size_t i = 0; i < bytesRead; i += 512) //100
+                  for (size_t i = 0; i < bytesRead; i += 512) // 100
                   {
-                    if (!deviceConnected) {
-                        Serial.println("Client disconnected, stopping transfer");
-                        file.close();
-                        xSemaphoreGive(fileMutex);
-                        break;
+                    if (!deviceConnected)
+                    {
+                      Serial.println("Client disconnected, stopping transfer");
+                      file.close();
+                      xSemaphoreGive(fileMutex);
+                      break;
                     }
 
                     const size_t chunkSize = min(512, (int)(bytesRead - i)); // 100 works fine
@@ -792,7 +904,7 @@ void BluetoothListen(void *parameter)
           }
           else if (command == "api_mont")
           {
-            strcpy(httpapi, "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry");
+            strcpy(httpapi_mont, "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry");
             Serial.println("API endpoint changed to Montaigne");
           }
         }
@@ -864,8 +976,8 @@ void BluetoothListen(void *parameter) {
 
 void setup()
 {
-  gsmMode = false;
-  wifiMode = true;
+  gsmMode = true;
+  wifiMode = false;
   if (gsmMode == false)
   {
     wifiMode = true;
@@ -905,7 +1017,7 @@ void setup()
     {
       bigOled.drawStr(0, 80, "GSM Mode");
       bigOled.drawStr(0, 90, "Connecting");
-      bigOled.drawStr(0, 90, "to network...");
+      bigOled.drawStr(0, 100, "to network...");
     }
     else if (wifiMode)
     {
@@ -956,25 +1068,25 @@ void setup()
     gsmSerial.begin(115200, SERIAL_8N1, GSM_RX_PIN, GSM_TX_PIN, false); // 38400 Initialize gsmSerial with appropriate RX/TX pins
     vTaskDelay(5000 / portTICK_PERIOD_MS);                              // Give some time for the serial communication to establish
     gsmSerial.println("AT");
+    readGsmResponse();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     gsmSerial.println("AT+IPR=115200");
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+CNMP=2");
+    readGsmResponse();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     gsmSerial.println("AT+CREG=2");
+    readGsmResponse();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     initialize_gsm();
     vTaskDelay(1000 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+CREG?");
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+CTZU=1");
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+CTZR=1");
-    vTaskDelay(50 / portTICK_PERIOD_MS);
     nvs_flash_init();
     // getTime();
-    getDateTime_SIM7600();
+    savedTimestamp = getDateTime_SIM7600();
     // savedTimestamp = getSavedTimestamp_GSM();
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+    gsmSerial.println("AT+CCLK?");
+    readGsmResponse();
+    // Check if registered and connected
+    void IsGSMConnected();
     vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
   else
@@ -1059,18 +1171,18 @@ void setup()
     Serial.println("Failed to create i2c_mutex"); // Handle the error appropriately
   }
 
-  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 10240, NULL, 3, &Task_Bluetooth, 1); //4096 worked 6144 worked as well. As well did 10240
+  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 10240, NULL, 3, &Task_Bluetooth, 1); // 4096 worked 6144 worked as well. As well did 10240
   xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 4096, NULL, 0, &Task_Display, 0);
   xTaskCreatePinnedToCore(Counting, "Count pulses", 1024, NULL, 2, &Task_Counting, 1); // 1024
   xTaskCreatePinnedToCore(Measuring, "Measuring", 8192, NULL, 3, &Task_Measuring, 1);  // 6144 maar crashed wanneer JSON te groot wordt
   vTaskDelay(500 / portTICK_PERIOD_MS);
   if (wifiMode)
   {
-    xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array", 4096, NULL, 3, &Task_sendArrayWifi, 0); // 6144
+    xTaskCreatePinnedToCore(sendArray_WiFi, "Send Array WiFi", 4096, NULL, 3, &Task_sendArrayWifi, 0); // 6144
   }
   else if (gsmMode)
   {
-    // xTaskCreatePinnedToCore(sendArray_GSM, "Send Array", 4096, NULL, 3, &Task_sendArrayGSM, 0); // 6144
+    xTaskCreatePinnedToCore(sendArray_GSM, "Send Array GSM", 4096, NULL, 3, &Task_sendArrayGSM, 0); // 6144
   }
   size_t free_size = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   size_t largest_free_block = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
