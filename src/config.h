@@ -19,7 +19,6 @@
 #include <WiFi.h>
 #include "esp_wifi.h"
 #include <HTTPClient.h>
-// #include "SD_MMC.h"
 #include <SPI.h>
 #include <SD.h>
 #include "Adafruit_AGS02MA.h" //Asair AGS02MA TVOC Gas Sensor
@@ -126,6 +125,8 @@ extern uint64_t timestamp_ms, unixTimestamp;
 extern char httpapi[]; // Removed because in main.cpp it's declared as String
 extern char DateTimeBuffer[50], TimeBuffer[25], TimeBufferDis[25], TimeBufferFinal[32];
 extern HardwareSerial gsmSerial;
+bool checkDataConnection();
+void sendSMS(String number, String message);
 extern bool gsmConnected;
 
 /*      DS18B20 sensor       */

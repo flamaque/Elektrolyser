@@ -130,12 +130,44 @@ void IsGSMConnected()
     if (response.indexOf("+CREG: 2,1") != -1 || response.indexOf("+CREG: 2,5") != -1)
     {
         gsmConnected = true;
+        Serial.println("GSM connected");
     }
     else
     {
+        Serial.println("GSM not connected");
         gsmConnected = false;
     }
     Serial.println("Received response: " + response);
+}
+
+bool checkDataConnection() {
+    // Check GPRS connection
+    gsmSerial.println("AT+CGATT?");
+    String response = readGsmResponse3();
+    
+    if (response.indexOf("+CGATT: 1") != -1) {
+        return true;
+        gsmConnected = true;
+        Serial.println("Data connection established");
+    }
+    
+    Serial.println("Data connection failed");
+    gsmConnected = false;
+    // No data connection, send SMS alert
+    // sendSMS(configuration.mobileNumber, "Data connection lost!");
+    return false;
+}
+
+void sendSMS(String number, String message) {
+    gsmSerial.println("AT+CMGF=1"); // Set SMS text mode
+    readGsmResponse();
+    
+    gsmSerial.println("AT+CMGS=\"" + number + "\"");
+    readGsmResponse();
+    
+    gsmSerial.print(message);
+    gsmSerial.write(26); // Ctrl+Z to send
+    readGsmResponse();
 }
 
 uint64_t parseResponse(String resp)

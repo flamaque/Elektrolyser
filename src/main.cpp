@@ -1,8 +1,9 @@
 #include "config.h"
 struct ConfigInterval configInterval;
 struct ConfigPin configPin;
-bool ShowJSON = false;
-bool ShowDebug = false;
+uint8_t ShowJSON = 0;
+uint8_t ShowDebug = 0;
+uint8_t OledScherm = 0;
 time_t timestamp;
 struct tm *timeinfo;
 char TimeBuffer[25];
@@ -87,7 +88,7 @@ void sendArray_GSM(void *parameter)
       if (xSemaphoreTake(OneLogMutex, portMAX_DELAY) == pdTRUE)
       {
         GSMOutputToOLED = 0; // Don't print gsm output to display
-        IsGSMConnected();
+        checkDataConnection();
         File OneLog = SD.open("/One_Measurement.txt", FILE_READ);
         if (!OneLog)
         {
@@ -592,7 +593,6 @@ void DisplayMeasurements(void *parameter)
   Serial.println("SavedTimestamp in DisplayMeasurements: " + String(timestamp_ms));
 
   char TX_RX[32];
-  char definiedGSMTypeDis[32];
   char Pin_MQ8Dis[32];
   char DHT_SENSOR_PINDis[32];
   char DS18B20_PINDis[32];
@@ -601,6 +601,15 @@ void DisplayMeasurements(void *parameter)
   char CurrentPinDis[32];
   char PH_PINDis[32];
   char voltPinDis[32];
+  snprintf(TX_RX, sizeof(TX_RX), "RX : %d TX : %d", configPin.GSM_RX_PIN, configPin.GSM_TX_PIN);
+  snprintf(Pin_MQ8Dis, sizeof(Pin_MQ8Dis), "MQ8   : %d   %f", configPin.Pin_MQ8, configNumeric.h2Amount);
+  snprintf(DHT_SENSOR_PINDis, sizeof(DHT_SENSOR_PINDis), "DHT22 : %d   %f", configPin.DHT_SENSOR_PIN, configNumeric.temperatureAmount);
+  snprintf(DS18B20_PINDis, sizeof(DS18B20_PINDis), "DS18  : %d   %f", configPin.DS18B20_PIN, configNumeric.ds18b20Amount);
+  snprintf(flowSensorPinDis, sizeof(flowSensorPinDis), "Flow  : %d   %f", configPin.flowSensorPin, configNumeric.flowRateAmount);
+  snprintf(EC_PINDis, sizeof(EC_PINDis), "EC    : %d   %f", configPin.EC_PIN, configNumeric.ecValueAmount);
+  snprintf(CurrentPinDis, sizeof(CurrentPinDis), "A     : %d   %f", configPin.CurrentPin, configNumeric.acsAmount);
+  snprintf(PH_PINDis, sizeof(PH_PINDis), "PH    : %d   %f", configPin.PH_PIN, configNumeric.phValueAmount);
+  snprintf(voltPinDis, sizeof(voltPinDis), "V     : %d   %f", configPin.voltPin, configNumeric.voltAmount);
 
   for (;;)
   {
@@ -653,6 +662,7 @@ void DisplayMeasurements(void *parameter)
       }
     }
 
+    if(OledScherm==0){
     bigOled.firstPage();
     do
     {
@@ -683,6 +693,35 @@ void DisplayMeasurements(void *parameter)
       }
 
     } while (bigOled.nextPage());
+    }
+    else if(OledScherm==1){
+    bigOled.firstPage();
+    do
+    {
+      bigOled.setFont(u8g2_font_04b_03b_tr);
+      bigOled.setDisplayRotation(U8G2_R1);
+      bigOled.drawStr(0, 8, timeDis.c_str());
+      bigOled.drawStr(0, 16, "Pinout & Freq.");
+      if (configuration.wifiMode)
+      {
+        bigOled.drawStr(0, 24, WiFiStatus.c_str());
+        bigOled.drawStr(0, 32, ("SSID: " + String(configuration.ssid)).c_str());
+      }
+      else if (configuration.gsmMode)
+      {
+        bigOled.drawStr(0, 24, gsmStatus.c_str());
+        bigOled.drawStr(0, 32, TX_RX);
+      }
+      bigOled.drawStr(0, 40, voltPinDis);
+      bigOled.drawStr(0, 48, CurrentPinDis);
+      bigOled.drawStr(0, 50, PH_PINDis);
+      bigOled.drawStr(0, 58, EC_PINDis);
+      bigOled.drawStr(0, 64, flowSensorPinDis);
+      bigOled.drawStr(0, 72, DHT_SENSOR_PINDis);
+      bigOled.drawStr(0, 80, DS18B20_PINDis);
+      bigOled.drawStr(0, 88, Pin_MQ8Dis);
+      } while (bigOled.nextPage());
+    }
     vTaskDelay(500 / portTICK_PERIOD_MS);
   }
   Serial.println("Display task has ended.");
@@ -1008,6 +1047,24 @@ void BluetoothListen(void *parameter)
             pCharacteristic->setValue(("ShowDebug = " + String(ShowDebug) + "\n").c_str());
             pCharacteristic->notify();
           }
+          else if (command.equalsIgnoreCase("ShowDebug2"))
+          {
+            
+          }
+          else if (command.equalsIgnoreCase("ShowGSMOutput"))
+          {
+            GSMOutputToOLED = !GSMOutputToOLED;
+            Serial.println("GSMOutputToOLED = " + String(GSMOutputToOLED));
+            pCharacteristic->setValue(("GSMOutputToOLED = " + String(GSMOutputToOLED) + "\n").c_str());
+            pCharacteristic->notify();
+          }  
+          else if (command.equalsIgnoreCase("Screen"))
+          {
+            OledScherm = !OledScherm;
+            Serial.println("Oled scherm: " + String(OledScherm));
+            pCharacteristic->setValue(("Oled scherm: " + String(OledScherm) + "\n").c_str());
+            pCharacteristic->notify();
+          }
         }
       }
     }
@@ -1201,7 +1258,7 @@ void setup()
     getDateTime_GSM();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     // Check if registered and connected
-    void IsGSMConnected();
+    IsGSMConnected();
     vTaskDelay(100 / portTICK_PERIOD_MS);
     Serial.println("Saved timestamp in setup: " + String(unixTimestamp));
     timestamp_ms = unixTimestamp;
