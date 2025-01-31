@@ -1,62 +1,5 @@
 #include "config.h"
 
-/*void AGS02MA_init(){
-  Serial.println(__FILE__);
-  Serial.print("AGS02MA_LIB_VERSION: ");
-  Serial.println(AGS02MA_LIB_VERSION);
-  Serial.println();
-
-  Wire.begin();
-
-  bool b = AGS.begin();
-  Serial.print("BEGIN:\t");
-  Serial.println(b);
-
-  Serial.print("VERSION:\t");
-  Serial.println(AGS.getSensorVersion());
-
-  //  pre-heating improves measurement quality
-  //  can be skipped
-  Serial.println("\nWarming up (120 seconds = 24 dots)");
-  while (AGS.isHeated() == false)
-  {
-    delay(5000);
-    Serial.print(".");
-  }
-  Serial.println();
-
-  b = AGS.setPPBMode();
-  uint8_t m = AGS.getMode();
-  Serial.print("MODE:\t");
-  Serial.print(b);
-  Serial.print("\t");
-  Serial.println(m);
-
-  uint8_t version = AGS.getSensorVersion();
-  Serial.print("VERS:\t");
-  Serial.println(version);
-}*/
-
-void AGS02MA_Init(){
-  Serial.println(F("Adafruit AGS20MA Test"));
-
-  if (! ags.begin(&Wire, 0x1A)) {
-  //if (! ags.begin(&Wire1, 0x1A)) { // or use Wire1 instead!
-    Serial.println("Couldn't find AGS20MA sensor, check your wiring and pullup resistors!");
-  }
-
-  if (ags.getFirmwareVersion() == 0) {
-    Serial.println(F("Could not read firmware, I2C communications issue?"));
-  }
-
-  Serial.print("Firmware version: 0x");
-  Serial.println(ags.getFirmwareVersion(), HEX);
-  ags.printSensorDetails();
-
-  // uncomment to change address, will need to restart and update the begin() argument!
-  //ags.setAddress(0x1A); while (1);
-}
-
 /**
  * @brief Initializes PCNT (Pulse Counter) for flow sensor
  * @param unit PCNT unit to configure
@@ -95,91 +38,20 @@ void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num)
 }
 
 /**
- * @brief Reads the temperature of the flow sensor
- * @param unit PCNT unit to configure
- * @var NUMSAMPLES: The number of analog readings to take and average.
- * @var NTC_PIN: The pin connected to the NTC thermistor.
- * @var serialResistance: The resistance of the serial resistor in the thermistor circuit.
- * @var nominalResistance: The nominal resistance of the thermistor at a reference temperature.
- * @var bCoefficient: The beta coefficient of the thermistor.
- * @var TEMPERATURENOMINAL: The reference temperature at which the nominal resistance is specified.
- * @return steinhart The  Steinhart-Hart equation
- */
-uint16_t nominalResistance = 50000; // The nominal resistance of the thermistor at a reference temperature.
-int serialResistance = 90700;       // The resistance of the serial resistor in the thermistor circuit.
-// 3230; (met typefout 997000 wat automatisch veranderd werdt naar 55032 is de temperatuur 19.91) 
-//(En schijnbaar kan 90700 ook niet, dit is verbeterd naar 25164 en nu is de temp 38.26 gaden)
-uint16_t bCoefficient = 3950;       // The beta coefficient of the thermistor.
-uint8_t TEMPERATURENOMINAL = 25;    // The reference temperature at which the nominal resistance is specified.
-const uint8_t NUMSAMPLES = 100;     // The number of analog readings to take and average.
-float temp_flow; // Global temperature reading
-// #define VERBOSE_SENSOR_ENABLED
-
-
-float Read_NTC()
-{
-  uint8_t i;
-  uint16_t sample;
-  float average = 0;
-
-  // take N samples in a row, with a slight delay
-  for (i = 0; i < NUMSAMPLES; i++)
-  {
-    sample = analogRead(NTC_PIN);
-    if(sample < 0 || sample > 4095) {
-      Serial.println("Invalid ADC reading");
-      return 0;
-    }
-    average += sample;
-    vTaskDelay(5 / portTICK_PERIOD_MS);
-  }
-  average /= NUMSAMPLES;
-
-#ifdef DEBUG_MODE_3
-  Serial.print("1 sample analog reading ");
-  Serial.println(sample);
-  Serial.printf("Average analog reading: %.2f\n", average);
-#endif
-
-  // convert the value to resistance
-  float resistance = 4095 / average - 1;
-  resistance = serialResistance * resistance;
-
-#ifdef DEBUG_MODE_3
-  Serial.printf("Thermistor resistance: %.2f\n", resistance);
-#endif
-
-  // resistance  / nominalResistance = 10 graden
-  // nominalResistance / resistance = 43.25 graden
-  float steinhart;
-  steinhart = nominalResistance / (resistance - nominalResistance); // (R/Ro)
-  // steinhart = resistance  / nominalResistance;     // (R/Ro)
-  steinhart = log(steinhart);                       // ln(R/Ro)
-  steinhart /= bCoefficient;                        // 1/B * ln(R/Ro)
-  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-  steinhart = 1.0 / steinhart;                      // Invert
-  steinhart -= 273.15;                              // convert to C
-
-#ifdef DEBUG_MODE_3
-  Serial.printf("Temperature: %.3f *C\n", steinhart);
-#endif
-
-  return steinhart;
-}
-
-/**
  * @brief Reads the voltage
- * @return voltage 
+ * @return voltage
  */
-float readVoltage() {
+float readVoltage()
+{
   const int numSamples = 100;
   const float adcVoltageScale = 3.3 / 4095.0;
   float voltageSum = 0.0;
   float R1 = 1000.0;
   float R2 = 10000.0;
 
-  for (int i = 0; i < numSamples; i++) {
-    int adc = analogRead(voltPin);
+  for (int i = 0; i < numSamples; i++)
+  {
+    int adc = analogRead(configPin.voltPin);
     voltageSum += adc * adcVoltageScale;
     vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
@@ -189,11 +61,10 @@ float readVoltage() {
 }
 
 /*      DS18B20 sensor            */
-OneWire oneWire(DS18B20_PIN);        // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature.
-int numberOfDevices;                 // Number of temperature devices found
-DeviceAddress tempDeviceAddress;     // We'll use this variable to store a found device address
-// DS18B20 Find and print Address
+OneWire oneWire(configPin.DS18B20_PIN); // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+DallasTemperature sensors(&oneWire);    // Pass our oneWire reference to Dallas Temperature.
+int numberOfDevices;                    // Number of temperature devices found
+DeviceAddress tempDeviceAddress;        // We'll use this variable to store a found device address
 void printDS18B20Address()
 {
   sensors.begin();
@@ -227,45 +98,8 @@ void printDS18B20Address()
   sensors.setResolution(11); // Set the resolution to 11 bits for 0.5°C resolution
 }
 
-/*      MQ-7 MQ-8 sensor            */
-float RatioMQ7CleanAir = 27.5;
+/*       MQ-8 sensor            */
 float RatioMQ8CleanAir = 70.0;
-void mq7_init(MQUnifiedsensor &MQ7)
-{
-  // CO
-  MQ7.setRegressionMethod(1); //_PPM =  a*ratio^b
-  // MQ7.setA(521853); MQ7.setB(-3.821); // Configurate the ecuation values to get Benzene concentration
-  MQ7.setA(99.042);
-  MQ7.setB(-1.518); // Configure the equation to calculate CO concentration value
-  MQ7.init();
-  vTaskDelay(5 / portTICK_PERIOD_MS);
-
-  float calcR0 = 0;
-  for (int i = 1; i <= 10; i++)
-  {
-    MQ7.update(); // Update data, the arduino will be read the voltage on the analog pin
-    calcR0 += MQ7.calibrate(RatioMQ7CleanAir);
-    Serial.print(".");
-  }
-  MQ7.setR0(calcR0 / 10);
-  Serial.println("Done calculating R0 for MQ7!.");
-  /*
-    //If the RL value is different from 10K please assign your RL value with the following method:
-    MQ7.setRL(9.87);
-  */
-  if (isinf(calcR0))
-  {
-    Serial.println("MQ7 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply");
-  } // while(1);
-  if (calcR0 == 0)
-  {
-    Serial.println("MQ7 Warning: Conection issue found, R0 is zero (Analog pin shorts to ground) please check your wiring and supply");
-  } // while(1);
-  /*****************************  MQ CAlibration ********************************************/
-  Serial.println("MQ7 initialized!");
-  MQ7.serialDebug(true);
-}
-
 void mq8_init(MQUnifiedsensor &MQ8)
 {
   // Hydrogen
@@ -311,12 +145,12 @@ float CurrentSensor_724()
   // Read ADC value multiple times to average
   for (int i = 0; i < numSamples; i++)
   {
-    int adc = analogReadMilliVolts(CurrentPin);
+    int adc = analogReadMilliVolts(configPin.CurrentPin);
     adc_voltage_sum += adc;             // 3.3
     vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
-  // Serial.println("ADC voltage raw: " + String(analogReadRaw(CurrentPin)));
-  // Serial.println("ADC mV Quick: " + String(analogReadMilliVolts(CurrentPin)));
+  // Serial.println("ADC voltage raw: " + String(analogReadRaw(configPin.CurrentPin)));
+  // Serial.println("ADC mV Quick: " + String(analogReadMilliVolts(configPin.CurrentPin)));
   //  Average the ADC voltage
   float adc_voltage = (adc_voltage_sum / numSamples); // * (3300 / 4095.0);
   // Serial.println("ADC voltage Quick: " + String(adc_voltage));
@@ -363,233 +197,9 @@ void init_displays()
   Serial.println("Displays initialized!"); // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
 }
 
-
-void processLine(String line)
-{
-  line.trim(); // Remove any leading or trailing whitespace
-  int colonIndex = line.indexOf(':');
-  if (colonIndex == -1)
-  {
-    Serial.println("Invalid line: " + line);
-    return; // Skip if no colon found
-  }
-  String pinName = line.substring(0, colonIndex);
-  String pinValueStr = line.substring(colonIndex + 1);
-  pinValueStr.trim(); // Remove any leading or trailing whitespace
-  uint8_t pinValue = pinValueStr.toInt();
-
-  if (pinName == "GSM_RX_PIN" || pinName == "GSM_TX_PIN" || pinName == "GSM_RST_PIN" || pinName == "Pin_MQ7" || pinName == "Pin_MQ8" || pinName == "DHT_SENSOR_PIN" || pinName == "DS18B20_PIN" || pinName == "flowSensorPin" || pinName == "flowSensor2Pin" || pinName == "buttonbigOled" || pinName == "EC_PIN" || pinName == "CurrentPin" || pinName == "PH_PIN")
-  {
-    if (pinValue < 0 || pinValue > 39)
-    {
-      Serial.println("Invalid pin value: " + pinValueStr);
-      Serial.println("For pin: " + pinName);
-      return; // Validate pin number range for ESP32
-    }
-    if (pinName == "GSM_RX_PIN")
-    {
-      GSM_RX_PIN = pinValue;
-    }
-    else if (pinName == "GSM_TX_PIN")
-    {
-      GSM_TX_PIN = pinValue;
-    }
-    else if (pinName == "Pin_MQ8")
-    {
-      Pin_MQ8 = pinValue;
-    }
-    else if (pinName == "DHT_SENSOR_PIN")
-    {
-      DHT_SENSOR_PIN = pinValue;
-    }
-    else if (pinName == "DS18B20_PIN")
-    {
-      DS18B20_PIN = pinValue;
-    }
-    else if (pinName == "flowSensorPin")
-    {
-      flowSensorPin = pinValue;
-    }
-    else if (pinName == "EC_PIN")
-    {
-      EC_PIN = pinValue;
-    }
-    else if (pinName == "CurrentPin")
-    {
-      CurrentPin = pinValue;
-    }
-    else if (pinName == "PH_PIN")
-    {
-      PH_PIN = pinValue;
-    }
-    else if (pinName == "NTC_PIN")
-    {
-      NTC_PIN = pinValue;
-    }
-    else if (pinName == "voltPin")
-    {
-      voltPin = pinValue;
-    }
-  }
-
-  if (pinName == "temperatureAmount" || pinName == "phValueAmount" || pinName == "humidityAmount" || pinName == "ecValueAmount" || pinName == "flowRateAmount" || pinName == "ds18b20Amount" || pinName == "acsAmount" || pinName == "h2Amount" || pinName == "voltAmount" || pinName == "powerAmount" || pinName == "TempFlowAmount")
-  {
-    if (pinValue < 0 || pinValue > 500)
-    {
-      Serial.println("Invalid pin value: " + pinValueStr);
-      Serial.println("For pin: " + pinName);
-      return; // Validate range for ESP32
-    }
-    else if (pinValue == 0)
-    {
-      Serial.println("Measurement for pin: " + pinName + " is disabled");
-      Serial.println("Pin value: " + pinValueStr);
-      // return;
-    }
-    if (pinName == "temperatureAmount")
-    {
-      temperatureAmount = pinValue;
-    }
-    else if (pinName == "phValueAmount")
-    {
-      phValueAmount = pinValue;
-    }
-    else if (pinName == "humidityAmount")
-    {
-      humidityAmount = pinValue;
-    }
-    else if (pinName == "ecValueAmount")
-    {
-      ecValueAmount = pinValue;
-    }
-    else if (pinName == "flowRateAmount")
-    {
-      flowRateAmount = pinValue;
-    }
-    else if (pinName == "acsAmount")
-    {
-      acsAmount = pinValue;
-    }
-    else if (pinName == "ds18b20Amount")
-    {
-      ds18b20Amount = pinValue;
-    }
-    else if (pinName == "h2Amount")
-    {
-      h2Amount = pinValue;
-    }
-    else if (pinName == "voltAmount")
-    {
-      voltAmount = pinValue;
-    }
-    else if (pinName == "powerAmount")
-    {
-      powerAmount = pinValue;
-    }
-    else if (pinName == "TempFlowAmount")
-    {
-      TempFlowAmount = pinValue;
-    }
-    else if (pinName == "flowSensorCalibration")
-    {
-      flowSensorCalibration = pinValue;
-    }
-  }
-
-  if (pinName == "mobileNumber")
-  {
-    if (pinValueStr.length() == 12 && pinValueStr.startsWith("+"))
-    {
-      mobileNumber = pinValueStr;
-    }
-    else
-    {
-      Serial.println("Invalid mobile number format: " + pinValueStr);
-      Serial.println("Number length: " + pinValueStr.length());
-      return;
-    }
-  }
-}
-
-void read_configuration()
-{
-  File file = SD.open("/config.txt");
-  if (!file)
-  {
-    Serial.println("Failed to open file for reading");
-    return;
-  }
-  vTaskDelay(50 / portTICK_PERIOD_MS);
-
-  while (file.available())
-  {
-    String line = file.readStringUntil('\n');
-    processLine(line);
-  }
-  vTaskDelay(50 / portTICK_PERIOD_MS);
-
-  file.close();
-  vTaskDelay(50 / portTICK_PERIOD_MS);
-}
-
-void printVariables()
-{
-  Serial.print("GSM_RX_PIN: ");
-  Serial.println(GSM_RX_PIN);
-  Serial.print("GSM_TX_PIN: ");
-  Serial.println(GSM_TX_PIN);
-  Serial.print("mobileNumber: ");
-  Serial.println(mobileNumber);
-  Serial.print("Pin_MQ8: ");
-  Serial.println(Pin_MQ8);
-  Serial.print("DHT_SENSOR_PIN: ");
-  Serial.println(DHT_SENSOR_PIN);
-  Serial.print("DS18B20_PIN: ");
-  Serial.println(DS18B20_PIN);
-  Serial.print("flowSensorPin: ");
-  Serial.println(flowSensorPin);
-  Serial.print("NTC_PIN: ");
-  Serial.println(NTC_PIN);
-  Serial.print("EC_PIN: ");
-  Serial.println(EC_PIN);
-  Serial.print("CurrentPin: ");
-  Serial.println(CurrentPin);
-  Serial.print("PH_PIN: ");
-  Serial.println(PH_PIN);
-  Serial.print("voltPin: ");
-  Serial.println(voltPin);
-
-  Serial.print("h2Amount: ");
-  Serial.println(h2Amount);
-  Serial.print("flowRateAmount: ");
-  Serial.println(flowRateAmount);
-  Serial.print("temperatureAmount: ");
-  Serial.println(temperatureAmount);
-  Serial.print("humidityAmount: ");
-  Serial.println(humidityAmount);
-  Serial.print("phValueAmount: ");
-  Serial.println(phValueAmount);
-  Serial.print("ecValueAmount: ");
-  Serial.println(ecValueAmount);
-  Serial.print("ds18b20Amount: ");
-  Serial.println(ds18b20Amount);
-  Serial.print("voltAmount: ");
-  Serial.println(voltAmount);
-  Serial.print("acsAmount: ");
-  Serial.println(acsAmount);
-  Serial.print("TempFlowAmount: ");
-  Serial.println(TempFlowAmount);
-
-  Serial.print("Phone Number: ");
-  Serial.println(mobileNumber);
-}
-
-
-
 /*      Conductivity Sensor   */
 DFRobot_ESP_EC ec;
 volatile float voltage_cond, temperature_cond = 25; // variable for storing the potentiometer value
-// extern int EC_PIN;
 float ecValueFloat = 0;
 float Cond()
 {
@@ -597,7 +207,7 @@ float Cond()
   if (millis() - timepoint > 1000U) // time interval: 1s
   {
     timepoint = millis();
-    voltage_cond = analogRead(EC_PIN) / 4095.0 * 3300;
+    voltage_cond = analogRead(configPin.EC_PIN) / 4095.0 * 3300;
     // Serial.println("voltage: " + String(voltage_cond, 4));
     // temperature = readTemperature();  // read your temperature sensor to execute temperature compensation
     // Serial.println("voltage_cond: " String(temperature_cond, 1));
@@ -615,7 +225,6 @@ float Cond()
 /*      pH Sensor             */
 #define ESPADC 4096.0   // the esp Analog Digital Conversion value
 #define ESPVOLTAGE 3300 // the esp voltage supply value
-// extern int PH_PIN;
 float voltage_pH, phValue;
 float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
 
@@ -630,7 +239,7 @@ float pH()
   if (millis() - timepoint > 1000U) // time interval: 1s
   {
     timepoint = millis();
-    voltage_pH = analogRead(PH_PIN) / ESPADC * ESPVOLTAGE; // read the voltage
+    voltage_pH = analogRead(configPin.PH_PIN) / ESPADC * ESPVOLTAGE; // read the voltage
     // Serial.print("voltage_pH:");
     // Serial.println(voltage_pH, 4);
 
@@ -640,4 +249,436 @@ float pH()
   }
   ph.calibration(voltage_pH, temperature_pH); // calibration process by Serial CMD
   return phValue;
+}
+
+struct Configuration configuration;
+struct ConfigNumeric configNumeric;
+// Removed the commented-out version of processLine to avoid ambiguity
+
+
+/* DHT22 */
+uint8_t data[5];
+
+/*!
+ *  @brief  Read Humidity
+ *  @param  force
+ *					force read mode
+ *	@return float value - humidity in percent
+ */
+float readHumidity() {
+  float f = NAN;
+      f = ((word)data[0]) << 8 | data[1];
+      f *= 0.1;
+  return f;
+}
+
+/*!
+ *  @brief  Read temperature
+ *  @param  S
+ *          Scale. Boolean value:
+ *					- true = Fahrenheit
+ *					- false = Celcius
+ *  @param  force
+ *          true if in force mode
+ *	@return Temperature value in selected scale
+ */
+float readTemperature(bool S, bool force) {
+  float f = NAN;
+
+      f = ((word)(data[2] & 0x7F)) << 8 | data[3];
+      f *= 0.1;
+      if (data[2] & 0x80) {
+        f *= -1;
+      }      
+  return f;
+}
+
+
+void processLine(const String &line)
+{
+  if (line.isEmpty())
+  {
+    return;
+  }
+  if (line.startsWith("###"))
+  {
+    return;
+  }
+  size_t colonPos = line.indexOf(':');
+  if (colonPos == -1)
+  {
+    Serial.println("Invalid line: no colon found");
+    Serial.println(line);
+    return;
+  }
+
+  String key = line.substring(0, colonPos);
+  String valueStr = line.substring(colonPos + 1);
+
+  key.trim();
+  valueStr.trim();
+
+  if (key.equalsIgnoreCase("ssid"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.ssid = valueStr;
+  }
+  else if (key.equalsIgnoreCase("password"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.password = valueStr;
+  }
+  else if (key.equalsIgnoreCase("apn"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.apn = valueStr;
+  }
+  else if (key.equalsIgnoreCase("apn_User"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.apn_User = valueStr;
+  }
+  else if (key.equalsIgnoreCase("apn_Pass"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.apn_Pass = valueStr;
+  }
+  else if (key.equalsIgnoreCase("httpapi"))
+  {
+    valueStr.remove(0, 1);
+    valueStr.remove(valueStr.length() - 1);
+    configuration.httpapi = valueStr;
+  }
+  else if (key.equalsIgnoreCase("ConnectionMode"))
+  {
+    if (valueStr.equalsIgnoreCase("GSM"))
+    {
+      configuration.connectionMode = "GSM";
+      configuration.gsmMode = true;
+      configuration.wifiMode = false;
+    }
+    else if (valueStr.equalsIgnoreCase("WiFi"))
+    {
+      configuration.connectionMode = "WiFi";
+      configuration.wifiMode = true;
+      configuration.gsmMode = false;
+    }
+    else
+    {
+      Serial.println("Invalid connection mode: " + valueStr);
+      return;
+    }
+  }
+  else if (key.equalsIgnoreCase("mobileNumber"))
+  {
+    if (valueStr.length() >= 12 && valueStr.startsWith("+"))
+    {
+      try
+      {
+        configuration.mobileNumber = valueStr;
+        Serial.println("Mobile number set successfully");
+      }
+      catch (...)
+      {
+        Serial.println("Invalid mobile number format: " + valueStr);
+        return;
+      }
+    }
+    else
+    {
+      Serial.println("Invalid mobile number format: " + valueStr);
+      return;
+    }
+  }
+  else if (key.equalsIgnoreCase("GSM_RX_PIN"))
+  {
+    configPin.GSM_RX_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("GSM_TX_PIN"))
+  {
+    configPin.GSM_TX_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("Pin_MQ8"))
+  {
+    configPin.Pin_MQ8 = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("DHT_SENSOR_PIN"))
+  {
+    configPin.DHT_SENSOR_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("DS18B20_PIN"))
+  {
+    configPin.DS18B20_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("flowSensorPin"))
+  {
+    configPin.flowSensorPin = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("EC_PIN"))
+  {
+    configPin.EC_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("CurrentPin"))
+  {
+    configPin.CurrentPin = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("PH_PIN"))
+  {
+    configPin.PH_PIN = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("voltPin"))
+  {
+    configPin.voltPin = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("SW_420_Pin"))
+  {
+    configPin.SW_420_Pin = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("temperatureAmount"))
+  {
+    configNumeric.temperatureAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("phvalueAmount"))
+  {
+    configNumeric.phValueAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("humidityAmount"))
+  {
+    configNumeric.humidityAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("ecValueAmount"))
+  {
+    configNumeric.ecValueAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("flowRateAmount"))
+  {
+    configNumeric.flowRateAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("acsAmount"))
+  {
+    configNumeric.acsAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("ds18b20Amount"))
+  {
+    configNumeric.ds18b20Amount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("h2Amount"))
+  {
+    configNumeric.h2Amount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("voltAmount"))
+  {
+    configNumeric.voltAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("powerAmount"))
+  {
+    configNumeric.powerAmount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("SW420Amount"))
+  {
+    configNumeric.SW420Amount = valueStr.toInt();
+  }
+  else if (key.equalsIgnoreCase("flowSensorCalibration"))
+  {
+    configNumeric.flowSensorCalibration = valueStr.toFloat();
+  }
+  else if (!key.isEmpty())
+  {
+    Serial.println("Unknown/empty key: " + key + " on line: " + line);
+    return;
+  }
+  else if (valueStr.isEmpty())
+  {
+    Serial.println("Key found but no value provided on line: " + line);
+    Serial.println("Value found: " + valueStr);
+    return;
+  }
+  else
+  {
+    Serial.println("Invalid key: " + key + " on line: " + line);
+    return;
+  }
+}
+
+bool read_configuration()
+{
+  File file = SD.open("/config.txt");
+  if (file)
+  {
+    Serial.println("Config file opened successfully.");
+  }
+  else
+  {
+    Serial.println("Failed to open config file from Micro SD card, trying SPIFFS.");
+    file = SPIFFS.open("/config.txt");
+    if (!file)
+    {
+      Serial.println("Failed to open config file from SPIFFS also. Please add it manually to SD Card.");
+      return false;
+    }
+  }
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+
+  while (file.available())
+  {
+    String line = file.readStringUntil('\n');
+    processLine(line);
+  }
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+
+  file.close();
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+  return true;
+}
+
+void printVariables()
+{
+  Serial.print("ssid: ");
+  Serial.println(configuration.ssid);
+  Serial.print("password: ");
+  Serial.println(configuration.password);
+  Serial.print("httpapi: ");
+  Serial.println(configuration.httpapi);
+  Serial.print("connectionMode: ");
+  Serial.println(configuration.connectionMode);
+  Serial.print("GSM_RX_PIN: ");
+  Serial.println(configPin.GSM_RX_PIN);
+  Serial.print("GSM_TX_PIN: ");
+  Serial.println(configPin.GSM_TX_PIN);
+  Serial.print("mobileNumber: ");
+  Serial.println(configuration.mobileNumber);
+  Serial.print("Pin_MQ8: ");
+  Serial.println(configPin.Pin_MQ8);
+  Serial.print("DHT_SENSOR_PIN: ");
+  Serial.println(configPin.DHT_SENSOR_PIN);
+  Serial.print("DS18B20_PIN: ");
+  Serial.println(configPin.DS18B20_PIN);
+  Serial.print("flowSensorPin: ");
+  Serial.println(configPin.flowSensorPin);
+  Serial.print("EC_PIN: ");
+  Serial.println(configPin.EC_PIN);
+  Serial.print("CurrentPin: ");
+  Serial.println(configPin.CurrentPin);
+  Serial.print("PH_PIN: ");
+  Serial.println(configPin.PH_PIN);
+  Serial.print("voltPin: ");
+  Serial.println(configPin.voltPin);
+  Serial.print("SW_420_Pin: ");
+  Serial.println(configPin.SW_420_Pin);
+
+  Serial.print("h2Amount: ");
+  Serial.println(configNumeric.h2Amount);
+  Serial.print("flowRateAmount: ");
+  Serial.println(configNumeric.flowRateAmount);
+  Serial.print("temperatureAmount: ");
+  Serial.println(configNumeric.temperatureAmount);
+  Serial.print("humidityAmount: ");
+  Serial.println(configNumeric.humidityAmount);
+  Serial.print("phValueAmount: ");
+  Serial.println(configNumeric.phValueAmount);
+  Serial.print("ecValueAmount: ");
+  Serial.println(configNumeric.ecValueAmount);
+  Serial.print("ds18b20Amount: ");
+  Serial.println(configNumeric.ds18b20Amount);
+  Serial.print("voltAmount: ");
+  Serial.println(configNumeric.voltAmount);
+  Serial.print("acsAmount: ");
+  Serial.println(configNumeric.acsAmount);
+  Serial.print("powerAmount: ");
+  Serial.println(configNumeric.powerAmount);
+  Serial.print("SW_420Amount: ");
+  Serial.println(configNumeric.SW420Amount);
+
+  Serial.print("Phone Number: ");
+  Serial.println(configuration.mobileNumber);
+}
+
+void initializeConfigInterval()
+{
+  if (configNumeric.temperatureAmount == 0)
+  {
+    Serial.println("Temperature amount is 0, setting to 1");
+    configNumeric.temperatureAmount = 1;
+  }
+  if (configNumeric.ds18b20Amount == 0)
+  {
+    Serial.println("DS18B20 amount is 0, setting to 1");
+    configNumeric.ds18b20Amount = 1;
+  }
+  if (configNumeric.acsAmount == 0)
+  {
+    Serial.println("ACS amount is 0, setting to 1");
+    configNumeric.acsAmount = 1;
+  }
+  if (configNumeric.humidityAmount == 0)
+  {
+    Serial.println("Humidity amount is 0, setting to 1");
+    configNumeric.humidityAmount = 1;
+  }
+  if (configNumeric.flowRateAmount == 0)
+  {
+    Serial.println("Flow rate amount is 0, setting to 1");
+    configNumeric.flowRateAmount = 1;
+  }
+  if (configNumeric.h2Amount == 0)
+  {
+    Serial.println("H2 amount is 0, setting to 1");
+    configNumeric.h2Amount = 1;
+  }
+  if (configNumeric.voltAmount == 0)
+  {
+    Serial.println("Volt amount is 0, setting to 1");
+    configNumeric.voltAmount = 1;
+  }
+  if (configNumeric.powerAmount == 0)
+  {
+    Serial.println("Power amount is 0, setting to 1");
+    configNumeric.powerAmount = 1;
+  }
+  if (configNumeric.phValueAmount == 0)
+  {
+    Serial.println("PH value amount is 0, setting to 1");
+    configNumeric.phValueAmount = 1;
+  }
+  if (configNumeric.ecValueAmount == 0)
+  {
+    Serial.println("EC value amount is 0, setting to 1");
+    configNumeric.ecValueAmount = 1;
+  }
+  if (configNumeric.SW420Amount == 0)
+  {
+    Serial.println("SW_420 value amount is 0, setting to 1");
+    configNumeric.SW420Amount = 1;
+  }
+  
+  numMeasurements = std::max({
+    configNumeric.temperatureAmount,
+    configNumeric.phValueAmount, 
+    configNumeric.humidityAmount,
+    configNumeric.ecValueAmount,
+    configNumeric.flowRateAmount,
+    configNumeric.acsAmount,
+    configNumeric.ds18b20Amount,
+    configNumeric.h2Amount,
+    configNumeric.voltAmount,
+    configNumeric.powerAmount,
+    configNumeric.SW420Amount
+});
+
+  configInterval.dht22_tempInterval = numMeasurements / configNumeric.temperatureAmount;
+  configInterval.ds18b20Interval = numMeasurements / configNumeric.ds18b20Amount;
+  configInterval.acsInterval = numMeasurements / configNumeric.acsAmount;
+  configInterval.dht22_humInterval = numMeasurements / configNumeric.humidityAmount;
+  configInterval.flowRateInterval = numMeasurements / configNumeric.flowRateAmount;
+  configInterval.h2Interval = numMeasurements / configNumeric.h2Amount;
+  configInterval.voltInterval = numMeasurements / configNumeric.voltAmount;
+  configInterval.powerInterval = numMeasurements / configNumeric.powerAmount;
+  configInterval.phValueInterval = numMeasurements / configNumeric.phValueAmount;
+  configInterval.ecValueInterval = numMeasurements / configNumeric.ecValueAmount;
+  configInterval.SW420Interval = numMeasurements / configNumeric.SW420Amount;
 }

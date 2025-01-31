@@ -10,7 +10,17 @@
         "string_view": "cpp",
         "initializer_list": "cpp",
         "*.tcc": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "optional": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "system_error": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "sstream": "cpp",
+        "cmath": "cpp"
     },
     "C_Cpp.default.compilerPath": "C:/Users/koeki/.platformio/packages/toolchain-xtensa-esp32s3/bin/xtensa-esp32s3-elf-gcc.exe"
 }

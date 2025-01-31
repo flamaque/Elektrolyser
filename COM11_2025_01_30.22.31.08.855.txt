@@ -1,0 +1,142 @@
+[  2099][V][BLEUtils.cpp:1049] dumpGapEvent(): Received a GAP event: ESP_GAP_BLE_ADV_START_COMPLETE_EVT
+[  2109][V][BLEUtils.cpp:1074] dumpGapEvent(): [status: 0]
+[  2114][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2120][D][BLEAdvertising.cpp:506] handleGAPEvent(): handleGAPEvent [event no: 6]
+Config file opened successfully.
+Mobile number set successfully
+ssid: Loading...
+password: driekeerraden123
+httpapi: http://jrbubuntu.ddns.net:5000/api/telemetry
+connectionMode: WiFi
+GSM_RX_PIN: 44
+GSM_TX_PIN: 43
+mobileNumber: +31614504283
+Pin_MQ8: 1
+DHT_SENSOR_PIN: 6
+DS18B20_PIN: 4
+flowSensorPin: 5
+EC_PIN: 2
+CurrentPin: 8
+PH_PIN: 3
+voltPin: 15
+SW_420_Pin: 18
+h2Amount: 5
+flowRateAmount: 1
+temperatureAmount: 5
+humidityAmount: 4
+phValueAmount: 2
+ecValueAmount: 2
+ds18b20Amount: 8
+voltAmount: 5
+acsAmount: 5
+SW_420Amount: 5
+Phone Number: +31614504283
+[  3373][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[  3382][V][WiFiGeneric.cpp:341] _arduino_event_cb(): STA Started
+WiFi mode selected, setting up WiFi.
+[  3389][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino EvenE (5062) wifi_init_default: esp_wifit_:g 2et_mac failed with 12289
+ - [S  TA33_S90T]AR[VT]
+[WiFiGeneric.cpp:344] _arduino_event_cb(): STA Stopped
+[  3407][E][WiFiGeneric.cpp:1047] _eventCallback(): esp_wifi_set_ps failed
+[  3414][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 3 - STA_STOP
+E (5095) wifi:timeout when WiFi un-init, type=4
+[  4396][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[  4405][V][WiFiGeneric.cpp:341] _arduino_event_cb(): STA Started
+[  4406][V][WiFiGeneric.cpp:97] set_esp_interface_ip(): Configuring Station static IP: 0.0.0.0, MASK: 0.0.0.0, GW: 0.0.0.0
+[  4423][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  4617][V][WiFiGeneric.cpp:356] _arduino_event_cb(): STA Connected: SSID: Loading..., BSSID: c0:c9:e3:0e:a9:cd, Channel: 3, Auth: WPA2_PSK
+[  4629][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 4 - STA_CONNECTED
+[  4658][V][WiFiGeneric.cpp:370] _arduino_event_cb(): STA Got New IP:192.168.0.146
+[  4666][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 7 - STA_GOT_IP
+[  4673][D][WiFiGeneric.cpp:1103] _eventCallback(): STA IP: 192.168.0.146, MASK: 255.255.255.0, GW: 192.168.0.1
+Connecting to WiFi...
+
+Connected to WiFi
+192.168.0.146
+Date time received: 
+Thursday, January 30 2025 22:31:12
+Saved timestamp in milliseconds: 1738272672000
+Saved timestamp in setup: 1738272672000
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 11.23 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 28E565C90F0000EA
+Found device 3 with address: 28FB20C90F000099
+Inside BLE task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 8
+Now running for 500 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 6608 freeHeap: 8493831
+[  6553][I][esp32-hal-adc.c:249] __analogReadMilliVolts(): ADC1: Characterized using Default Vref: 0
+
+Free heap size: 151868, largest free block: 139252
+Free 32 bit heap size: 151868, largest 32 free block: 139252
+Now running sendArray WiFi task
+Free heap at end of setup: 151724
+Measurement: 0 entries: 1 size: 208
+Free heap MeasuringTask: 8487295 highWater mark: 5280
+Free heap ESP.getFreeHeap JSON: 151424, Heap fragmentation:  9%
+
+urements: 1738272672000
+Measurement: 10 entries: 11 size: 1994
+Free heap MeasuringTask: 8483471 highWater mark: 5280
+Free heap ESP.getFreeHeap JSON: 147736, Heap fragmentation:  6%
+
+Measurement: 20 entries: 21 size: 3808
+Free heap MeasuringTask: 8480463 highWater mark: 5280
+Free heap ESP.getFreeHeap JSON: 144728, Heap fragmentation:  10%
+
+Measurement: 30 entries: 31 size: 5592
+Free heap MeasuringTask: 8477711 highWater mark: 5280
+Free heap ESP.getFreeHeap JSON: 141976, Heap fragmentation:  8%
+
+Measurement: 40 entries: 41 size: 7405
+Free heap MeasuringTask: 8474767 highWater mark: 5280
+Free heap ESP.getFreeHeap JSON: 139032, Heap fragmentation:  6%
+
+Measurement: 50 entries: 51 size: 9192
+Free heap MeasuringTask: 8470831 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 135096, Heap fragmentation:  7%
+
+Measurement: 60 entries: 61 size: 11008
+Free heap MeasuringTask: 8468191 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 132456, Heap fragmentation:  8%
+
+Measurement: 70 entries: 71 size: 12793
+Free heap MeasuringTask: 8465551 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 129816, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14606
+Free heap MeasuringTask: 8463071 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 127336, Heap fragmentation:  7%
+
+Measurement: 90 entries: 91 size: 16391
+Free heap MeasuringTask: 8460639 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 124904, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18211
+Free heap MeasuringTask: 8456763 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 121028, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20004
+Free heap MeasuringTask: 8453627 highWater mark: 5248
+Free heap ESP.getFreeHeap JSON: 117892, Heap fragmentation:  10%
+

@@ -1,0 +1,406 @@
+[  1889][V][FreeRTOS.cpp:198] take(): Semaphore taken:  name: StartEvt (0x3fcb4030), owner: start
+[  1897][V][FreeRTOS.cpp:63] wait(): >> wait: Semaphore waiting: name: StartEvt (0x3fcb4030), owner: start for start
+[  1898][D][BLEDevice.cpp:102] gattServerEventHandler(): gattServerEventHandler [esp_gatt_if: 3] ... ESP_GATTS_START_EVT
+[  1918][V][BLEUtils.cpp:1530] dumpGattServerEvent(): GATT ServerEvent: ESP_GATTS_START_EVT
+[  1926][V][BLEUtils.cpp:1686] dumpGattServerEvent(): [status: ESP_GATT_OK, service_handle: 0x28]
+[  1935][V][BLEServer.cpp:144] handleGATTServerEvent(): >> handleGATTServerEvent: ESP_GATTS_START_EVT
+[  1944][V][FreeRTOS.cpp:143] give(): Semaphore giving: name: StartEvt (0x3fcb4030), owner: start
+[  1953][V][BLECharacteri[s t i1c9.5c3p]p[:V2]0[5F]r eheaRnTdOlS.GcApTpT:S7e7r]v ewraEivte(n)t:( )<:<  >w>a ihta:n dSleemGaApThToSreer vreerEleveanset:d: E nSaP_meGA:T TSSta_SrtTAEvRTt_ E(0VTx3
+cb4030), owner: <N/A>
+[  1969][V][BLEService.[c p p1:916599]][ Vs]t[aBrLtE(C)h:a r<a<c tsetrairstt(i)c.
+cpp:465] handleGATTServerEvent(): << handleGATTServerEvent
+[  1982][V][BLEServer.cpp:281] handleGATTServerEvent(): << handleGATTS[e r v1e9r8E2v]e[nIt][
+BLEDevice.cpp:577] getAdvertising(): create advertising
+[  1995][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2001][V][BLEDevice.cpp:584] startAdvertising(): >> startAdvertising
+[  2007][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2013][V][BLEAdvertising.cpp:187] start(): >> start: customAdvData: 0, customScanResponseData: 0
+[  2022][D][BLEAdvertising.cpp:199] start(): - advertising service: 0000ffe0-0000-1000-8000-00805f9b34fb
+[  2031][V][BLEAdvertising.cpp:252] start(): << start
+[  2035][V][BLEUtils.cpp:1049] dumpGapEvent(): Received a GAP event: ESP_GAP_BLE_ADV_DATA_SET_COMPLETE_EVT
+[  2046[] [ V2]0[4B6L]E[DVe]v[iBcLeE.Uctpipl:s5.8c6p]p :s1t0a5r6t]A ddvuemrptGiaspiEnvge(n)t:( )<:<  [ssttaarttuAsd:v e0r]ti
+sing
+[  2057][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2063][D][BLEAdvertising.cpp:506] handleGAPEvent(): handleGAPEvent [event no: 0]
+[  2070][V][BLEUtils.cpp:1049] dumpGapEvent(): Received a GAP event: ESP_GAP_BLE_SCAN_RSP_DATA_SET_COMPLETE_EVT
+[  2080][V][BLEUtils.cpp:1206] dumpGapEvent(): [status: 0]
+[  2085][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2091][D][BLEAdvertising.cpp:506] handleGAPEvent(): handleGAPEvent [event no: 1]
+[  2099][V][BLEUtils.cpp:1049] dumpGapEvent(): Received a GAP event: ESP_GAP_BLE_ADV_START_COMPLETE_EVT
+[  2108][V][BLEUtils.cpp:1074] dumpGapEvent(): [status: 0]
+[  2113][D][BLEDevice.cpp:579] getAdvertising(): get advertising
+[  2119][D][BLEAdvertising.cpp:506] handleGAPEvent(): handleGAPEvent [event no: 6]
+Config file opened successfully.
+Mobile number set successfully
+ssid: Loading...
+password: driekeerraden123
+httpapi: http://jrbubuntu.ddns.net:5000/api/telemetry
+connectionMode: WiFi
+GSM_RX_PIN: 44
+GSM_TX_PIN: 43
+mobileNumber: +31614504283
+Pin_MQ8: 1
+DHT_SENSOR_PIN: 6
+DS18B20_PIN: 4
+flowSensorPin: 5
+EC_PIN: 2
+CurrentPin: 8
+PH_PIN: 3
+voltPin: 15
+SW_420_Pin: 18
+h2Amount: 5
+flowRateAmount: 1
+temperatureAmount: 5
+humidityAmount: 4
+phValueAmount: 2
+ecValueAmount: 2
+ds18b20Amount: 8
+voltAmount: 5
+acsAmount: 5
+SW_420Amount: 5
+Phone Number: +31614504283
+[  3372][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[  3381][V][WiFiGeneric.cpp:341] _arduino_event_cb(): STA Started
+WiFi mode selected, setting up WiFi.
+[  3388][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino EvenE (5060) wifi_init_default:t :e 2sp_wifi_get_mac failed with 12289
+ -[   ST338A8_S]T[AVR][TW
+iFiGeneric.cpp:344] _arduino_event_cb(): STA Stopped
+[  3406][E][WiFiGeneric.cpp:1047] _eventCallback(): esp_wifi_set_ps failed
+[  3412][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 3 - STA_STOP
+E (5093) wifi:timeout when WiFi un-init, type=4
+[  4395][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[  4404][V][WiFiGeneric.cpp:341] _arduino_event_cb(): STA Started
+[  4405][V][WiFiGeneric.cpp:97] set_esp_interface_ip(): Configuring Station static IP: 0.0.0.0, MASK: 0.0.0.0, GW: 0.0.0.0
+[  4422][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  4614][V][WiFiGeneric.cpp:356] _arduino_event_cb(): STA Connected: SSID: Loading..., BSSID: c0:c9:e3:0e:a9:cd, Channel: 3, Auth: WPA2_PSK
+[  4627][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 4 - STA_CONNECTED
+[  4669][V][WiFiGeneric.cpp:370] _arduino_event_cb(): STA Got New IP:192.168.0.146
+[  4676][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 7 - STA_GOT_IP
+[  4684][D][WiFiGeneric.cpp:1103] _eventCallback(): STA IP: 192.168.0.146, MASK: 255.255.255.0, GW: 192.168.0.1
+Connecting to WiFi...
+
+Connected to WiFi
+192.168.0.146
+Date time received: 
+Thursday, January 30 2025 22:16:03
+Saved timestamp in milliseconds: 1738271763000
+Saved timestamp in setup: 1738271763000
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 11.46 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 28E565C90F0000EA
+Found device 3 with address: 28FB20C90F000099
+Inside BLE task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 8
+Now running for 600 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 6616 freeHeap: 8493851
+[  6552][I][esp32-hal-adc.c:249] __analogReadMilliVolts(): ADC1: Characterized using Default Vref: 0
+
+Free heap size: 151888, largest free block: 139252
+Free 32 bit heap size: 151888, largest 32 free block: 139252
+Now running sendArray WiFi task.
+Free heap at end of setup: 151744
+Measurement: 0 entries: 1 size: 208
+Free heap MeasuringTask: 8487315 highWater mark: 5288
+Free heap ESP.getFreeHeap JSON: 151444, Heap fragmentation:  9%
+
+Inside Display Measurements task.Measurement: 10 entries: 11 size: 2000
+Free heap MeasuringTask: 8483563 highWater mark: 5288
+Free heap ESP.getFreeHeap JSON: 147828, Heap fragmentation:  6%
+
+Measurement: 20 entries: 21 size: 3820
+Free heap MeasuringTask: 8480603 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 144868, Heap fragmentation:  10%
+
+Measurement: 30 entries: 31 size: 5612
+Free heap MeasuringTask: 8477915 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 142180, Heap fragmentation:  8%
+
+Measurement: 40 entries: 41 size: 7433
+Free heap MeasuringTask: 8475163 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 139428, Heap fragmentation:  7%
+
+Measurement: 50 entries: 51 size: 9226
+Free heap MeasuringTask: 8471595 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 135860, Heap fragmentation:  7%
+
+Measurement: 60 entries: 61 size: 11047
+Free heap MeasuringTask: 8468907 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 133172, Heap fragmentation:  8%
+
+Measurement: 70 entries: 71 size: 12839
+Free heap MeasuringTask: 8466411 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 130676, Heap fragmentation:  10%
+
+Measurement: 80 entries: 81 size: 14660
+Free heap MeasuringTask: 8463755 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 128020, Heap fragmentation:  8%
+
+Measurement: 90 entries: 91 size: 16452
+Free heap MeasuringTask: 8461323 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 125588, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18273
+Free heap MeasuringTask: 8457819 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 122084, Heap fragmentation:  10%
+
+Measurement: 110 entries: 111 size: 20065
+Free heap MeasuringTask: 8455419 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 119684, Heap fragmentation:  8%
+
+Measurement: 120 entries: 121 size: 21886
+Free heap MeasuringTask: 8452859 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 117124, Heap fragmentation:  10%
+
+Measurement: 130 entries: 131 size: 23679
+Free heap MeasuringTask: 8450363 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 114628, Heap fragmentation:  8%
+
+Measurement: 140 entries: 141 size: 25501
+Free heap MeasuringTask: 8447963 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 112228, Heap fragmentation:  9%
+
+Measurement: 150 entries: 151 size: 27294
+Free heap MeasuringTask: 8444171 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 108436, Heap fragmentation:  10%
+
+Measurement: 160 entries: 161 size: 29115
+Free heap MeasuringTask: 8441643 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 105908, Heap fragmentation:  12%
+
+Measurement: 170 entries: 171 size: 30908
+Free heap MeasuringTask: 8439339 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 103604, Heap fragmentation:  10%
+
+Measurement: 180 entries: 181 size: 32729
+Free heap MeasuringTask: 8436907 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 101172, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34521
+Free heap MeasuringTask: 8434507 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 98772, Heap fragmentation:  9%
+
+Measurement: 200 entries: 201 size: 36343
+Free heap MeasuringTask: 8432075 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 96340, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38135
+Free heap MeasuringTask: 8428667 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 92932, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39957
+Free heap MeasuringTask: 8426363 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 90628, Heap fragmentation:  15%
+
+Measurement: 230 entries: 231 size: 41747
+Free heap MeasuringTask: 8423963 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 88228, Heap fragmentation:  12%
+
+Measurement: 240 entries: 241 size: 43568
+Free heap MeasuringTask: 8421531 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 85796, Heap fragmentation:  15%
+
+Measurement: 250 entries: 251 size: 45361
+Free heap MeasuringTask: 8419163 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 83428, Heap fragmentation:  12%
+
+Measurement: 260 entries: 261 size: 47180
+Free heap MeasuringTask: 8415739 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 80004, Heap fragmentation:  13%
+
+Measurement: 270 entries: 271 size: 48972
+Free heap MeasuringTask: 8413291 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 77556, Heap fragmentation:  16%
+
+Measurement: 280 entries: 281 size: 50794
+Free heap MeasuringTask: 8411083 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 75348, Heap fragmentation:  14%
+
+Measurement: 290 entries: 291 size: 52586
+Free heap MeasuringTask: 8408843 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 73108, Heap fragmentation:  14%
+
+Measurement: 300 entries: 301 size: 54408
+Free heap MeasuringTask: 8405963 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 70228, Heap fragmentation:  16%
+
+Measurement: 310 entries: 311 size: 56200
+Free heap MeasuringTask: 8402571 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 66836, Heap fragmentation:  18%
+
+Measurement: 320 entries: 321 size: 58022
+Free heap MeasuringTask: 8400315 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 64580, Heap fragmentation:  18%
+
+Measurement: 330 entries: 331 size: 59813
+Free heap MeasuringTask: 8398043 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 62308, Heap fragmentation:  18%
+
+Measurement: 340 entries: 341 size: 61634
+Free heap MeasuringTask: 8395819 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 60084, Heap fragmentation:  19%
+
+Measurement: 350 entries: 351 size: 63427
+Free heap MeasuringTask: 8393531 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 57796, Heap fragmentation:  19%
+
+Measurement: 360 entries: 361 size: 65249
+Free heap MeasuringTask: 8391067 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 55332, Heap fragmentation:  19%
+
+Measurement: 370 entries: 371 size: 67042
+Free heap MeasuringTask: 8387723 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 51988, Heap fragmentation:  22%
+
+Measurement: 380 entries: 381 size: 68864
+Free heap MeasuringTask: 8385451 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 49716, Heap fragmentation:  22%
+
+Measurement: 390 entries: 391 size: 70657
+Free heap MeasuringTask: 8383243 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 47508, Heap fragmentation:  23%
+
+Measurement: 400 entries: 401 size: 72479
+Free heap MeasuringTask: 8381067 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 45332, Heap fragmentation:  24%
+
+Measurement: 410 entries: 411 size: 74272
+Free heap MeasuringTask: 8378891 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 43156, Heap fragmentation:  25%
+
+Measurement: 420 entries: 421 size: 76092
+Free heap MeasuringTask: 8375419 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 39684, Heap fragmentation:  26%
+
+Measurement: 430 entries: 431 size: 77884
+Free heap MeasuringTask: 8373211 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 37476, Heap fragmentation:  27%
+
+Measurement: 440 entries: 441 size: 79706
+Free heap MeasuringTask: 8370971 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 35236, Heap fragmentation:  28%
+
+Measurement: 450 entries: 451 size: 81497
+Free heap MeasuringTask: 8366267 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 32932, Heap fragmentation:  32%
+
+Measurement: 460 entries: 461 size: 83318
+Free heap MeasuringTask: 8366395 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 30660, Heap fragmentation:  34%
+
+Measurement: 470 entries: 471 size: 85111
+Free heap MeasuringTask: 8363211 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 27476, Heap fragmentation:  37%
+
+Measurement: 480 entries: 481 size: 86933
+Free heap MeasuringTask: 8360843 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 25108, Heap fragmentation:  39%
+
+Measurement: 490 entries: 491 size: 88726
+Free heap MeasuringTask: 8358571 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 22836, Heap fragmentation:  45%
+
+Measurement: 500 entries: 501 size: 90547
+Free heap MeasuringTask: 8356459 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 20724, Heap fragmentation:  49%
+
+Measurement: 510 entries: 511 size: 92340
+Free heap MeasuringTask: 8354511 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 18612, Heap fragmentation:  54%
+
+Measurement: 520 entries: 521 size: 94161
+Free heap MeasuringTask: 8352139 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 16404, Heap fragmentation:  54%
+
+Measurement: 530 entries: 531 size: 95953
+Free heap MeasuringTask: 8348891 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 13156, Heap fragmentation:  42%
+
+Measurement: 540 entries: 541 size: 97775
+Free heap MeasuringTask: 8346651 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 10916, Heap fragmentation:  30%
+
+Measurement: 550 entries: 551 size: 99567
+Free heap MeasuringTask: 8344423 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 8688, Heap fragmentation:  24%
+
+Measurement: 560 entries: 561 size: 101388
+Free heap MeasuringTask: 8342099 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 6364, Heap fragmentation:  36%
+
+Measurement: 570 entries: 571 size: 103181
+Free heap MeasuringTask: 8339955 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 4220, Heap fragmentation:  46%
+
+Measurement: 580 entries: 581 size: 105003
+Free heap MeasuringTask: 8336567 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 1912, Heap fragmentation:  100%
+
+Measurement: 590 entries: 591 size: 106796
+Free heap MeasuringTask: 8333303 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 2888, Heap fragmentation:  68%
+
+After for loop, freeHeap: 8331111 highWater mark: 5256
+600 measurements took: 162740 bytes
+
+600 measurements take: 10 min 48 sec.
+Free heap before writing to SD card: 2728
+, Heap fragmentation:  72%
+doc entries: 600 size : 108409
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 2720
+Heap fragmentation after serialize JSON: 76%
+[656010][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[656019][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and i
+
+Data written to log file.
+Now running for 610 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5256 freeHeap: 8482719
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8481139 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 150360, Heap fragmentation:  60%
+
+[663034][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for jrbubuntu.ddns.net
+[663042][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[663049][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[663156][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4
+SendArray stack high water mark: 1464
+Free heap size SendArray: 8484195
+Measurement: 10 entries: 11 size: 2003
+Free heap MeasuringTask: 8482771 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 147784, Heap fragmentation:  34%
+
+Measurement: 20 entries: 21 size: 3824
+Free heap MeasuringTask: 8479907 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 144920, Heap fragmentation:  33%
+
+Measurement: 30 entries: 31 size: 5616
+Free heap MeasuringTask: 8477123 highWater mark: 5256
+Free heap ESP.getFreeHeap JSON: 142136, Heap fragmentation:  31%
+

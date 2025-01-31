@@ -1,0 +1,4009 @@
+[  3499][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino EvenE (5228) wifi_init_default:t :e 2sp_wifi_get_mac failed with 12289
+ -[   ST350A0_S][TAVR][TW
+iFiGeneric.cpp:344] _arduino_event_cb(): STA Stopped
+[  3517][E][WiFiGeneric.cpp:1047] _eventCallback(): esp_wifi_set_ps failed
+[  3523][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 3 - STA_STOP
+E (5261) wifi:timeout when WiFi un-init, type=4
+[  4506][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[  4515][V][WiFiGeneric.cpp:341] _arduino_event_cb(): STA Started
+[  4516][V][WiFiGeneric.cpp:97] set_esp_interface_ip(): Configuring Station static IP: 0.0.0.0, MASK: 0.0.0.0, GW: 0.0.0.0
+[  4533][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  4725][V][WiFiGeneric.cpp:356] _arduino_event_cb(): STA Connected: SSID: Loading..., BSSID: c0:c9:e3:0e:a9:cd, Channel: 3, Auth: WPA2_PSK
+[  4737][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 4 - STA_CONNECTED
+[  4771][V][WiFiGeneric.cpp:370] _arduino_event_cb(): STA Got New IP:192.168.0.146
+[  4779][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 7 - STA_GOT_IP
+[  4786][D][WiFiGeneric.cpp:1103] _eventCallback(): STA IP: 192.168.0.146, MASK: 255.255.255.0, GW: 192.168.0.1
+Connecting to WiFi...
+
+Connected to WiFi
+192.168.0.146
+Date time received: 
+Thursday, January 30 2025 20:05:40
+Saved timestamp in milliseconds: 1738263940000
+Saved timestamp in setup: 1738263940000
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 13.53 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 28E565C90F0000EA
+Found device 3 with address: 28FB20C90F000099
+Inside BLE task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 8
+Now running for 20 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 6612 freeHeap: 8493667
+[ 10594][I][esp32-hal-adc.c:249] __analogReadMilliVolts(): ADC1: Characterized using Default Vref: 0
+
+Free heap size: 151840, largest free block: 139252
+Free 32 bit heap size: 151840, largest 32 free block: 139252
+Now running sendArray WiFi task.
+Free heap at end of setup: 151696
+Measurement: 0 entries: 1 size: 208
+Free heap MeasuringTask: 8487131 highWater mark: 5284
+Free heap ESP.getFreeHeap JSON: 151396, Heap fragmentation:  9%
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1738263940000
+Measurement: 10 entries: 11 size: 1995
+Free heap MeasuringTask: 8483531 highWater mark: 5284
+Free heap ESP.getFreeHeap JSON: 147796, Heap fragmentation:  6%
+
+After for loop, freeHeap: 8480491 highWater mark: 5284
+20 measurements took: 13176 bytes
+
+20 measurements take: 0 min 21 sec.
+Free heap before writing to SD card: 144708
+, Heap fragmentation:  10%
+doc entries: 20 size : 3604
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 144708
+Heap fragmentation after serialize JSON: 10%
+Data written to log file.
+Now running for 30 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5284 freeHeap: 8488247
+[ 32053][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[ 32062][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 3604
+[ 32092][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[ 32101][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[ 32109][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[ 32215][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967126
+SendArray stack high water mark: 1464
+Free heap size SendArray: 8486731
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8486367 highWater mark: 5284
+Free heap ESP.getFreeHeap JSON: 150632, Heap fragmentation:  8%
+
+Measurement: 10 entries: 11 size: 2000
+Free heap MeasuringTask: 8483291 highWater mark: 5284
+Free heap ESP.getFreeHeap JSON: 147556, Heap fragmentation:  6%
+
+Measurement: 20 entries: 21 size: 3815
+Free heap MeasuringTask: 8480259 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144524, Heap fragmentation:  10%
+
+After for loop, freeHeap: 8477655 highWater mark: 5252
+30 measurements took: 10592 bytes
+
+30 measurements take: 0 min 32 sec.
+Free heap before writing to SD card: 141872
+, Heap fragmentation:  8%
+doc entries: 30 size : 5424
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 141872
+Heap fragmentation after serialize JSON: 8%
+Data written to log file.
+Now running for 40 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487951
+[ 64772][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[ 64781][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+Buffer size in sendArray: 5424
+[ 64843][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[ 64853][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[ 64861][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[ 64967][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 0 min 32 sec.
+Time to send data: 4294967094
+SendArray stack high water mark: 1464
+Free heap size SendArray: 8486707
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8486367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150632, Heap fragmentation:  13%
+
+Measurement: 10 entries: 11 size: 1995
+Free heap MeasuringTask: 8483367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147632, Heap fragmentation:  12%
+
+Measurement: 20 entries: 21 size: 3812
+Free heap MeasuringTask: 8480343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144608, Heap fragmentation:  10%
+
+Measurement: 30 entries: 31 size: 5598
+Free heap MeasuringTask: 8477495 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141760, Heap fragmentation:  8%
+
+After for loop, freeHeap: 8474855 highWater mark: 5252
+40 measurements took: 13096 bytes
+
+40 measurements take: 0 min 43 sec.
+Free heap before writing to SD card: 139072
+, Heap fragmentation:  9%
+doc entries: 40 size : 7202
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 139072
+Heap fragmentation after serialize JSON: 9%
+Data written to log file.
+Now running for 50 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8488007
+[108274][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[108283][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buer size in sendArray: 7202
+[108363][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[108373][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[108380][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+1
+[108486][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 0 min 43 sec.
+Time to send data: 4294967077
+SendArray stack high water mark: 1464
+Free heap size SendArray: 8486727
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8486415 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150680, Heap fragmentation:  8%
+
+Measurement: 10 entries: 11 size: 1994
+Free heap MeasuringTask: 8483247 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147512, Heap fragmentation:  6%
+
+Measurement: 20 entries: 21 size: 3813
+Free heap MeasuringTask: 8480071 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144336, Heap fragmentation:  10%
+
+Measurement: 30 entries: 31 size: 5598
+Free heap MeasuringTask: 8477239 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141504, Heap fragmentation:  8%
+
+Measurement: 40 entries: 41 size: 7414
+Free heap MeasuringTask: 8474295 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138560, Heap fragmentation:  9%
+
+After for loop, freeHeap: 8471751 highWater mark: 5252
+50 measurements took: 16256 bytes
+
+50 measurements take: 0 min 53 sec.
+Free heap before writing to SD card: 135968
+, Heap fragmentation:  7%
+doc entries: 50 size : 9020
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 135960
+Heap fragmentation after serialize JSON: 7%
+[162543][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[162552][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 9020
+[162570][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[162580][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[162588][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+Data written to log file.
+Now running for 60 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482971
+[162694][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967138
+SendArray stack high water mark: 1464
+Free he 8486271
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150204, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1992
+Free heap MeasuringTask: 8483091 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147356, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3807
+Free heap MeasuringTask: 8479979 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144244, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5594
+Free heap MeasuringTask: 8477115 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141380, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7409
+Free heap MeasuringTask: 8474379 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138644, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9197
+Free heap MeasuringTask: 8470699 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134964, Heap fragmentation:  12%
+
+After for loop, freeHeap: 8468219 highWater mark: 5252
+60 measurements took: 14752 bytes
+
+60 measurements take: 1 min 4 sec.
+Free heap before writing to SD card: 132436
+, Heap fragmentation:  11%
+doc entries: 60 size : 10803
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 132436
+Heap fragmentation after serialize JSON: 11%
+[227751][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[227760][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if sta
+
+Buffer size in sendArray: 10803
+[227798][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[227808][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+Data written to log file.
+[227816][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Now running for 70 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482915
+Error on sending POST: -1
+[227922][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 1 min 5 sec.
+Time to send data: 4294967118
+SendArray stack high water mark: 8486263
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1994
+Free heap MeasuringTask: 8482863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147128, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8479827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144092, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8476943 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141208, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7420
+Free heap MeasuringTask: 8474079 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138344, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9205
+Free heap MeasuringTask: 8470207 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134472, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11020
+Free heap MeasuringTask: 8467551 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131816, Heap fragmentation:  10%
+
+After for loop, freeHeap: 8465071 highWater mark: 5252
+70 measurements took: 17844 bytes
+
+70 measurements take: 1 min 15 sec.
+Free heap before writing to SD card: 129288
+, Heap fragmentation:  9%
+doc entries: 70 size : 12625
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 129300
+Heap fragmentation after serialize JSON: 9%
+[303729][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[303738][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogement
+
+Buffer size in sendArray: 12625
+[303766][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[303776][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[303783][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+Data written to log file.
+Now running for 80 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487371
+[303890][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 1 min 15 sec.
+Time to send data: 4294967128
+SendArray stack high water mark: 1352
+Free heap size SendArray: 8486331
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1998
+Free heap MeasuringTask: 8482799 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147064, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3815
+Free heap MeasuringTask: 8479543 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 143808, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5602
+Free heap MeasuringTask: 8476759 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141024, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7418
+Free heap MeasuringTask: 8473863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138128, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9206
+Free heap MeasuringTask: 8470135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134400, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11021
+Free heap MeasuringTask: 8467479 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131744, Heap fragmentation:  10%
+
+Measurement: 70 entries: 71 size: 12810
+Free heap MeasuringTask: 8464815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129080, Heap fragmentation:  8%
+
+After for loop, freeHeap: 8462335 highWater mark: 5252
+80 measurements took: 25036 bytes
+
+80 measurements take: 1 min 26 sec.
+Free heap before writing to SD card: 126552
+, Heap fragmentation:  10%
+doc entries: 80 size : 14419
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 126552
+Heap fragmentation after serialize JSON: 10%
+[390696][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[390705][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 14419
+Data written to log file.
+Now running for 90 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482691
+[390792][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[390802][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[390810][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[390916][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967069
+SendArray st: 1352
+Free heap size SendArray: 8486283
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150200, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1994
+Free heap MeasuringTask: 8482655 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 146920, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3808
+Free heap MeasuringTask: 8479567 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 143832, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5591
+Free heap MeasuringTask: 8476975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141240, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7408
+Free heap MeasuringTask: 8474063 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138328, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9194
+Free heap MeasuringTask: 8470399 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134664, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11012
+Free heap MeasuringTask: 8467655 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131920, Heap fragmentation:  10%
+
+Measurement: 70 entries: 71 size: 12797
+Free heap MeasuringTask: 8465111 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129376, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14612
+Free heap MeasuringTask: 8462455 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126720, Heap fragmentation:  10%
+
+After for loop, freeHeap: 8460119 highWater mark: 5252
+90 measurements took: 22572 bytes
+
+90 measurements take: 1 min 37 sec.
+Free heap before writing to SD card: 124336
+, Heap fragmentation:  8%
+doc entries: 90 size : 16221
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 124336
+Heap fragmentation after serialize JSON: 8%
+[488473][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[488482][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Data written to log file.
+Received OneLogMutex and inside if statement
+Now running for 100 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487355
+
+[488507][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[488517][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[488524][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[488630][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 1 min 37 sec.
+Time to send data: 4294967132
+SendArray stack high water mark: 1352
+Free heap size SendArray: 8486255
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150204, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8482867 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147132, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3813
+Free heap MeasuringTask: 8479763 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144028, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5602
+Free heap MeasuringTask: 8476971 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141236, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7418
+Free heap MeasuringTask: 8474027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138292, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9201
+Free heap MeasuringTask: 8470203 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134468, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11015
+Free heap MeasuringTask: 8467707 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131972, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12804
+Free heap MeasuringTask: 8465003 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129268, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14619
+Free heap MeasuringTask: 8462379 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126644, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16407
+Free heap MeasuringTask: 8459983 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124248, Heap fragmentation:  8%
+
+After for loop, freeHeap: 8457547 highWater mark: 5252
+100 measurements took: 29808 bytes
+
+100 measurements take: 1 min 47 sec.
+Free heap before writing to SD card: 121764
+, Heap fragmentation:  10%
+doc entries: 100 size : 18013
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 121764
+Heap fragmentation after serialize JSON: 10%
+[596937][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[596946][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 18013
+[597027][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[597037][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[597045][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+Data written to log file.
+Now running for 110 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482987
+[597151][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967075
+
+Free heap size SendArray: 8486287
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150212, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1995
+Free heap MeasuringTask: 8482847 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147112, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3813
+Free heap MeasuringTask: 8479623 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 143888, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5599
+Free heap MeasuringTask: 8476835 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141100, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7418
+Free heap MeasuringTask: 8474023 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138288, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9203
+Free heap MeasuringTask: 8470343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134608, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11017
+Free heap MeasuringTask: 8467827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132092, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12801
+Free heap MeasuringTask: 8465331 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129596, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14617
+Free heap MeasuringTask: 8462547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126812, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16406
+Free heap MeasuringTask: 8460003 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124268, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18225
+Free heap MeasuringTask: 8456483 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120748, Heap fragmentation:  9%
+
+After for loop, freeHeap: 8454163 highWater mark: 5252
+110 measurements took: 28824 bytes
+
+110 measurements take: 1 min 58 sec.
+Free heap before writing to SD card: 118380
+, Heap fragmentation:  11%
+doc entries: 110 size : 19831
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 118372
+Heap fragmentation after serialize JSON: 11%
+[716208][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[716217][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 19831
+[716242][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[716252][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[716259][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[716371][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967126
+SendArray stack high water mark: 1352
+Free heap size SendArray: 8449579
+Data written to log file.
+Now running for 120 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487495
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1993
+Free heap MeasuringTask: 8482911 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147176, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3807
+Free heap MeasuringTask: 8479927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144192, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5594
+Free heap MeasuringTask: 8477319 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141584, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7412
+Free heap MeasuringTask: 8474375 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138640, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9198
+Free heap MeasuringTask: 8470583 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134848, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11013
+Free heap MeasuringTask: 8467991 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132256, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12801
+Free heap MeasuringTask: 8465431 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129696, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14614
+Free heap MeasuringTask: 8462711 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126976, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16401
+Free heap MeasuringTask: 8460343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124608, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18215
+Free heap MeasuringTask: 8456871 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121136, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20003
+Free heap MeasuringTask: 8454359 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118624, Heap fragmentation:  11%
+
+After for loop, freeHeap: 8452023 highWater mark: 5252
+120 measurements took: 35472 bytes
+
+120 measurements take: 2 min 9 sec.
+Free heap before writing to SD card: 116240
+, Heap fragmentation:  9%
+doc entries: 120 size : 21609
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 116240
+Heap fragmentation after serialize JSON: 9%
+[846428][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[846437][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 21609
+[846475][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[846485][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[846492][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[846599][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between 
+Time to send data: 4294967118
+SendArray stack high water mark: 1352
+Free heap size SendArray: 8447451
+Data written to log file.
+Now running for 130 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487503
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  30%
+
+Measurement: 10 entries: 11 size: 2000
+Free heap MeasuringTask: 8482839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147128, Heap fragmentation:  28%
+
+Measurement: 20 entries: 21 size: 3812
+Free heap MeasuringTask: 8479727 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 143992, Heap fragmentation:  27%
+
+Measurement: 30 entries: 31 size: 5598
+Free heap MeasuringTask: 8476943 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141208, Heap fragmentation:  25%
+
+Measurement: 40 entries: 41 size: 7413
+Free heap MeasuringTask: 8474183 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138448, Heap fragmentation:  24%
+
+Measurement: 50 entries: 51 size: 9200
+Free heap MeasuringTask: 8470535 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134800, Heap fragmentation:  22%
+
+Measurement: 60 entries: 61 size: 11019
+Free heap MeasuringTask: 8467559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131824, Heap fragmentation:  20%
+
+Measurement: 70 entries: 71 size: 12811
+Free heap MeasuringTask: 8465015 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129280, Heap fragmentation:  18%
+
+Measurement: 80 entries: 81 size: 14630
+Free heap MeasuringTask: 8462135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126400, Heap fragmentation:  16%
+
+Measurement: 90 entries: 91 size: 16416
+Free heap MeasuringTask: 8459575 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 123840, Heap fragmentation:  15%
+
+Measurement: 100 entries: 101 size: 18230
+Free heap MeasuringTask: 8455879 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120144, Heap fragmentation:  12%
+
+Measurement: 110 entries: 111 size: 20017
+Free heap MeasuringTask: 8453543 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 117808, Heap fragmentation:  10%
+
+Measurement: 120 entries: 121 size: 21832
+Free heap MeasuringTask: 8451079 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115344, Heap fragmentation:  12%
+
+After for loop, freeHeap: 8448807 highWater mark: 5252
+130 measurements took: 38696 bytes
+
+130 measurements take: 2 min 20 sec.
+Free heap before writing to SD card: 113024
+, Heap fragmentation:  10%
+doc entries: 130 size : 23442
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 113024
+Heap fragmentation after serialize JSON: 10%
+[987656][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[987665][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and i
+
+Buffer size in sendArray: 23442
+[987698][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[987708][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[987716][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+Data written to log file.
+Now running for 140 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482983
+[987822][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967123
+SendArray stack high water mark: 1352
+
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485923 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150188, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 2000
+Free heap MeasuringTask: 8482803 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147068, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3817
+Free heap MeasuringTask: 8479891 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144156, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5608
+Free heap MeasuringTask: 8476947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141212, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7426
+Free heap MeasuringTask: 8474051 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138316, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9217
+Free heap MeasuringTask: 8470531 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134796, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11034
+Free heap MeasuringTask: 8468019 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132284, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12823
+Free heap MeasuringTask: 8465347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129612, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14642
+Free heap MeasuringTask: 8462627 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126892, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16431
+Free heap MeasuringTask: 8460131 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124396, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18249
+Free heap MeasuringTask: 8456547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120812, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20037
+Free heap MeasuringTask: 8453971 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118236, Heap fragmentation:  10%
+
+Measurement: 120 entries: 121 size: 21855
+Free heap MeasuringTask: 8451347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115612, Heap fragmentation:  12%
+
+Measurement: 130 entries: 131 size: 23642
+Free heap MeasuringTask: 8449059 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113324, Heap fragmentation:  10%
+
+After for loop, freeHeap: 8446707 highWater mark: 5252
+140 measurements took: 36276 bytes
+
+140 measurements take: 2 min 31 sec.
+Free heap before writing to SD card: 110924
+, Heap fragmentation:  12%
+doc entries: 140 size : 25250
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 110924
+Heap fragmentation after serialize JSON: 12%
+[1139379][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[1139388][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+
+[1139443][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[1139453][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[1139461][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[1139575][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 2 min 31 sec.
+Time to send data: 4294967092
+SendArray stack high water mark: 1352
+Free heap size SendArray: 8442135
+Data written to log file.
+Now running for 150 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487507
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1999
+Free heap MeasuringTask: 8482895 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147160, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3818
+Free heap MeasuringTask: 8479711 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 143976, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5606
+Free heap MeasuringTask: 8477007 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141272, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7420
+Free heap MeasuringTask: 8474175 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138440, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9206
+Free heap MeasuringTask: 8470463 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134728, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11023
+Free heap MeasuringTask: 8467951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132216, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12806
+Free heap MeasuringTask: 8465567 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129832, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14625
+Free heap MeasuringTask: 8462815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127080, Heap fragmentation:  7%
+
+Measurement: 90 entries: 91 size: 16417
+Free heap MeasuringTask: 8460271 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124536, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18236
+Free heap MeasuringTask: 8456719 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120984, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20022
+Free heap MeasuringTask: 8454303 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118568, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21837
+Free heap MeasuringTask: 8451807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116072, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23623
+Free heap MeasuringTask: 8449359 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113624, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25441
+Free heap MeasuringTask: 8446895 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111160, Heap fragmentation:  8%
+
+After for loop, freeHeap: 8444207 highWater mark: 5252
+150 measurements took: 43300 bytes
+
+150 measurements take: 2 min 41 sec.
+Free heap before writing to SD card: 108424
+, Heap fragmentation:  10%
+doc entries: 150 size : 27053
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 108424
+Heap fragmentation after serialize JSON: 10%
+[1302132][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[1302141][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received On
+
+[1302169][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[1302179][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[1302186][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[1302292][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Ti
+SendArray stack high water mark: 
+Data written to log file.
+Now running for 160 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150204, Heap fragmentation:  38%
+
+Measurement: 10 entries: 11 size: 1995
+Free heap MeasuringTask: 8482795 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147060, Heap fragmentation:  36%
+
+Measurement: 20 entries: 21 size: 3811
+Free heap MeasuringTask: 8479755 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144020, Heap fragmentation:  35%
+
+Measurement: 30 entries: 31 size: 5598
+Free heap MeasuringTask: 8476939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141204, Heap fragmentation:  34%
+
+Measurement: 40 entries: 41 size: 7414
+Free heap MeasuringTask: 8474075 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138340, Heap fragmentation:  32%
+
+Measurement: 50 entries: 51 size: 9200
+Free heap MeasuringTask: 8470459 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134724, Heap fragmentation:  31%
+
+Measurement: 60 entries: 61 size: 11015
+Free heap MeasuringTask: 8467899 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132164, Heap fragmentation:  29%
+
+Measurement: 70 entries: 71 size: 12804
+Free heap MeasuringTask: 8465099 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129364, Heap fragmentation:  28%
+
+Measurement: 80 entries: 81 size: 14620
+Free heap MeasuringTask: 8462363 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126628, Heap fragmentation:  26%
+
+Measurement: 90 entries: 91 size: 16409
+Free heap MeasuringTask: 8459963 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124228, Heap fragmentation:  25%
+
+Measurement: 100 entries: 101 size: 18228
+Free heap MeasuringTask: 8456379 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120644, Heap fragmentation:  22%
+
+Measurement: 110 entries: 111 size: 20017
+Free heap MeasuringTask: 8454027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118292, Heap fragmentation:  21%
+
+Measurement: 120 entries: 121 size: 21835
+Free heap MeasuringTask: 8451675 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115940, Heap fragmentation:  19%
+
+Measurement: 130 entries: 131 size: 23619
+Free heap MeasuringTask: 8449275 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113540, Heap fragmentation:  18%
+
+Measurement: 140 entries: 141 size: 25438
+Free heap MeasuringTask: 8446747 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111012, Heap fragmentation:  16%
+
+Measurement: 150 entries: 151 size: 27227
+Free heap MeasuringTask: 8443051 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107316, Heap fragmentation:  13%
+
+After for loop, freeHeap: 8441835 highWater mark: 5252
+160 measurements took: 45696 bytes
+
+160 measurements take: 2 min 52 sec.
+Free heap before writing to SD card: 106052
+, Heap fragmentation:  12%
+doc entries: 160 size : 28835
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 106052
+Heap fragmentation after serialize JSON: 12%
+[1475849][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[1475858][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer siz[1475935][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[1475944][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[1475952][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+Data written to log file.
+Now running for 170 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487355
+[1476062][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 2 min 53 sec.
+Time to send data: 4294967075
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8486315
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485923 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150188, Heap fragmentation:  38%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8482835 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147100, Heap fragmentation:  36%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8479923 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144188, Heap fragmentation:  35%
+
+Measurement: 30 entries: 31 size: 5599
+Free heap MeasuringTask: 8477187 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141452, Heap fragmentation:  34%
+
+Measurement: 40 entries: 41 size: 7417
+Free heap MeasuringTask: 8474419 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138684, Heap fragmentation:  33%
+
+Measurement: 50 entries: 51 size: 9204
+Free heap MeasuringTask: 8470795 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135060, Heap fragmentation:  31%
+
+Measurement: 60 entries: 61 size: 11022
+Free heap MeasuringTask: 8468091 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132356, Heap fragmentation:  29%
+
+Measurement: 70 entries: 71 size: 12814
+Free heap MeasuringTask: 8465371 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129636, Heap fragmentation:  28%
+
+Measurement: 80 entries: 81 size: 14632
+Free heap MeasuringTask: 8462731 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126996, Heap fragmentation:  26%
+
+Measurement: 90 entries: 91 size: 16419
+Free heap MeasuringTask: 8460363 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124628, Heap fragmentation:  25%
+
+Measurement: 100 entries: 101 size: 18232
+Free heap MeasuringTask: 8456827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121092, Heap fragmentation:  23%
+
+Measurement: 110 entries: 111 size: 20019
+Free heap MeasuringTask: 8454491 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118756, Heap fragmentation:  21%
+
+Measurement: 120 entries: 121 size: 21838
+Free heap MeasuringTask: 8452043 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116308, Heap fragmentation:  20%
+
+Measurement: 130 entries: 131 size: 23626
+Free heap MeasuringTask: 8449723 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113988, Heap fragmentation:  18%
+
+Measurement: 140 entries: 141 size: 25441
+Free heap MeasuringTask: 8447291 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111556, Heap fragmentation:  16%
+
+Measurement: 150 entries: 151 size: 27231
+Free heap MeasuringTask: 8443483 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107748, Heap fragmentation:  13%
+
+Measurement: 160 entries: 161 size: 29050
+Free heap MeasuringTask: 8441099 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105364, Heap fragmentation:  11%
+
+After for loop, freeHeap: 8438571 highWater mark: 5252
+170 measurements took: 48784 bytes
+
+170 measurements take: 3 min 3 sec.
+Free heap before writing to SD card: 102788
+, Heap fragmentation:  13%
+doc entries: 170 size : 30659
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 102796
+Heap fragmentation after serialize JSON: 13%
+[1660119][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[1660128][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+Buffer size in sendArray: 30659
+[1660157][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[1660166][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[1660174][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[1660280][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time betw
+Time to seSendArray stack high water mark: 1304
+FreData written to log file.
+Now running for 180 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487539
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485955 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150220, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1996
+Free heap MeasuringTask: 8482967 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147232, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3813
+Free heap MeasuringTask: 8479847 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144112, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5601
+Free heap MeasuringTask: 8477223 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141488, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7417
+Free heap MeasuringTask: 8474647 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138912, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9207
+Free heap MeasuringTask: 8470999 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135264, Heap fragmentation:  13%
+
+Measurement: 60 entries: 61 size: 11025
+Free heap MeasuringTask: 8468391 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132656, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12814
+Free heap MeasuringTask: 8465687 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129952, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14633
+Free heap MeasuringTask: 8462919 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127184, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16420
+Free heap MeasuringTask: 8460407 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124672, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18238
+Free heap MeasuringTask: 8456839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121104, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20028
+Free heap MeasuringTask: 8454535 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118800, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21843
+Free heap MeasuringTask: 8452135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116400, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23628
+Free heap MeasuringTask: 8449719 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113984, Heap fragmentation:  11%
+
+Measurement: 140 entries: 141 size: 25448
+Free heap MeasuringTask: 8447255 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111520, Heap fragmentation:  9%
+
+Measurement: 150 entries: 151 size: 27239
+Free heap MeasuringTask: 8443367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107632, Heap fragmentation:  9%
+
+Measurement: 160 entries: 161 size: 29057
+Free heap MeasuringTask: 8440839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105104, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30845
+Free heap MeasuringTask: 8438327 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102592, Heap fragmentation:  13%
+
+After for loop, freeHeap: 8436183 highWater mark: 5252
+180 measurements took: 51356 bytes
+
+180 measurements take: 3 min 14 sec.
+Free heap before writing to SD card: 100400
+, Heap fragmentation:  11%
+doc entries: 180 size : 32453
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 100400
+Heap fragmentation after serialize JSON: 11%
+[1855337][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[1855346][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer siz[1855427][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[1855436][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[1855444][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[1855557][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967069
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8431619
+Data written to log file.
+Now running for 190 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150192, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1998
+Free heap MeasuringTask: 8482935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147200, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8480055 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144320, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5601
+Free heap MeasuringTask: 8477335 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141600, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7416
+Free heap MeasuringTask: 8474695 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138960, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9206
+Free heap MeasuringTask: 8470759 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135024, Heap fragmentation:  13%
+
+Measurement: 60 entries: 61 size: 11027
+Free heap MeasuringTask: 8467847 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132112, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12818
+Free heap MeasuringTask: 8465159 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129424, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14638
+Free heap MeasuringTask: 8462503 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126768, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16424
+Free heap MeasuringTask: 8460039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124304, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18238
+Free heap MeasuringTask: 8456615 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120880, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20025
+Free heap MeasuringTask: 8454311 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118576, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21844
+Free heap MeasuringTask: 8451975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116240, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23630
+Free heap MeasuringTask: 8449639 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113904, Heap fragmentation:  11%
+
+Measurement: 140 entries: 141 size: 25449
+Free heap MeasuringTask: 8447047 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111312, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27238
+Free heap MeasuringTask: 8443431 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107696, Heap fragmentation:  9%
+
+Measurement: 160 entries: 161 size: 29059
+Free heap MeasuringTask: 8440999 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105264, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30845
+Free heap MeasuringTask: 8438615 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102880, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32661
+Free heap MeasuringTask: 8436263 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100528, Heap fragmentation:  11%
+
+After for loop, freeHeap: 8434055 highWater mark: 5252
+190 measurements took: 53476 bytes
+
+190 measurements take: 3 min 25 sec.
+Free heap before writing to SD card: 98272
+, Heap fragmentation:  13%
+doc entries: 190 size : 34269
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 98264
+Heap fragmentation after serialize JSON: 13%
+[2061614][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[2061623][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+[2061662][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[2061671][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[2061679][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[2061786][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time besage: 3 min 26 sec.
+Time to send data: 4294967117
+SendArray stack h 8429483
+Data written to log file.
+Now running for 200 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487507
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150224, Heap fragmentation:  46%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8482899 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147164, Heap fragmentation:  45%
+
+Measurement: 20 entries: 21 size: 3812
+Free heap MeasuringTask: 8480059 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144324, Heap fragmentation:  44%
+
+Measurement: 30 entries: 31 size: 5602
+Free heap MeasuringTask: 8477291 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141556, Heap fragmentation:  43%
+
+Measurement: 40 entries: 41 size: 7423
+Free heap MeasuringTask: 8474347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138612, Heap fragmentation:  41%
+
+Measurement: 50 entries: 51 size: 9212
+Free heap MeasuringTask: 8470507 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134772, Heap fragmentation:  40%
+
+Measurement: 60 entries: 61 size: 11030
+Free heap MeasuringTask: 8468027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132292, Heap fragmentation:  39%
+
+Measurement: 70 entries: 71 size: 12817
+Free heap MeasuringTask: 8465547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129812, Heap fragmentation:  37%
+
+Measurement: 80 entries: 81 size: 14634
+Free heap MeasuringTask: 8462859 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127124, Heap fragmentation:  36%
+
+Measurement: 90 entries: 91 size: 16421
+Free heap MeasuringTask: 8460491 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124756, Heap fragmentation:  35%
+
+Measurement: 100 entries: 101 size: 18237
+Free heap MeasuringTask: 8457067 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121332, Heap fragmentation:  33%
+
+Measurement: 110 entries: 111 size: 20023
+Free heap MeasuringTask: 8454763 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 119028, Heap fragmentation:  32%
+
+Measurement: 120 entries: 121 size: 21841
+Free heap MeasuringTask: 8452395 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116660, Heap fragmentation:  30%
+
+Measurement: 130 entries: 131 size: 23630
+Free heap MeasuringTask: 8449915 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 114180, Heap fragmentation:  29%
+
+Measurement: 140 entries: 141 size: 25450
+Free heap MeasuringTask: 8447371 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111636, Heap fragmentation:  27%
+
+Measurement: 150 entries: 151 size: 27239
+Free heap MeasuringTask: 8443819 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 108084, Heap fragmentation:  25%
+
+Measurement: 160 entries: 161 size: 29057
+Free heap MeasuringTask: 8441483 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105748, Heap fragmentation:  23%
+
+Measurement: 170 entries: 171 size: 30846
+Free heap MeasuringTask: 8439211 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 103476, Heap fragmentation:  21%
+
+Measurement: 180 entries: 181 size: 32663
+Free heap MeasuringTask: 8436827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 101092, Heap fragmentation:  19%
+
+Measurement: 190 entries: 191 size: 34451
+Free heap MeasuringTask: 8434523 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98788, Heap fragmentation:  18%
+
+After for loop, freeHeap: 8432251 highWater mark: 5252
+200 measurements took: 55256 bytes
+
+200 measurements take: 3 min 35 sec.
+Free heap before writing to SD card: 96468
+, Heap fragmentation:  16%
+doc entries: 200 size : 36060
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 96468
+Heap fragmentation after serialize JSON: 16%
+[2278343][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[2278352][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and insi
+
+Buffer si[2278433][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[2278443][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[2278451][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[2278557][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 3 min 36 sec.
+Time to send data: 4294967075
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8427687
+Data written to log file.
+Now running for 210 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150192, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1998
+Free heap MeasuringTask: 8482855 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147120, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3817
+Free heap MeasuringTask: 8479735 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144000, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5604
+Free heap MeasuringTask: 8476839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141104, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7420
+Free heap MeasuringTask: 8474071 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138336, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9208
+Free heap MeasuringTask: 8470299 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134564, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11023
+Free heap MeasuringTask: 8467723 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131988, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12812
+Free heap MeasuringTask: 8465291 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129556, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14629
+Free heap MeasuringTask: 8462555 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126820, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16420
+Free heap MeasuringTask: 8460059 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124324, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18236
+Free heap MeasuringTask: 8456523 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120788, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20025
+Free heap MeasuringTask: 8454027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118292, Heap fragmentation:  10%
+
+Measurement: 120 entries: 121 size: 21841
+Free heap MeasuringTask: 8451739 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116004, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23631
+Free heap MeasuringTask: 8449403 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113668, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25447
+Free heap MeasuringTask: 8446955 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111220, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27236
+Free heap MeasuringTask: 8443371 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107636, Heap fragmentation:  9%
+
+Measurement: 160 entries: 161 size: 29051
+Free heap MeasuringTask: 8441003 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105268, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30841
+Free heap MeasuringTask: 8438699 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102964, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32661
+Free heap MeasuringTask: 8436363 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100628, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34450
+Free heap MeasuringTask: 8433915 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98180, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36267
+Free heap MeasuringTask: 8431355 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95620, Heap fragmentation:  11%
+
+After for loop, freeHeap: 8429083 highWater mark: 5252
+210 measurements took: 58448 bytes
+
+210 measurements take: 3 min 46 sec.
+Free heap before writing to SD card: 93300
+, Heap fragmentation:  13%
+doc entries: 210 size : 37876
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 93292
+Heap fragmentation after serialize JSON: 13%
+[2506114][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[2506123][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 37876
+[2506182][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[2506192][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[2506200][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[2506306][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967097
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8424507
+Data written to log file.
+Now running for 220 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487535
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150200, Heap fragmentation:  46%
+
+Measurement: 10 entries: 11 size: 1998
+Free heap MeasuringTask: 8482915 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147180, Heap fragmentation:  45%
+
+Measurement: 20 entries: 21 size: 3816
+Free heap MeasuringTask: 8479971 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144236, Heap fragmentation:  44%
+
+Measurement: 30 entries: 31 size: 5605
+Free heap MeasuringTask: 8477267 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141532, Heap fragmentation:  43%
+
+Measurement: 40 entries: 41 size: 7423
+Free heap MeasuringTask: 8474579 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138844, Heap fragmentation:  42%
+
+Measurement: 50 entries: 51 size: 9213
+Free heap MeasuringTask: 8470723 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134988, Heap fragmentation:  40%
+
+Measurement: 60 entries: 61 size: 11032
+Free heap MeasuringTask: 8468067 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132332, Heap fragmentation:  39%
+
+Measurement: 70 entries: 71 size: 12822
+Free heap MeasuringTask: 8465555 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129820, Heap fragmentation:  37%
+
+Measurement: 80 entries: 81 size: 14637
+Free heap MeasuringTask: 8462739 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127004, Heap fragmentation:  36%
+
+Measurement: 90 entries: 91 size: 16424
+Free heap MeasuringTask: 8460131 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124396, Heap fragmentation:  35%
+
+Measurement: 100 entries: 101 size: 18237
+Free heap MeasuringTask: 8456643 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120908, Heap fragmentation:  33%
+
+Measurement: 110 entries: 111 size: 20028
+Free heap MeasuringTask: 8454259 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118524, Heap fragmentation:  31%
+
+Measurement: 120 entries: 121 size: 21845
+Free heap MeasuringTask: 8451875 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116140, Heap fragmentation:  30%
+
+Measurement: 130 entries: 131 size: 23634
+Free heap MeasuringTask: 8449427 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113692, Heap fragmentation:  28%
+
+Measurement: 140 entries: 141 size: 25453
+Free heap MeasuringTask: 8446867 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111132, Heap fragmentation:  27%
+
+Measurement: 150 entries: 151 size: 27240
+Free heap MeasuringTask: 8443155 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107420, Heap fragmentation:  24%
+
+Measurement: 160 entries: 161 size: 29056
+Free heap MeasuringTask: 8440755 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105020, Heap fragmentation:  23%
+
+Measurement: 170 entries: 171 size: 30844
+Free heap MeasuringTask: 8438403 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102668, Heap fragmentation:  21%
+
+Measurement: 180 entries: 181 size: 32659
+Free heap MeasuringTask: 8436115 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100380, Heap fragmentation:  19%
+
+Measurement: 190 entries: 191 size: 34444
+Free heap MeasuringTask: 8433843 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98108, Heap fragmentation:  17%
+
+Measurement: 200 entries: 201 size: 36260
+Free heap MeasuringTask: 8431283 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95548, Heap fragmentation:  15%
+
+Measurement: 210 entries: 211 size: 38048
+Free heap MeasuringTask: 8427859 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92124, Heap fragmentation:  12%
+
+After for loop, freeHeap: 8425571 highWater mark: 5252
+220 measurements took: 61964 bytes
+
+220 measurements take: 3 min 57 sec.
+Free heap before writing to SD card: 89788
+, Heap fragmentation:  14%
+doc entries: 220 size : 39659
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 89788
+Heap fragmentation after serialize JSON: 14%
+[2744863][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[2744872][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+[2744897][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[2744907][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[2744915][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[2745021][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between 
+Time to send data: 4294967131
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8420999
+Data written to log file.
+Now running for 230 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485919 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150184, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 2002
+Free heap MeasuringTask: 8482783 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147048, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3823
+Free heap MeasuringTask: 8479751 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144016, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5610
+Free heap MeasuringTask: 8476855 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141120, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7428
+Free heap MeasuringTask: 8473975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138240, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9213
+Free heap MeasuringTask: 8470279 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134544, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11027
+Free heap MeasuringTask: 8467783 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132048, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12814
+Free heap MeasuringTask: 8465415 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129680, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14632
+Free heap MeasuringTask: 8462775 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127040, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16422
+Free heap MeasuringTask: 8460135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124400, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18239
+Free heap MeasuringTask: 8456551 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120816, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20026
+Free heap MeasuringTask: 8454135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118400, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21841
+Free heap MeasuringTask: 8451719 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115984, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23631
+Free heap MeasuringTask: 8449351 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113616, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25447
+Free heap MeasuringTask: 8446999 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111264, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27233
+Free heap MeasuringTask: 8443287 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107552, Heap fragmentation:  9%
+
+Measurement: 160 entries: 161 size: 29049
+Free heap MeasuringTask: 8440871 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105136, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30839
+Free heap MeasuringTask: 8438519 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102784, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32657
+Free heap MeasuringTask: 8436087 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100352, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34447
+Free heap MeasuringTask: 8433767 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98032, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36265
+Free heap MeasuringTask: 8431495 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95760, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38054
+Free heap MeasuringTask: 8428247 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92512, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39868
+Free heap MeasuringTask: 8425959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90224, Heap fragmentation:  14%
+
+After for loop, freeHeap: 8423751 highWater mark: 5252
+230 measurements took: 63780 bytes
+
+230 measurements take: 4 min 8 sec.
+Free heap before writing to SD card: 87968
+, Heap fragmentation:  12%
+doc entries: 230 size : 41474
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 87960
+Heap fragmentation after serialize JSON: 12%
+[2994328][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[2994337][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 41474
+[2994427][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[2994437][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[2994445][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[2994559][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 4 min 9 sec.
+Time to send data: 4294967057
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8419179
+Data written to log file.
+Now running for 240 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487539
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1995
+Free heap MeasuringTask: 8482907 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147172, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8479771 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144036, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8476939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141204, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7423
+Free heap MeasuringTask: 8474059 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138324, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9214
+Free heap MeasuringTask: 8470347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134612, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11028
+Free heap MeasuringTask: 8467739 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132004, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12814
+Free heap MeasuringTask: 8465131 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129396, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14630
+Free heap MeasuringTask: 8462507 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126772, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16418
+Free heap MeasuringTask: 8460043 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124308, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18232
+Free heap MeasuringTask: 8456523 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120788, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20022
+Free heap MeasuringTask: 8453979 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118244, Heap fragmentation:  10%
+
+Measurement: 120 entries: 121 size: 21843
+Free heap MeasuringTask: 8451547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115812, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23633
+Free heap MeasuringTask: 8449067 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113332, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25449
+Free heap MeasuringTask: 8446763 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111028, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27239
+Free heap MeasuringTask: 8443035 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107300, Heap fragmentation:  13%
+
+Measurement: 160 entries: 161 size: 29054
+Free heap MeasuringTask: 8440619 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 104884, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30842
+Free heap MeasuringTask: 8438251 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102516, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32658
+Free heap MeasuringTask: 8435979 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100244, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34449
+Free heap MeasuringTask: 8433611 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97876, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36268
+Free heap MeasuringTask: 8431115 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95380, Heap fragmentation:  10%
+
+Measurement: 210 entries: 211 size: 38058
+Free heap MeasuringTask: 8427675 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 91940, Heap fragmentation:  11%
+
+Measurement: 220 entries: 221 size: 39876
+Free heap MeasuringTask: 8425323 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89588, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41662
+Free heap MeasuringTask: 8422955 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87220, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8420667 highWater mark: 5252
+240 measurements took: 66872 bytes
+
+240 measurements take: 4 min 19 sec.
+Free heap before writing to SD card: 84884
+, Heap fragmentation:  14%
+doc entries: 240 size : 43271
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 84876
+Heap fragmentation after serialize JSON: 14%
+[3254616][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[3254625][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+
+[3254651][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[3254661][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[3254668][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[3254775][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967130
+SendArray stack high wat
+Free heap size SendArray: 8416087
+Data written to log file.
+Now running for 250 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487539
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485955 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150220, Heap fragmentation:  51%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8483007 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147272, Heap fragmentation:  50%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8480063 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144328, Heap fragmentation:  49%
+
+Measurement: 30 entries: 31 size: 5602
+Free heap MeasuringTask: 8477311 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141576, Heap fragmentation:  48%
+
+Measurement: 40 entries: 41 size: 7421
+Free heap MeasuringTask: 8474207 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138472, Heap fragmentation:  47%
+
+Measurement: 50 entries: 51 size: 9210
+Free heap MeasuringTask: 8470379 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134644, Heap fragmentation:  46%
+
+Measurement: 60 entries: 61 size: 11028
+Free heap MeasuringTask: 8467807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132072, Heap fragmentation:  45%
+
+Measurement: 70 entries: 71 size: 12815
+Free heap MeasuringTask: 8465375 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129640, Heap fragmentation:  44%
+
+Measurement: 80 entries: 81 size: 14629
+Free heap MeasuringTask: 8462767 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127032, Heap fragmentation:  42%
+
+Measurement: 90 entries: 91 size: 16418
+Free heap MeasuringTask: 8460415 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124680, Heap fragmentation:  41%
+
+Measurement: 100 entries: 101 size: 18233
+Free heap MeasuringTask: 8456847 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121112, Heap fragmentation:  40%
+
+Measurement: 110 entries: 111 size: 20020
+Free heap MeasuringTask: 8454607 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118872, Heap fragmentation:  38%
+
+Measurement: 120 entries: 121 size: 21838
+Free heap MeasuringTask: 8451935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116200, Heap fragmentation:  37%
+
+Measurement: 130 entries: 131 size: 23627
+Free heap MeasuringTask: 8449407 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113672, Heap fragmentation:  36%
+
+Measurement: 140 entries: 141 size: 25442
+Free heap MeasuringTask: 8446863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111128, Heap fragmentation:  34%
+
+Measurement: 150 entries: 151 size: 27230
+Free heap MeasuringTask: 8443231 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107496, Heap fragmentation:  32%
+
+Measurement: 160 entries: 161 size: 29049
+Free heap MeasuringTask: 8440815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105080, Heap fragmentation:  30%
+
+Measurement: 170 entries: 171 size: 30835
+Free heap MeasuringTask: 8438431 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102696, Heap fragmentation:  29%
+
+Measurement: 180 entries: 181 size: 32650
+Free heap MeasuringTask: 8436095 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100360, Heap fragmentation:  27%
+
+Measurement: 190 entries: 191 size: 34440
+Free heap MeasuringTask: 8433743 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98008, Heap fragmentation:  25%
+
+Measurement: 200 entries: 201 size: 36257
+Free heap MeasuringTask: 8431487 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95752, Heap fragmentation:  24%
+
+Measurement: 210 entries: 211 size: 38048
+Free heap MeasuringTask: 8428127 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92392, Heap fragmentation:  21%
+
+Measurement: 220 entries: 221 size: 39866
+Free heap MeasuringTask: 8425679 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89944, Heap fragmentation:  19%
+
+Measurement: 230 entries: 231 size: 41656
+Free heap MeasuringTask: 8423343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87608, Heap fragmentation:  16%
+
+Measurement: 240 entries: 241 size: 43475
+Free heap MeasuringTask: 8421055 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85320, Heap fragmentation:  14%
+
+After for loop, freeHeap: 8418847 highWater mark: 5252
+250 measurements took: 68692 bytes
+
+250 measurements take: 4 min 29 sec.
+Free heap before writing to SD card: 83064
+, Heap fragmentation:  17%
+doc entries: 250 size : 45084
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 83056
+Heap fragmentation after serialize JSON: 17%
+[3525832][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[3525841][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+Buffer size in sendArray: 45084
+[3525886][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[3525896][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[3525903][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[3526010][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 4 min 31 sec.
+Time to send data: 4294967111
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8414271
+Data written to log file.
+Now running for 260 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487539
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150212, Heap fragmentation:  51%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8482827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147092, Heap fragmentation:  50%
+
+Measurement: 20 entries: 21 size: 3814
+Free heap MeasuringTask: 8480039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144304, Heap fragmentation:  49%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8477447 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141712, Heap fragmentation:  48%
+
+Measurement: 40 entries: 41 size: 7420
+Free heap MeasuringTask: 8474551 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138816, Heap fragmentation:  47%
+
+Measurement: 50 entries: 51 size: 9209
+Free heap MeasuringTask: 8470631 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134896, Heap fragmentation:  46%
+
+Measurement: 60 entries: 61 size: 11027
+Free heap MeasuringTask: 8467927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132192, Heap fragmentation:  45%
+
+Measurement: 70 entries: 71 size: 12814
+Free heap MeasuringTask: 8465559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129824, Heap fragmentation:  44%
+
+Measurement: 80 entries: 81 size: 14631
+Free heap MeasuringTask: 8462887 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127152, Heap fragmentation:  43%
+
+Measurement: 90 entries: 91 size: 16421
+Free heap MeasuringTask: 8460423 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124688, Heap fragmentation:  41%
+
+Measurement: 100 entries: 101 size: 18239
+Free heap MeasuringTask: 8456855 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121120, Heap fragmentation:  40%
+
+Measurement: 110 entries: 111 size: 20024
+Free heap MeasuringTask: 8454535 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118800, Heap fragmentation:  38%
+
+Measurement: 120 entries: 121 size: 21842
+Free heap MeasuringTask: 8451959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116224, Heap fragmentation:  37%
+
+Measurement: 130 entries: 131 size: 23630
+Free heap MeasuringTask: 8449527 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113792, Heap fragmentation:  36%
+
+Measurement: 140 entries: 141 size: 25450
+Free heap MeasuringTask: 8447047 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111312, Heap fragmentation:  34%
+
+Measurement: 150 entries: 151 size: 27240
+Free heap MeasuringTask: 8443351 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107616, Heap fragmentation:  32%
+
+Measurement: 160 entries: 161 size: 29057
+Free heap MeasuringTask: 8441063 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105328, Heap fragmentation:  31%
+
+Measurement: 170 entries: 171 size: 30845
+Free heap MeasuringTask: 8438727 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102992, Heap fragmentation:  29%
+
+Measurement: 180 entries: 181 size: 32662
+Free heap MeasuringTask: 8436263 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100528, Heap fragmentation:  27%
+
+Measurement: 190 entries: 191 size: 34449
+Free heap MeasuringTask: 8433927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98192, Heap fragmentation:  25%
+
+Measurement: 200 entries: 201 size: 36266
+Free heap MeasuringTask: 8431623 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95888, Heap fragmentation:  24%
+
+Measurement: 210 entries: 211 size: 38058
+Free heap MeasuringTask: 8428311 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92576, Heap fragmentation:  21%
+
+Measurement: 220 entries: 221 size: 39878
+Free heap MeasuringTask: 8425911 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90176, Heap fragmentation:  19%
+
+Measurement: 230 entries: 231 size: 41669
+Free heap MeasuringTask: 8423607 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87872, Heap fragmentation:  17%
+
+Measurement: 240 entries: 241 size: 43483
+Free heap MeasuringTask: 8421415 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85680, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45272
+Free heap MeasuringTask: 8419175 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83440, Heap fragmentation:  17%
+
+After for loop, freeHeap: 8416951 highWater mark: 5252
+260 measurements took: 70588 bytes
+
+260 measurements take: 4 min 40 sec.
+Free heap before writing to SD card: 81168
+, Heap fragmentation:  15%
+doc entries: 260 size : 46881
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 81160
+Heap fragmentation after serialize JSON: 15%
+[3807817][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[3807826][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex a
+
+Buffer size in sendArray: 46881
+[3807898][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[3807908][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[3807915][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[3808030][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 4 min 41 sec.
+TiSendArray stack high water mark: 1304
+Free heap size SendArray: 8412371
+Data written to log file.
+Now running for 270 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487539
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485955 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150220, Heap fragmentation:  46%
+
+Measurement: 10 entries: 11 size: 1996
+Free heap MeasuringTask: 8482951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147216, Heap fragmentation:  45%
+
+Measurement: 20 entries: 21 size: 3811
+Free heap MeasuringTask: 8479911 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144176, Heap fragmentation:  44%
+
+Measurement: 30 entries: 31 size: 5600
+Free heap MeasuringTask: 8477079 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141344, Heap fragmentation:  43%
+
+Measurement: 40 entries: 41 size: 7421
+Free heap MeasuringTask: 8473879 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138144, Heap fragmentation:  41%
+
+Measurement: 50 entries: 51 size: 9209
+Free heap MeasuringTask: 8470183 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134448, Heap fragmentation:  40%
+
+Measurement: 60 entries: 61 size: 11029
+Free heap MeasuringTask: 8467559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 131824, Heap fragmentation:  38%
+
+Measurement: 70 entries: 71 size: 12813
+Free heap MeasuringTask: 8465175 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129440, Heap fragmentation:  37%
+
+Measurement: 80 entries: 81 size: 14631
+Free heap MeasuringTask: 8462615 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126880, Heap fragmentation:  36%
+
+Measurement: 90 entries: 91 size: 16423
+Free heap MeasuringTask: 8460103 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124368, Heap fragmentation:  35%
+
+Measurement: 100 entries: 101 size: 18240
+Free heap MeasuringTask: 8456567 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120832, Heap fragmentation:  33%
+
+Measurement: 110 entries: 111 size: 20023
+Free heap MeasuringTask: 8454183 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118448, Heap fragmentation:  31%
+
+Measurement: 120 entries: 121 size: 21841
+Free heap MeasuringTask: 8451607 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115872, Heap fragmentation:  30%
+
+Measurement: 130 entries: 131 size: 23629
+Free heap MeasuringTask: 8449143 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113408, Heap fragmentation:  28%
+
+Measurement: 140 entries: 141 size: 25450
+Free heap MeasuringTask: 8446647 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 110912, Heap fragmentation:  27%
+
+Measurement: 150 entries: 151 size: 27236
+Free heap MeasuringTask: 8443095 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107360, Heap fragmentation:  24%
+
+Measurement: 160 entries: 161 size: 29052
+Free heap MeasuringTask: 8440759 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105024, Heap fragmentation:  23%
+
+Measurement: 170 entries: 171 size: 30839
+Free heap MeasuringTask: 8438311 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102576, Heap fragmentation:  21%
+
+Measurement: 180 entries: 181 size: 32657
+Free heap MeasuringTask: 8435943 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100208, Heap fragmentation:  19%
+
+Measurement: 190 entries: 191 size: 34442
+Free heap MeasuringTask: 8433527 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97792, Heap fragmentation:  17%
+
+Measurement: 200 entries: 201 size: 36261
+Free heap MeasuringTask: 8431239 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95504, Heap fragmentation:  15%
+
+Measurement: 210 entries: 211 size: 38051
+Free heap MeasuringTask: 8427751 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92016, Heap fragmentation:  16%
+
+Measurement: 220 entries: 221 size: 39871
+Free heap MeasuringTask: 8425367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89632, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41657
+Free heap MeasuringTask: 8423079 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87344, Heap fragmentation:  16%
+
+Measurement: 240 entries: 241 size: 43474
+Free heap MeasuringTask: 8420727 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 84992, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45260
+Free heap MeasuringTask: 8418567 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 82832, Heap fragmentation:  16%
+
+Measurement: 260 entries: 261 size: 47076
+Free heap MeasuringTask: 8415207 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79472, Heap fragmentation:  13%
+
+After for loop, freeHeap: 8412967 highWater mark: 5252
+270 measurements took: 74572 bytes
+
+270 measurements take: 4 min 51 sec.
+Free heap before writing to SD card: 77184
+, Heap fragmentation:  16%
+doc entries: 270 size : 48683
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 77176
+Heap fragmentation after serialize JSON: 16%
+[4100587][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[4100596][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and i
+
+Buffer size in sendArray: 48683
+[4100660][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[4100670][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[4100677][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[4100784][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967092
+SendArray stack high water mark: Data written to log file.
+Now running for 280 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487547
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 2000
+Free heap MeasuringTask: 8482823 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147088, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3819
+Free heap MeasuringTask: 8479799 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144064, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5611
+Free heap MeasuringTask: 8476887 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141152, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7431
+Free heap MeasuringTask: 8473975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138240, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9218
+Free heap MeasuringTask: 8470391 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134656, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11037
+Free heap MeasuringTask: 8467959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132224, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12827
+Free heap MeasuringTask: 8465511 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129776, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14644
+Free heap MeasuringTask: 8462839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127104, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16433
+Free heap MeasuringTask: 8460407 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124672, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18250
+Free heap MeasuringTask: 8456679 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120944, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20041
+Free heap MeasuringTask: 8454135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118400, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21861
+Free heap MeasuringTask: 8451527 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115792, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23649
+Free heap MeasuringTask: 8449191 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113456, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25468
+Free heap MeasuringTask: 8446919 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111184, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27255
+Free heap MeasuringTask: 8443223 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107488, Heap fragmentation:  13%
+
+Measurement: 160 entries: 161 size: 29074
+Free heap MeasuringTask: 8440807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105072, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30862
+Free heap MeasuringTask: 8438599 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102864, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32681
+Free heap MeasuringTask: 8436151 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100416, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34470
+Free heap MeasuringTask: 8433703 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97968, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36288
+Free heap MeasuringTask: 8431303 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95568, Heap fragmentation:  15%
+
+Measurement: 210 entries: 211 size: 38079
+Free heap MeasuringTask: 8427863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92128, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39898
+Free heap MeasuringTask: 8425591 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89856, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41685
+Free heap MeasuringTask: 8423367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87632, Heap fragmentation:  16%
+
+Measurement: 240 entries: 241 size: 43500
+Free heap MeasuringTask: 8421015 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85280, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45288
+Free heap MeasuringTask: 8418791 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83056, Heap fragmentation:  17%
+
+Measurement: 260 entries: 261 size: 47108
+Free heap MeasuringTask: 8415623 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79888, Heap fragmentation:  13%
+
+Measurement: 270 entries: 271 size: 48897
+Free heap MeasuringTask: 8413351 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 77616, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8411127 highWater mark: 5252
+280 measurements took: 76420 bytes
+
+280 measurements take: 5 min 2 sec.
+Free heap before writing to SD card: 75344
+, Heap fragmentation:  16%
+doc entries: 280 size : 50510
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 75344
+Heap fragmentation after serialize JSON: 16%
+[4404341][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[4404350][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+Buffer size in sendArray: 50510
+[4404380][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[4404390][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[4404397][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[4404504][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967126
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8406563
+Data written to log file.
+Now running for 290 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150200, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 2002
+Free heap MeasuringTask: 8482863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147128, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3820
+Free heap MeasuringTask: 8479879 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144144, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5608
+Free heap MeasuringTask: 8477255 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141520, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7422
+Free heap MeasuringTask: 8474503 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138768, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9210
+Free heap MeasuringTask: 8470791 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135056, Heap fragmentation:  13%
+
+Measurement: 60 entries: 61 size: 11027
+Free heap MeasuringTask: 8468151 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132416, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12813
+Free heap MeasuringTask: 8465671 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129936, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14631
+Free heap MeasuringTask: 8462663 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 126928, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16422
+Free heap MeasuringTask: 8460071 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124336, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18242
+Free heap MeasuringTask: 8456503 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 120768, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20030
+Free heap MeasuringTask: 8454119 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118384, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21847
+Free heap MeasuringTask: 8451639 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115904, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23635
+Free heap MeasuringTask: 8449271 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113536, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25451
+Free heap MeasuringTask: 8446983 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111248, Heap fragmentation:  8%
+
+Measurement: 150 entries: 151 size: 27237
+Free heap MeasuringTask: 8443239 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107504, Heap fragmentation:  9%
+
+Measurement: 160 entries: 161 size: 29055
+Free heap MeasuringTask: 8440855 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105120, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30846
+Free heap MeasuringTask: 8438343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102608, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32663
+Free heap MeasuringTask: 8435927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100192, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34455
+Free heap MeasuringTask: 8433639 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97904, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36271
+Free heap MeasuringTask: 8431351 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95616, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38059
+Free heap MeasuringTask: 8427975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92240, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39879
+Free heap MeasuringTask: 8425735 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90000, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41666
+Free heap MeasuringTask: 8423447 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87712, Heap fragmentation:  12%
+
+Measurement: 240 entries: 241 size: 43483
+Free heap MeasuringTask: 8421159 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85424, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45274
+Free heap MeasuringTask: 8418871 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83136, Heap fragmentation:  12%
+
+Measurement: 260 entries: 261 size: 47094
+Free heap MeasuringTask: 8415495 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79760, Heap fragmentation:  13%
+
+Measurement: 270 entries: 271 size: 48886
+Free heap MeasuringTask: 8412999 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 77264, Heap fragmentation:  16%
+
+Measurement: 280 entries: 281 size: 50701
+Free heap MeasuringTask: 8410631 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 74896, Heap fragmentation:  13%
+
+After for loop, freeHeap: 8408471 highWater mark: 5252
+290 measurements took: 79060 bytes
+
+290 measurements take: 5 min 13 sec.
+Free heap before writing to SD card: 72688
+, Heap fragmentation:  13%
+doc entries: 290 size : 52308
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 72680
+Heap fragmentation after serialize JSON: 13%
+[4718811][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[4718820][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendArray: 52308
+[4718852][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[4718862][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[4718870][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[4718976][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time bet
+ta: 4294967124
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8403891
+Data written to log file.
+Now running for 300 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485943 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150208, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1998
+Free heap MeasuringTask: 8483111 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147376, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3815
+Free heap MeasuringTask: 8480167 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144432, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8477527 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141792, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7421
+Free heap MeasuringTask: 8474807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 139072, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9212
+Free heap MeasuringTask: 8470871 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135136, Heap fragmentation:  13%
+
+Measurement: 60 entries: 61 size: 11032
+Free heap MeasuringTask: 8468039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132304, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12819
+Free heap MeasuringTask: 8465479 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129744, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14636
+Free heap MeasuringTask: 8462887 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127152, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16424
+Free heap MeasuringTask: 8460407 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124672, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18241
+Free heap MeasuringTask: 8456871 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121136, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20029
+Free heap MeasuringTask: 8454551 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118816, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21846
+Free heap MeasuringTask: 8452039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116304, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23637
+Free heap MeasuringTask: 8449447 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113712, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25452
+Free heap MeasuringTask: 8447047 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111312, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27242
+Free heap MeasuringTask: 8443319 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107584, Heap fragmentation:  13%
+
+Measurement: 160 entries: 161 size: 29059
+Free heap MeasuringTask: 8440807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105072, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30850
+Free heap MeasuringTask: 8438487 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102752, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32668
+Free heap MeasuringTask: 8436119 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100384, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34456
+Free heap MeasuringTask: 8433863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98128, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36272
+Free heap MeasuringTask: 8431463 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95728, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38060
+Free heap MeasuringTask: 8428103 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92368, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39880
+Free heap MeasuringTask: 8425671 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89936, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41673
+Free heap MeasuringTask: 8423367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87632, Heap fragmentation:  16%
+
+Measurement: 240 entries: 241 size: 43493
+Free heap MeasuringTask: 8421063 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85328, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45281
+Free heap MeasuringTask: 8418711 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 82976, Heap fragmentation:  17%
+
+Measurement: 260 entries: 261 size: 47096
+Free heap MeasuringTask: 8415275 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79540, Heap fragmentation:  18%
+
+Measurement: 270 entries: 271 size: 48884
+Free heap MeasuringTask: 8413019 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 77296, Heap fragmentation:  16%
+
+Measurement: 280 entries: 281 size: 50702
+Free heap MeasuringTask: 8410715 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 74980, Heap fragmentation:  16%
+
+Measurement: 290 entries: 291 size: 52487
+Free heap MeasuringTask: 8408411 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 72676, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8405659 highWater mark: 5252
+300 measurements took: 81872 bytes
+
+300 measurements take: 5 min 24 sec.
+Free heap before writing to SD card: 69876
+, Heap fragmentation:  16%
+doc entries: 300 size : 54095
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 69876
+Heap fragmentation after serialize JSON: 16%
+[5044283][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[5044292][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received On
+
+Buffer size in sendArray: 54095
+[5044384][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[5044394][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[5044401][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[5044509][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to SendArray stack high water mark: 1304
+Free heap size SendArray: 8401087
+Data written to log file.
+Now running for 310 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487519
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485943 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150208, Heap fragmentation:  57%
+
+Measurement: 10 entries: 11 size: 1999
+Free heap MeasuringTask: 8482807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147072, Heap fragmentation:  56%
+
+Measurement: 20 entries: 21 size: 3817
+Free heap MeasuringTask: 8479783 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144048, Heap fragmentation:  55%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8476887 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141152, Heap fragmentation:  54%
+
+Measurement: 40 entries: 41 size: 7420
+Free heap MeasuringTask: 8474103 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138368, Heap fragmentation:  53%
+
+Measurement: 50 entries: 51 size: 9205
+Free heap MeasuringTask: 8470471 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134736, Heap fragmentation:  52%
+
+Measurement: 60 entries: 61 size: 11022
+Free heap MeasuringTask: 8467927 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132192, Heap fragmentation:  51%
+
+Measurement: 70 entries: 71 size: 12807
+Free heap MeasuringTask: 8465607 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129872, Heap fragmentation:  50%
+
+Measurement: 80 entries: 81 size: 14627
+Free heap MeasuringTask: 8462935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127200, Heap fragmentation:  49%
+
+Measurement: 90 entries: 91 size: 16418
+Free heap MeasuringTask: 8460375 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124640, Heap fragmentation:  48%
+
+Measurement: 100 entries: 101 size: 18235
+Free heap MeasuringTask: 8456775 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121040, Heap fragmentation:  46%
+
+Measurement: 110 entries: 111 size: 20026
+Free heap MeasuringTask: 8454343 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118608, Heap fragmentation:  45%
+
+Measurement: 120 entries: 121 size: 21845
+Free heap MeasuringTask: 8452007 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116272, Heap fragmentation:  44%
+
+Measurement: 130 entries: 131 size: 23633
+Free heap MeasuringTask: 8449607 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113872, Heap fragmentation:  43%
+
+Measurement: 140 entries: 141 size: 25449
+Free heap MeasuringTask: 8447319 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111584, Heap fragmentation:  42%
+
+Measurement: 150 entries: 151 size: 27237
+Free heap MeasuringTask: 8443703 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107968, Heap fragmentation:  40%
+
+Measurement: 160 entries: 161 size: 29055
+Free heap MeasuringTask: 8441207 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105472, Heap fragmentation:  38%
+
+Measurement: 170 entries: 171 size: 30846
+Free heap MeasuringTask: 8438711 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102976, Heap fragmentation:  37%
+
+Measurement: 180 entries: 181 size: 32664
+Free heap MeasuringTask: 8436279 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100544, Heap fragmentation:  35%
+
+Measurement: 190 entries: 191 size: 34457
+Free heap MeasuringTask: 8433879 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98144, Heap fragmentation:  34%
+
+Measurement: 200 entries: 201 size: 36272
+Free heap MeasuringTask: 8431559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95824, Heap fragmentation:  32%
+
+Measurement: 210 entries: 211 size: 38061
+Free heap MeasuringTask: 8428311 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92576, Heap fragmentation:  30%
+
+Measurement: 220 entries: 221 size: 39877
+Free heap MeasuringTask: 8425975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90240, Heap fragmentation:  28%
+
+Measurement: 230 entries: 231 size: 41663
+Free heap MeasuringTask: 8423575 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87840, Heap fragmentation:  26%
+
+Measurement: 240 entries: 241 size: 43479
+Free heap MeasuringTask: 8421207 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85472, Heap fragmentation:  24%
+
+Measurement: 250 entries: 251 size: 45267
+Free heap MeasuringTask: 8419015 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83280, Heap fragmentation:  22%
+
+Measurement: 260 entries: 261 size: 47087
+Free heap MeasuringTask: 8415543 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79808, Heap fragmentation:  18%
+
+Measurement: 270 entries: 271 size: 48878
+Free heap MeasuringTask: 8413175 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 77440, Heap fragmentation:  16%
+
+Measurement: 280 entries: 281 size: 50697
+Free heap MeasuringTask: 8410823 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 75088, Heap fragmentation:  16%
+
+Measurement: 290 entries: 291 size: 52484
+Free heap MeasuringTask: 8408647 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 72912, Heap fragmentation:  16%
+
+Measurement: 300 entries: 301 size: 54303
+Free heap MeasuringTask: 8405815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 70080, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8403591 highWater mark: 5252
+310 measurements took: 83928 bytes
+
+310 measurements take: 5 min 34 sec.
+Free heap before writing to SD card: 67808
+, Heap fragmentation:  16%
+doc entries: 310 size : 55912
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 67808
+Heap fragmentation after serialize JSON: 16%
+[5380566][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[5380575][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex 
+
+Buffer size in sendArray: 55912
+[5380666][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[5380676][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[5380684][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[5380790][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 5 min 36 sec.
+Time to send data: 4294967065
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8399015
+Data written to log file.
+Now running for 320 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487523
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150204, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 2001
+Free heap MeasuringTask: 8482931 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147196, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3822
+Free heap MeasuringTask: 8479959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144224, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5614
+Free heap MeasuringTask: 8477047 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141312, Heap fragmentation:  16%
+
+Measurement: 40 entries: 41 size: 7435
+Free heap MeasuringTask: 8474263 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138528, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9224
+Free heap MeasuringTask: 8470551 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134816, Heap fragmentation:  12%
+
+Measurement: 60 entries: 61 size: 11040
+Free heap MeasuringTask: 8468055 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132320, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12827
+Free heap MeasuringTask: 8465451 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129716, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14644
+Free heap MeasuringTask: 8462795 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127060, Heap fragmentation:  10%
+
+Measurement: 90 entries: 91 size: 16430
+Free heap MeasuringTask: 8460315 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124580, Heap fragmentation:  8%
+
+Measurement: 100 entries: 101 size: 18246
+Free heap MeasuringTask: 8456859 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121124, Heap fragmentation:  9%
+
+Measurement: 110 entries: 111 size: 20035
+Free heap MeasuringTask: 8454203 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118468, Heap fragmentation:  11%
+
+Measurement: 120 entries: 121 size: 21855
+Free heap MeasuringTask: 8451659 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 115924, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23646
+Free heap MeasuringTask: 8449195 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113460, Heap fragmentation:  10%
+
+Measurement: 140 entries: 141 size: 25463
+Free heap MeasuringTask: 8446731 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 110996, Heap fragmentation:  12%
+
+Measurement: 150 entries: 151 size: 27252
+Free heap MeasuringTask: 8443067 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107332, Heap fragmentation:  13%
+
+Measurement: 160 entries: 161 size: 29072
+Free heap MeasuringTask: 8440667 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 104932, Heap fragmentation:  11%
+
+Measurement: 170 entries: 171 size: 30860
+Free heap MeasuringTask: 8438315 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102580, Heap fragmentation:  13%
+
+Measurement: 180 entries: 181 size: 32680
+Free heap MeasuringTask: 8436011 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100276, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34468
+Free heap MeasuringTask: 8433723 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97988, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36290
+Free heap MeasuringTask: 8431291 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 95556, Heap fragmentation:  10%
+
+Measurement: 210 entries: 211 size: 38079
+Free heap MeasuringTask: 8427915 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92180, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39899
+Free heap MeasuringTask: 8425579 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89844, Heap fragmentation:  14%
+
+Measurement: 230 entries: 231 size: 41686
+Free heap MeasuringTask: 8423387 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 87652, Heap fragmentation:  12%
+
+Measurement: 240 entries: 241 size: 43504
+Free heap MeasuringTask: 8420987 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85252, Heap fragmentation:  14%
+
+Measurement: 250 entries: 251 size: 45292
+Free heap MeasuringTask: 8418683 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 82948, Heap fragmentation:  17%
+
+Measurement: 260 entries: 261 size: 47107
+Free heap MeasuringTask: 8415243 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 79508, Heap fragmentation:  13%
+
+Measurement: 270 entries: 271 size: 48895
+Free heap MeasuringTask: 8412987 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 77252, Heap fragmentation:  16%
+
+Measurement: 280 entries: 281 size: 50712
+Free heap MeasuringTask: 8410699 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 74964, Heap fragmentation:  16%
+
+Measurement: 290 entries: 291 size: 52505
+Free heap MeasuringTask: 8408411 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 72676, Heap fragmentation:  16%
+
+Measurement: 300 entries: 301 size: 54324
+Free heap MeasuringTask: 8405675 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 69940, Heap fragmentation:  16%
+
+Measurement: 310 entries: 311 size: 56111
+Free heap MeasuringTask: 8402395 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 66660, Heap fragmentation:  18%
+
+After for loop, freeHeap: 8401243 highWater mark: 5252
+320 measurements took: 86280 bytes
+
+320 measurements take: 5 min 45 sec.
+Free heap before writing to SD card: 65460
+, Heap fragmentation:  16%
+doc entries: 320 size : 57717
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 65460
+Heap fragmentation after serialize JSON: 16%
+[5727597][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[5727606][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLog
+
+Buffer size in sendArray: 57717
+[5727631][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[5727642][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[5727650][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[5727761][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 429
+SendArray stack high water mark: 1304
+Free heap size Sen8396667
+Data written to log file.
+Now running for 330 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487547
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  58%
+
+Measurement: 10 entries: 11 size: 1996
+Free heap MeasuringTask: 8482975 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147240, Heap fragmentation:  57%
+
+Measurement: 20 entries: 21 size: 3811
+Free heap MeasuringTask: 8480035 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144300, Heap fragmentation:  57%
+
+Measurement: 30 entries: 31 size: 5598
+Free heap MeasuringTask: 8477347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141612, Heap fragmentation:  56%
+
+Measurement: 40 entries: 41 size: 7415
+Free heap MeasuringTask: 8474483 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138748, Heap fragmentation:  55%
+
+Measurement: 50 entries: 51 size: 9205
+Free heap MeasuringTask: 8470643 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134908, Heap fragmentation:  53%
+
+Measurement: 60 entries: 61 size: 11023
+Free heap MeasuringTask: 8467987 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132252, Heap fragmentation:  53%
+
+Measurement: 70 entries: 71 size: 12809
+Free heap MeasuringTask: 8465439 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129704, Heap fragmentation:  52%
+
+Measurement: 80 entries: 81 size: 14626
+Free heap MeasuringTask: 8462799 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127064, Heap fragmentation:  51%
+
+Measurement: 90 entries: 91 size: 16412
+Free heap MeasuringTask: 8460403 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124668, Heap fragmentation:  50%
+
+Measurement: 100 entries: 101 size: 18229
+Free heap MeasuringTask: 8456915 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121180, Heap fragmentation:  48%
+
+Measurement: 110 entries: 111 size: 20017
+Free heap MeasuringTask: 8454563 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118828, Heap fragmentation:  47%
+
+Measurement: 120 entries: 121 size: 21834
+Free heap MeasuringTask: 8452163 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116428, Heap fragmentation:  46%
+
+Measurement: 130 entries: 131 size: 23623
+Free heap MeasuringTask: 8449651 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113916, Heap fragmentation:  45%
+
+Measurement: 140 entries: 141 size: 25442
+Free heap MeasuringTask: 8447363 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111628, Heap fragmentation:  44%
+
+Measurement: 150 entries: 151 size: 27231
+Free heap MeasuringTask: 8443731 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107996, Heap fragmentation:  42%
+
+Measurement: 160 entries: 161 size: 29049
+Free heap MeasuringTask: 8441347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105612, Heap fragmentation:  40%
+
+Measurement: 170 entries: 171 size: 30840
+Free heap MeasuringTask: 8439027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 103292, Heap fragmentation:  39%
+
+Measurement: 180 entries: 181 size: 32658
+Free heap MeasuringTask: 8436547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 100812, Heap fragmentation:  38%
+
+Measurement: 190 entries: 191 size: 34444
+Free heap MeasuringTask: 8434227 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98492, Heap fragmentation:  36%
+
+Measurement: 200 entries: 201 size: 36261
+Free heap MeasuringTask: 8431907 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 96172, Heap fragmentation:  34%
+
+Measurement: 210 entries: 211 size: 38050
+Free heap MeasuringTask: 8428579 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 92844, Heap fragmentation:  32%
+
+Measurement: 220 entries: 221 size: 39868
+Free heap MeasuringTask: 8426211 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90476, Heap fragmentation:  30%
+
+Measurement: 230 entries: 231 size: 41656
+Free heap MeasuringTask: 8424019 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 88284, Heap fragmentation:  29%
+
+Measurement: 240 entries: 241 size: 43475
+Free heap MeasuringTask: 8421699 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 85964, Heap fragmentation:  27%
+
+Measurement: 250 entries: 251 size: 45265
+Free heap MeasuringTask: 8419443 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83708, Heap fragmentation:  25%
+
+Measurement: 260 entries: 261 size: 47080
+Free heap MeasuringTask: 8416051 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 80316, Heap fragmentation:  21%
+
+Measurement: 270 entries: 271 size: 48866
+Free heap MeasuringTask: 8413763 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 78028, Heap fragmentation:  19%
+
+Measurement: 280 entries: 281 size: 50684
+Free heap MeasuringTask: 8411491 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 75756, Heap fragmentation:  17%
+
+Measurement: 290 entries: 291 size: 52470
+Free heap MeasuringTask: 8409379 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 73644, Heap fragmentation:  14%
+
+Measurement: 300 entries: 301 size: 54286
+Free heap MeasuringTask: 8406467 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 70732, Heap fragmentation:  17%
+
+Measurement: 310 entries: 311 size: 56075
+Free heap MeasuringTask: 8403267 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 67532, Heap fragmentation:  16%
+
+Measurement: 320 entries: 321 size: 57895
+Free heap MeasuringTask: 8401059 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 65324, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8398819 highWater mark: 5252
+330 measurements took: 88728 bytes
+
+330 measurements take: 5 min 56 sec.
+Free heap before writing to SD card: 63036
+, Heap fragmentation:  16%
+doc entries: 330 size : 59507
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 63028
+Heap fragmentation after serialize JSON: 16%
+[6085568][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[6085577][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received O
+
+Buffer size in sendArray: 59507
+[6085605][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[6085615][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[6085623][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[6085729][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time be57 sec.
+Time to send data: 4294967127
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8394239
+Data written to log file.
+Now running for 340 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487503
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150200, Heap fragmentation:  21%
+
+Measurement: 10 entries: 11 size: 1999
+Free heap MeasuringTask: 8482919 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147184, Heap fragmentation:  20%
+
+Measurement: 20 entries: 21 size: 3816
+Free heap MeasuringTask: 8480167 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144432, Heap fragmentation:  18%
+
+Measurement: 30 entries: 31 size: 5602
+Free heap MeasuringTask: 8477479 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141744, Heap fragmentation:  17%
+
+Measurement: 40 entries: 41 size: 7419
+Free heap MeasuringTask: 8474807 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 139072, Heap fragmentation:  15%
+
+Measurement: 50 entries: 51 size: 9204
+Free heap MeasuringTask: 8471255 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135520, Heap fragmentation:  13%
+
+Measurement: 60 entries: 61 size: 11020
+Free heap MeasuringTask: 8468647 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132912, Heap fragmentation:  11%
+
+Measurement: 70 entries: 71 size: 12807
+Free heap MeasuringTask: 8466199 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 130464, Heap fragmentation:  9%
+
+Measurement: 80 entries: 81 size: 14623
+Free heap MeasuringTask: 8463639 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127904, Heap fragmentation:  8%
+
+Measurement: 90 entries: 91 size: 16410
+Free heap MeasuringTask: 8461191 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 125456, Heap fragmentation:  9%
+
+Measurement: 100 entries: 101 size: 18224
+Free heap MeasuringTask: 8457591 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121856, Heap fragmentation:  10%
+
+Measurement: 110 entries: 111 size: 20012
+Free heap MeasuringTask: 8455143 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 119408, Heap fragmentation:  8%
+
+Measurement: 120 entries: 121 size: 21830
+Free heap MeasuringTask: 8452583 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116848, Heap fragmentation:  9%
+
+Measurement: 130 entries: 131 size: 23617
+Free heap MeasuringTask: 8450135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 114400, Heap fragmentation:  11%
+
+Measurement: 140 entries: 141 size: 25434
+Free heap MeasuringTask: 8447703 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111968, Heap fragmentation:  9%
+
+Measurement: 150 entries: 151 size: 27220
+Free heap MeasuringTask: 8444055 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 108320, Heap fragmentation:  10%
+
+Measurement: 160 entries: 161 size: 29036
+Free heap MeasuringTask: 8441671 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105936, Heap fragmentation:  12%
+
+Measurement: 170 entries: 171 size: 30822
+Free heap MeasuringTask: 8439175 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 103440, Heap fragmentation:  9%
+
+Measurement: 180 entries: 181 size: 32637
+Free heap MeasuringTask: 8436839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 101104, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34423
+Free heap MeasuringTask: 8434583 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98848, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36243
+Free heap MeasuringTask: 8432167 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 96432, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38030
+Free heap MeasuringTask: 8428743 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 93008, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39850
+Free heap MeasuringTask: 8426359 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90624, Heap fragmentation:  15%
+
+Measurement: 230 entries: 231 size: 41637
+Free heap MeasuringTask: 8424135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 88400, Heap fragmentation:  12%
+
+Measurement: 240 entries: 241 size: 43456
+Free heap MeasuringTask: 8421815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 86080, Heap fragmentation:  15%
+
+Measurement: 250 entries: 251 size: 45243
+Free heap MeasuringTask: 8419559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 83824, Heap fragmentation:  13%
+
+Measurement: 260 entries: 261 size: 47060
+Free heap MeasuringTask: 8416135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 80400, Heap fragmentation:  14%
+
+Measurement: 270 entries: 271 size: 48849
+Free heap MeasuringTask: 8413863 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 78128, Heap fragmentation:  17%
+
+Measurement: 280 entries: 281 size: 50667
+Free heap MeasuringTask: 8411559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 75824, Heap fragmentation:  14%
+
+Measurement: 290 entries: 291 size: 52455
+Free heap MeasuringTask: 8409351 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 73616, Heap fragmentation:  14%
+
+Measurement: 300 entries: 301 size: 54270
+Free heap MeasuringTask: 8406519 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 70784, Heap fragmentation:  17%
+
+Measurement: 310 entries: 311 size: 56061
+Free heap MeasuringTask: 8403255 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 67520, Heap fragmentation:  16%
+
+Measurement: 320 entries: 321 size: 57876
+Free heap MeasuringTask: 8400999 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 65264, Heap fragmentation:  16%
+
+Measurement: 330 entries: 331 size: 59665
+Free heap MeasuringTask: 8398887 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 63152, Heap fragmentation:  16%
+
+After for loop, freeHeap: 8396695 highWater mark: 5252
+340 measurements took: 90808 bytes
+
+340 measurements take: 6 min 7 sec.
+Free heap before writing to SD card: 60912
+, Heap fragmentation:  16%
+doc entries: 340 size : 61273
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 60912
+Heap fragmentation after serialize JSON: 16%
+[6454536][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[6454545][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and i
+[6454643][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[6454653][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[6454661][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[6454767][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 6 min 8 sec.
+Time to send data: 4294967058
+SendAFree heap size SendArray: 8392131
+Data written to log file.
+Now running for 350 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487543
+Measurement: 0 entries: 1 size: 209
+Free heap MeasuringTask: 8485951 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150216, Heap fragmentation:  57%
+
+Measurement: 10 entries: 11 size: 1997
+Free heap MeasuringTask: 8482983 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147248, Heap fragmentation:  56%
+
+Measurement: 20 entries: 21 size: 3816
+Free heap MeasuringTask: 8480039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144304, Heap fragmentation:  55%
+
+Measurement: 30 entries: 31 size: 5606
+Free heap MeasuringTask: 8477367 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141632, Heap fragmentation:  54%
+
+Measurement: 40 entries: 41 size: 7423
+Free heap MeasuringTask: 8474695 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138960, Heap fragmentation:  53%
+
+Measurement: 50 entries: 51 size: 9210
+Free heap MeasuringTask: 8471063 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135328, Heap fragmentation:  52%
+
+Measurement: 60 entries: 61 size: 11028
+Free heap MeasuringTask: 8468519 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132784, Heap fragmentation:  51%
+
+Measurement: 70 entries: 71 size: 12818
+Free heap MeasuringTask: 8465959 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 130224, Heap fragmentation:  50%
+
+Measurement: 80 entries: 81 size: 14636
+Free heap MeasuringTask: 8463391 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127656, Heap fragmentation:  49%
+
+Measurement: 90 entries: 91 size: 16424
+Free heap MeasuringTask: 8460911 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 125176, Heap fragmentation:  48%
+
+Measurement: 100 entries: 101 size: 18242
+Free heap MeasuringTask: 8457407 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121672, Heap fragmentation:  47%
+
+Measurement: 110 entries: 111 size: 20031
+Free heap MeasuringTask: 8455055 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 119320, Heap fragmentation:  46%
+
+Measurement: 120 entries: 121 size: 21846
+Free heap MeasuringTask: 8452591 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116856, Heap fragmentation:  44%
+
+Measurement: 130 entries: 131 size: 23635
+Free heap MeasuringTask: 8450079 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 114344, Heap fragmentation:  43%
+
+Measurement: 140 entries: 141 size: 25453
+Free heap MeasuringTask: 8447615 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111880, Heap fragmentation:  42%
+
+Measurement: 150 entries: 151 size: 27241
+Free heap MeasuringTask: 8444015 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 108280, Heap fragmentation:  40%
+
+Measurement: 160 entries: 161 size: 29057
+Free heap MeasuringTask: 8441743 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 106008, Heap fragmentation:  39%
+
+Measurement: 170 entries: 171 size: 30846
+Free heap MeasuringTask: 8439503 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 103768, Heap fragmentation:  37%
+
+Measurement: 180 entries: 181 size: 32662
+Free heap MeasuringTask: 8437151 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 101416, Heap fragmentation:  36%
+
+Measurement: 190 entries: 191 size: 34447
+Free heap MeasuringTask: 8434847 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 99112, Heap fragmentation:  34%
+
+Measurement: 200 entries: 201 size: 36266
+Free heap MeasuringTask: 8432463 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 96728, Heap fragmentation:  33%
+
+Measurement: 210 entries: 211 size: 38052
+Free heap MeasuringTask: 8429183 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 93448, Heap fragmentation:  30%
+
+Measurement: 220 entries: 221 size: 39871
+Free heap MeasuringTask: 8426815 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 91080, Heap fragmentation:  29%
+
+Measurement: 230 entries: 231 size: 41658
+Free heap MeasuringTask: 8424655 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 88920, Heap fragmentation:  27%
+
+Measurement: 240 entries: 241 size: 43476
+Free heap MeasuringTask: 8422415 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 86680, Heap fragmentation:  25%
+
+Measurement: 250 entries: 251 size: 45263
+Free heap MeasuringTask: 8420159 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 84424, Heap fragmentation:  23%
+
+Measurement: 260 entries: 261 size: 47080
+Free heap MeasuringTask: 8416751 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 81016, Heap fragmentation:  20%
+
+Measurement: 270 entries: 271 size: 48870
+Free heap MeasuringTask: 8414575 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 78840, Heap fragmentation:  17%
+
+Measurement: 280 entries: 281 size: 50688
+Free heap MeasuringTask: 8412159 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 76424, Heap fragmentation:  15%
+
+Measurement: 290 entries: 291 size: 52476
+Free heap MeasuringTask: 8409839 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 74104, Heap fragmentation:  15%
+
+Measurement: 300 entries: 301 size: 54295
+Free heap MeasuringTask: 8407039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 71304, Heap fragmentation:  17%
+
+Measurement: 310 entries: 311 size: 56082
+Free heap MeasuringTask: 8403711 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 67976, Heap fragmentation:  16%
+
+Measurement: 320 entries: 321 size: 57900
+Free heap MeasuringTask: 8401423 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 65688, Heap fragmentation:  16%
+
+Measurement: 330 entries: 331 size: 59686
+Free heap MeasuringTask: 8399279 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 63544, Heap fragmentation:  17%
+
+Measurement: 340 entries: 341 size: 61500
+Free heap MeasuringTask: 8397103 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 61368, Heap fragmentation:  17%
+
+After for loop, freeHeap: 8394863 highWater mark: 5252
+350 measurements took: 92680 bytes
+
+350 measurements take: 6 min 18 sec.
+Free heap before writing to SD card: 59080
+, Heap fragmentation:  17%
+doc entries: 350 size : 63111
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 59080
+Heap fragmentation after serialize JSON: 17%
+[6834074][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[6834083][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex and inside if statement
+
+Buffer size in sendAr
+[6834140][E][WiFiClient.cpp:275] connect(): socket error on fd 48, errno: 104, "Connection reset by peer"
+[6834149][D][HTTPClient.cpp:1163] connect(): failed connect to jrbubuntu.ddns.net:5000
+[6834157][W][HTTPClient.cpp:1483] returnError(): error(-1): connection refused
+Error on sending POST: -1
+[6834263][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between
+Time to send data: 4294967100
+SendArray stack high water mark: 130
+Data written to log file.
+Now running for 360 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8487531
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8485919 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 150184, Heap fragmentation:  32%
+
+Measurement: 10 entries: 11 size: 1999
+Free heap MeasuringTask: 8482775 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147040, Heap fragmentation:  31%
+
+Measurement: 20 entries: 21 size: 3813
+Free heap MeasuringTask: 8479935 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144200, Heap fragmentation:  29%
+
+Measurement: 30 entries: 31 size: 5603
+Free heap MeasuringTask: 8477231 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141496, Heap fragmentation:  28%
+
+Measurement: 40 entries: 41 size: 7421
+Free heap MeasuringTask: 8474559 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138824, Heap fragmentation:  27%
+
+Measurement: 50 entries: 51 size: 9212
+Free heap MeasuringTask: 8471039 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135304, Heap fragmentation:  25%
+
+Measurement: 60 entries: 61 size: 11028
+Free heap MeasuringTask: 8468447 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132712, Heap fragmentation:  23%
+
+Measurement: 70 entries: 71 size: 12817
+Free heap MeasuringTask: 8465855 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 130120, Heap fragmentation:  22%
+
+Measurement: 80 entries: 81 size: 14635
+Free heap MeasuringTask: 8463247 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127512, Heap fragmentation:  20%
+
+Measurement: 90 entries: 91 size: 16424
+Free heap MeasuringTask: 8460799 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 125064, Heap fragmentation:  19%
+
+Measurement: 100 entries: 101 size: 18242
+Free heap MeasuringTask: 8457135 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121400, Heap fragmentation:  16%
+
+Measurement: 110 entries: 111 size: 20030
+Free heap MeasuringTask: 8454779 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 119044, Heap fragmentation:  14%
+
+Measurement: 120 entries: 121 size: 21846
+Free heap MeasuringTask: 8452347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116612, Heap fragmentation:  13%
+
+Measurement: 130 entries: 131 size: 23632
+Free heap MeasuringTask: 8449931 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 114196, Heap fragmentation:  11%
+
+Measurement: 140 entries: 141 size: 25450
+Free heap MeasuringTask: 8447531 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111796, Heap fragmentation:  9%
+
+Measurement: 150 entries: 151 size: 27238
+Free heap MeasuringTask: 8443883 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 108148, Heap fragmentation:  10%
+
+Measurement: 160 entries: 161 size: 29054
+Free heap MeasuringTask: 8441595 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 105860, Heap fragmentation:  12%
+
+Measurement: 170 entries: 171 size: 30842
+Free heap MeasuringTask: 8439243 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 103508, Heap fragmentation:  9%
+
+Measurement: 180 entries: 181 size: 32660
+Free heap MeasuringTask: 8436875 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 101140, Heap fragmentation:  11%
+
+Measurement: 190 entries: 191 size: 34448
+Free heap MeasuringTask: 8434459 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 98724, Heap fragmentation:  13%
+
+Measurement: 200 entries: 201 size: 36265
+Free heap MeasuringTask: 8432091 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 96356, Heap fragmentation:  11%
+
+Measurement: 210 entries: 211 size: 38053
+Free heap MeasuringTask: 8428763 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 93028, Heap fragmentation:  12%
+
+Measurement: 220 entries: 221 size: 39871
+Free heap MeasuringTask: 8426451 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 90716, Heap fragmentation:  15%
+
+Measurement: 230 entries: 231 size: 41660
+Free heap MeasuringTask: 8424259 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 88524, Heap fragmentation:  13%
+
+Measurement: 240 entries: 241 size: 43476
+Free heap MeasuringTask: 8421939 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 86204, Heap fragmentation:  15%
+
+Measurement: 250 entries: 251 size: 45267
+Free heap MeasuringTask: 8419779 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 84044, Heap fragmentation:  13%
+
+Measurement: 260 entries: 261 size: 47081
+Free heap MeasuringTask: 8416371 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 80636, Heap fragmentation:  14%
+
+Measurement: 270 entries: 271 size: 48870
+Free heap MeasuringTask: 8414131 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 78396, Heap fragmentation:  17%
+
+Measurement: 280 entries: 281 size: 50685
+Free heap MeasuringTask: 8411827 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 76092, Heap fragmentation:  14%
+
+Measurement: 290 entries: 291 size: 52477
+Free heap MeasuringTask: 8409539 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 73804, Heap fragmentation:  14%
+
+Measurement: 300 entries: 301 size: 54294
+Free heap MeasuringTask: 8406739 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 71004, Heap fragmentation:  17%
+
+Measurement: 310 entries: 311 size: 56083
+Free heap MeasuringTask: 8403419 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 67684, Heap fragmentation:  16%
+
+Measurement: 320 entries: 321 size: 57897
+Free heap MeasuringTask: 8401155 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 65420, Heap fragmentation:  16%
+
+Measurement: 330 entries: 331 size: 59689
+Free heap MeasuringTask: 8398995 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 63260, Heap fragmentation:  16%
+
+Measurement: 340 entries: 341 size: 61509
+Free heap MeasuringTask: 8396211 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 60476, Heap fragmentation:  19%
+
+Measurement: 350 entries: 351 size: 63302
+Free heap MeasuringTask: 8393299 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 57564, Heap fragmentation:  19%
+
+After for loop, freeHeap: 8390723 highWater mark: 5252
+360 measurements took: 96808 bytes
+
+360 measurements take: 6 min 28 sec.
+Free heap before writing to SD card: 54940
+, Heap fragmentation:  22%
+doc entries: 360 size : 64915
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 54940
+Heap fragmentation after serialize JSON: 30%
+[7224570][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[7224579][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received OneLogMutex a
+
+Buffer siz[7224607][D][HTTPClient.cpp:1170] connect():  connected to jrbubuntu.ddns.net:5000
+[7225133][D][HTTPClient.cpp:842] sendRequest(): Stream payload written: 64915
+Data written to log file.
+Now running for 370 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482319
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8480731 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144996, Heap fragmentation:  50%
+
+[7227050][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'HTTP/1.1 200 OK'
+[7227057][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Server: Werkzeug/3.0.3 Python/3.12.3'
+[7227067][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Date: Thu, 30 Jan 2025 21:05:58 GMT'
+[7227076][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Content-Type: application/json'
+[7227085][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Content-Length: 44'
+[7227092][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Connection: close'
+[7227100][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: ''
+[7227106][D][HTTPClient.cpp:1321] handleHeaderResponse(): code: 200
+[7227112][D][HTTPClient.cpp:1324] handleHeaderResponse(): size: 44
+[7227119][D][WiFiClient.cpp:536] connected(): Disconnected: RES: 0, ERR: 128
+[7227126][D][HTTPClient.cpp:1460] writeToStreamDataBlock(): connection closed or file end (written: 44).
+[7227136][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+200
+{"message":"Telemetry logged successfully"}
+
+[7227241][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time between usage: 6 min 30 sec.
+Time to send data: 4294964619
+SendArray stack high water mark: 1304
+Free 8483655
+Measurement: 10 entries: 11 size: 2003
+Free heap MeasuringTask: 8482819 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147084, Heap fragmentation:  50%
+
+Measurement: 20 entries: 21 size: 3825
+Free heap MeasuringTask: 8479859 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144124, Heap fragmentation:  49%
+
+Measurement: 30 entries: 31 size: 5618
+Free heap MeasuringTask: 8477075 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141340, Heap fragmentation:  48%
+
+Measurement: 40 entries: 41 size: 7438
+Free heap MeasuringTask: 8474323 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 138588, Heap fragmentation:  47%
+
+Measurement: 50 entries: 51 size: 9231
+Free heap MeasuringTask: 8470723 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 134988, Heap fragmentation:  46%
+
+Measurement: 60 entries: 61 size: 11053
+Free heap MeasuringTask: 8468163 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132428, Heap fragmentation:  45%
+
+Measurement: 70 entries: 71 size: 12846
+Free heap MeasuringTask: 8465603 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129868, Heap fragmentation:  44%
+
+Measurement: 80 entries: 81 size: 14668
+Free heap MeasuringTask: 8462947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127212, Heap fragmentation:  43%
+
+Measurement: 90 entries: 91 size: 16461
+Free heap MeasuringTask: 8460547 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124812, Heap fragmentation:  41%
+
+Measurement: 100 entries: 101 size: 18283
+Free heap MeasuringTask: 8456947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121212, Heap fragmentation:  40%
+
+Measurement: 110 entries: 111 size: 20076
+Free heap MeasuringTask: 8454347 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118612, Heap fragmentation:  38%
+
+Measurement: 120 entries: 121 size: 21898
+Free heap MeasuringTask: 8451883 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116148, Heap fragmentation:  37%
+
+Measurement: 130 entries: 131 size: 23691
+Free heap MeasuringTask: 8449323 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113588, Heap fragmentation:  36%
+
+Measurement: 140 entries: 141 size: 25513
+Free heap MeasuringTask: 8446795 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111060, Heap fragmentation:  34%
+
+Measurement: 150 entries: 151 size: 27306
+Free heap MeasuringTask: 8443035 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 107300, Heap fragmentation:  32%
+
+Measurement: 160 entries: 161 size: 29128
+Free heap MeasuringTask: 8440411 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 104676, Heap fragmentation:  30%
+
+Measurement: 170 entries: 171 size: 30921
+Free heap MeasuringTask: 8437947 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 102212, Heap fragmentation:  28%
+
+Measurement: 180 entries: 181 size: 32743
+Free heap MeasuringTask: 8435515 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 99780, Heap fragmentation:  27%
+
+Measurement: 190 entries: 191 size: 34536
+Free heap MeasuringTask: 8433051 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 97316, Heap fragmentation:  25%
+
+Measurement: 200 entries: 201 size: 36358
+Free heap MeasuringTask: 8430587 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 94852, Heap fragmentation:  23%
+
+Measurement: 210 entries: 211 size: 38151
+Free heap MeasuringTask: 8427179 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 91444, Heap fragmentation:  20%
+
+Measurement: 220 entries: 221 size: 39973
+Free heap MeasuringTask: 8424811 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 89076, Heap fragmentation:  18%
+
+Measurement: 230 entries: 231 size: 41766
+Free heap MeasuringTask: 8422571 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 86836, Heap fragmentation:  16%
+
+Measurement: 240 entries: 241 size: 43588
+Free heap MeasuringTask: 8420267 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 84532, Heap fragmentation:  13%
+
+Measurement: 250 entries: 251 size: 45381
+Free heap MeasuringTask: 8417963 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 82228, Heap fragmentation:  16%
+
+Measurement: 260 entries: 261 size: 47203
+Free heap MeasuringTask: 8414619 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 78884, Heap fragmentation:  17%
+
+Measurement: 270 entries: 271 size: 48995
+Free heap MeasuringTask: 8412315 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 76580, Heap fragmentation:  15%
+
+Measurement: 280 entries: 281 size: 50816
+Free heap MeasuringTask: 8409979 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 74244, Heap fragmentation:  15%
+
+Measurement: 290 entries: 291 size: 52608
+Free heap MeasuringTask: 8407739 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 72004, Heap fragmentation:  15%
+
+Measurement: 300 entries: 301 size: 54430
+Free heap MeasuringTask: 8404859 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 69124, Heap fragmentation:  18%
+
+Measurement: 310 entries: 311 size: 56223
+Free heap MeasuringTask: 8401515 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 65780, Heap fragmentation:  16%
+
+Measurement: 320 entries: 321 size: 58045
+Free heap MeasuringTask: 8399243 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 63508, Heap fragmentation:  17%
+
+Measurement: 330 entries: 331 size: 59838
+Free heap MeasuringTask: 8396971 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 61236, Heap fragmentation:  17%
+
+Measurement: 340 entries: 341 size: 61660
+Free heap MeasuringTask: 8394571 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 58836, Heap fragmentation:  20%
+
+Measurement: 350 entries: 351 size: 63452
+Free heap MeasuringTask: 8392235 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 56500, Heap fragmentation:  21%
+
+Measurement: 360 entries: 361 size: 65274
+Free heap MeasuringTask: 8390027 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 54292, Heap fragmentation:  21%
+
+After for loop, freeHeap: 8387803 highWater mark: 5252
+370 measurements took: 94516 bytes
+
+370 measurements take: 6 min 39 sec.
+Free heap before writing to SD card: 52020
+, Heap fragmentation:  22%
+doc entries: 370 size : 66887
+Onelog data in MeasuringTask: 
+Data written to one measurement file.
+Free heap after serialize JSON: 52020
+Heap fragmentation after serialize JSON: 30%
+[7626047][V][HTTPClient.cpp:252] beginInternal(): url: http://jrbubuntu.ddns.net:5000/api/telemetry
+[7626056][D][HTTPClient.cpp:303] beginInternal(): protocol: http, host: jrbubuntu.ddns.net port: 5000 url: /api/telemetry
+Received Onnside if statement
+
+Buffer size in sendArray: 66887
+[7626105][D][HTTPClient.cpp:1170] connect():  connected to jrbubuntu.ddns.net:5000
+[7626713][D][HTTPClient.cpp:842] sendRequest(): Stream payload written: 66887
+Data written to log file.
+Now running for 380 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask begining high water mark: 5252 freeHeap: 8482331
+Measurement: 0 entries: 1 size: 210
+Free heap MeasuringTask: 8480731 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144996, Heap fragmentation:  71%
+
+[7628560][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'HTTP/1.1 200 OK'
+[7628568][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Server: Werkzeug/3.0.3 Python/3.12.3'
+[7628577][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Date: Thu, 30 Jan 2025 21:12:40 GMT'
+[7628586][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Content-Type: application/json'
+[7628595][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Content-Length: 44'
+[7628602][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: 'Connection: close'
+[7628609][V][HTTPClient.cpp:1264] handleHeaderResponse(): RX: ''
+[7628615][D][HTTPClient.cpp:1321] handleHeaderResponse(): code: 200
+[7628621][D][HTTPClient.cpp:1324] handleHeaderResponse(): size: 44
+[7628629][D][WiFiClient.cpp:536] connected(): Disconnected: RES: 0, ERR: 128
+[7628635][D][HTTPClient.cpp:1460] writeToStreamDataBlock(): connection closed or file end (written: 44).
+[7628645][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+200
+{"message":"Telemetry logged successfully"}
+
+[7628751][D][HTTPClient.cpp:408] disconnect(): tcp is closed
+
+Time to send data: 4294964585
+SendArray stack high water mark: 1304
+Free heap size SendArray: 8483599
+Measurement: 10 entries: 11 size: 2003
+Free heap MeasuringTask: 8482923 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 147188, Heap fragmentation:  71%
+
+Measurement: 20 entries: 21 size: 3825
+Free heap MeasuringTask: 8479995 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 144260, Heap fragmentation:  71%
+
+Measurement: 30 entries: 31 size: 5618
+Free heap MeasuringTask: 8477467 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 141732, Heap fragmentation:  70%
+
+Measurement: 40 entries: 41 size: 7440
+Free heap MeasuringTask: 8474779 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 139044, Heap fragmentation:  70%
+
+Measurement: 50 entries: 51 size: 9233
+Free heap MeasuringTask: 8471083 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 135348, Heap fragmentation:  69%
+
+Measurement: 60 entries: 61 size: 11055
+Free heap MeasuringTask: 8468331 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 132596, Heap fragmentation:  68%
+
+Measurement: 70 entries: 71 size: 12848
+Free heap MeasuringTask: 8465707 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 129972, Heap fragmentation:  67%
+
+Measurement: 80 entries: 81 size: 14670
+Free heap MeasuringTask: 8463179 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 127444, Heap fragmentation:  67%
+
+Measurement: 90 entries: 91 size: 16462
+Free heap MeasuringTask: 8460523 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 124788, Heap fragmentation:  66%
+
+Measurement: 100 entries: 101 size: 18284
+Free heap MeasuringTask: 8456923 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 121188, Heap fragmentation:  65%
+
+Measurement: 110 entries: 111 size: 20077
+Free heap MeasuringTask: 8454491 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 118756, Heap fragmentation:  64%
+
+Measurement: 120 entries: 121 size: 21899
+Free heap MeasuringTask: 8451931 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 116196, Heap fragmentation:  63%
+
+Measurement: 130 entries: 131 size: 23692
+Free heap MeasuringTask: 8449435 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 113700, Heap fragmentation:  63%
+
+Measurement: 140 entries: 141 size: 25514
+Free heap MeasuringTask: 8447067 highWater mark: 5252
+Free heap ESP.getFreeHeap JSON: 111332, Heap fragmentation:  62%
+

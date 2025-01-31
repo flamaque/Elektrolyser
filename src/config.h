@@ -32,6 +32,70 @@
 #include "esp_task_wdt.h"      //Needed for Watchdog timer for Bluetooth task
 #include "ESP_PH.h" // library for the PH sensor
 #include "DFRobot_ESP_EC.h" // library for the conductivity sensor
+#include "SPIFFS.h" //For saving the config.txt to filesystem
+#include "DHT.h"
+
+struct Configuration {
+    String ssid;
+    String password;
+    String httpapi;
+    String connectionMode;  // Can be "GSM" or "WiFi"
+    String apn;
+    String apn_User;
+    String apn_Pass;
+    String mobileNumber;
+    bool gsmMode;
+    bool wifiMode;
+};
+extern struct Configuration configuration;
+
+struct ConfigPin {
+    uint8_t GSM_RX_PIN;
+    uint8_t GSM_TX_PIN;
+    uint8_t Pin_MQ8;
+    uint8_t DHT_SENSOR_PIN;
+    uint8_t DS18B20_PIN;
+    uint8_t flowSensorPin;
+    uint8_t EC_PIN;
+    uint8_t PH_PIN;
+    uint8_t voltPin;
+    uint8_t CurrentPin;
+    uint8_t SW_420_Pin;
+};
+extern struct ConfigPin configPin;
+
+struct ConfigNumeric {
+    uint8_t temperatureAmount;
+    uint8_t humidityAmount;
+    uint8_t h2Amount;
+    uint8_t flowRateAmount;
+    uint8_t phValueAmount;
+    uint8_t ecValueAmount;
+    uint8_t ds18b20Amount;
+    uint8_t voltAmount;
+    uint8_t powerAmount;
+    uint8_t acsAmount;
+    uint8_t SW420Amount;
+    float flowSensorCalibration;
+};
+extern struct ConfigNumeric configNumeric;
+
+extern uint8_t numMeasurements;
+struct ConfigInterval {
+    uint8_t dht22_tempInterval;
+    uint8_t dht22_humInterval;
+    uint8_t h2Interval;
+    uint8_t flowRateInterval;
+    uint8_t phValueInterval;
+    uint8_t ecValueInterval;
+    uint8_t ds18b20Interval;
+    uint8_t voltInterval;
+    uint8_t powerInterval;
+    uint8_t acsInterval;
+    uint8_t SW420Interval;
+};
+extern struct ConfigInterval configInterval;
+void initializeConfigInterval();
 
 void Counting(void *parameter);
 void DisplayMeasurements(void *parameter);
@@ -39,27 +103,32 @@ void Measuring(void *parameter);
 void sendArray_WiFi(void *parameter);
 void BluetoothListen(void *parameter);
 
+/*      WiFi    */
+void printLocalTime();
+void getTime_WiFi();
+uint64_t getSavedTimestamp_WiFi();
+
 /*      GSM     */
 void initialize_gsm();
 void readGsmResponse();
 String readGsmResponse3();
+String readGsmResponse5();
+uint64_t parseResponse(String resp);
 // String getDateTime_SIM7600();
-void getTime();
 void IsGSMConnected();
 void saveTimestamp(uint64_t timestamp_ms);
-uint64_t getDateTime_SIM7600();
+void getDateTime_GSM();
 uint64_t getSavedTimestamp_GSM();
 uint64_t convertToUnixTimestamp(String date, String time);
-extern const String apn, apn_User, apn_Pass;
+extern time_t timestamp;
 extern String date_getTime, response, datetime_gsm;
-extern uint64_t savedTimestamp, timestamp_ms, unixTimestamp;
+extern uint64_t timestamp_ms, unixTimestamp;
 extern char httpapi[]; // Removed because in main.cpp it's declared as String
+extern char DateTimeBuffer[50], TimeBuffer[25], TimeBufferDis[25], TimeBufferFinal[32];
 extern HardwareSerial gsmSerial;
 extern bool gsmConnected;
 
-void AGS02MA_Init();
-extern Adafruit_AGS02MA ags;
-
+/*      DS18B20 sensor       */
 extern OneWire oneWire;                 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 extern DallasTemperature sensors;       // Pass our oneWire reference to Dallas Temperature.
 extern DeviceAddress tempDeviceAddress; // We'll use this variable to store a found device address
@@ -75,48 +144,33 @@ extern volatile uint8_t GSMOutputToOLED, stateDebug;
 /* voltage sensor */
 float readVoltage();
 
+/*  DHT22 sensor    */
+
 /*      DS18B20 sensor       */
-extern uint8_t DS18B20_PIN;
 void printDS18B20Address();
 // void AllDS18B20Sensors();
 
-/*      MQ-7 MQ-8 sensor       */
-void mq7_init(MQUnifiedsensor &MQ7);
+/*      MQ-8 sensor       */
 void mq8_init(MQUnifiedsensor &MQ8);
 
 /* Volt sensor */
-extern uint8_t voltPin;
 
 /* Flow sensor */
 void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num);
-extern uint8_t NTC_PIN;
-extern volatile float flowRate, flowRate2;
-
-/* NTC */
-float Read_NTC();
-extern float steinhart, temp_flow;
-extern uint8_t NTC_PIN, TEMPERATURENOMINAL;
-extern int serialResistance;
-extern const uint8_t NUMSAMPLES;
-extern uint16_t nominalResistance, bCoefficient;
+extern volatile float flowRate;
 
 /*      Current Sensor   */
 extern uint8_t CurrentPin;
 float CurrentSensor_724();
 
-void printLocalTime();
-void getTime_WiFi();
-uint64_t getSavedTimestamp_WiFi();
-extern uint64_t savedTimestamp;
+// extern uint8_t SD_CS_PIN, GSM_RX_PIN, GSM_TX_PIN, Pin_MQ8, DHT_SENSOR_PIN, DS18B20_PIN, flowSensorPin, EC_PIN, PH_PIN, voltPin, CurrentPin, SW_420_Pin;
 
-extern uint8_t SD_CS_PIN, GSM_RX_PIN, GSM_TX_PIN, Pin_MQ8, DHT_SENSOR_PIN, DS18B20_PIN, flowSensorPin, EC_PIN, PH_PIN, NTC_PIN, voltPin, CurrentPin;
-extern String mobileNumber;
-extern float flowSensorCalibration;
-extern uint8_t h2Amount, DFcoAmount, AGS02MAAmount, flowRateAmount, temperatureAmount, humidityAmount, phValueAmount, ecValueAmount, ds18b20Amount, voltAmount, powerAmount, acsAmount, TempFlowAmount;
-void processLine(String line);
-void read_configuration();
+// extern uint8_t SW420Amount, h2Amount, flowRateAmount, temperatureAmount, humidityAmount, phValueAmount, ecValueAmount, ds18b20Amount, voltAmount, powerAmount, acsAmount;
+void processLine(const String &line);
+bool read_configuration();
 void printVariables();
 void initSD();
+extern const uint8_t SD_CS_PIN;
 
 /*      Bluetooth      */
 extern BLEServer* pServer;
@@ -136,14 +190,14 @@ void initBLE();
 
 /*      Ph Sensor         */
 extern ESP_PH ph;
-extern uint8_t PH_PIN;
+// extern uint8_t PH_PIN;
 float pH();
 //float readTemperature();
 
 /*      Conductivity Sensor   */
 extern DFRobot_ESP_EC ec;
 //extern float voltage_cond, temperature_cond;
-extern uint8_t EC_PIN; // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
+// extern uint8_t EC_PIN; // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
 float Cond();
 
 #endif // CONFIG_H
