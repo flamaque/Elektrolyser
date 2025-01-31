@@ -8,8 +8,8 @@ import ssl
 app = Flask(__name__)
 DB_CONFIG = {
     'host': '127.0.0.1',
-    'user': 'pee51',
-    'password': 'Wachtwoord',
+    'user': 'x',
+    'password': 'x',
     'database': 'electrolyser',
     'ssl_cert': '/home/jochem/Documents/pee51_client-certificate.pem',
     'ssl_key': '/home/jochem/Documents/pee51_client-key.pem',
@@ -37,7 +37,7 @@ def insert_telemetry_data(data):
         cursor = connection.cursor()
 
         # Define possible keys
-        possible_keys = ['T_g', 'pH', 'A', 'V', 'P', 'T1', 'T2', 'T3', 'T4', 'T5', 'Hum', 'Cond', 'Flow1', 'H2',>
+        possible_keys = ['T_g', 'pH', 'A', 'V', 'P', 'T1', 'T2', 'T3', 'T4', 'T5', 'Hum', 'Cond', 'Flow1', 'H2', 'FT', 'ts']
 
         for entry in data:
             # Extract the timestamp

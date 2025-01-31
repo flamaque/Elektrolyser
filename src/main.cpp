@@ -22,16 +22,6 @@ bool gsmConnected;
 String message = "";
 String BtConnected;
 
-/*      Setup Wifi                      */
-// const char *ssid = "H369A2606A5";
-// const char *password = "9EAD76CC35C6";
-// const char *ssid = "Ziggo0542186";
-// const char *password = "bu6cjcwg3fpuhwwN";
-// char *ssid = "JRB";
-// char *password = "driekeerraden";
-// const char *ssid = "Loading...";
-// const char *password = "driekeerraden123";
-
 const char *ntpServer = "pool.ntp.org"; // NTP server to request epoch time
 const long gmtOffset_sec = 3600;
 const int daylightOffset_sec = 3600;
